@@ -4,19 +4,33 @@
 
 This document outlines all implementation tasks for the Union Shop Flutter coursework. Each task represents one small commit to demonstrate incremental development and proper version control practices.
 
+## Progress Summary
+**Overall Progress**:
+- Basic Features: 1/9 (10% of 40%)
+- Intermediate Features: 0/7 (0% of 35%)
+- Advanced Features: 0/3 (0% of 25%)
+
 ---
 
 ## 2. Basic Features (40% of Application Marks)
 
 ### 2.1. Static Homepage (5%)
-
+**Implementation Tasks**
 - [x]Update header banner text with welcoming message
 - [x]Update hero section title and description
 - [x]Update product card names and prices to realistic values
 - [x]Test mobile responsiveness and scrolling
 
-### 2.2. About Us Page (5%)
+**Tests**
+- [ ] Homepage renders without errors
+- [ ] Hero section displays with background image and overlay text
+- [ ] Product grid displays 4 hardcoded products
+- [ ] All product cards are clickable and navigate to product page
+- [ ] Layout is readable on mobile view (< 600px width)
+- [ ] Page scrolls smoothly
 
+### 2.2. About Us Page (5%)
+**Implementation Tasks**
 - [ ]Create pages/about_page.dart with basic structure
 - [ ]Add app bar with "About" title and back button
 - [ ]Add "About Us" heading centred at the top
@@ -25,8 +39,17 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ]Add navigation link from homepage
 - [ ]Test everything displays correctly
 
+**Tests**
+**Tests to Verify:**
+- [ ] About Us page accessible via `/about` route
+- [ ] Page displays company information text
+- [ ] Contact email (hello@upsu.net) is visible
+- [ ] "The Union Shop & Reception Team" signature appears
+- [ ] Content is formatted with proper spacing
+- [ ] Navigation from homepage footer works
+- [ ] Back button returns to homepage
 ### 2.3. Footer (4%)
-
+**Implementation Tasks**
 - [ ] Create lib/widgets/footer.dart with Footer widget class
 - [ ] Add three-column layout (Opening Hours, Help and Information, Latest Offers)
 - [ ] Add "Opening Hours" section with winter break closure notice and term times
@@ -37,8 +60,19 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Replace homepage footer placeholder with Footer widget
 - [ ] Test footer displays correctly and is responsive
 
-### 2.4. Dummy Collections Page (5%)
+**Tests**
+- [ ] Footer displays on at least one page
+- [ ] Footer includes three columns on desktop
+- [ ] Footer stacks vertically on mobile (< 600px)
+- [ ] Opening hours section shows all information
+- [ ] Help links are visible (non-functional acceptable)
+- [ ] Email subscription form exists
+- [ ] Social media icons (Facebook, Twitter) display
+- [ ] Copyright text includes "© 2025" and Shopify credit
+- [ ] Footer is responsive and readable at all widths
 
+### 2.4. Dummy Collections Page (5%)
+**Implementaion Tasks**
 - [ ] Create pages/collections_page.dart with basic structure
 - [ ] Add app bar with "Collections" title
 - [ ] Create hardcoded list of collection data (names and image URLs)
@@ -49,8 +83,18 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Add navigation link from homepage/navbar to collections
 - [ ] Test collections page displays and navigation works
 
-### 2.5. Dummy Collection Page (5%)
+**Tests**
+- [ ] Collections page accessible via `/collections` route
+- [ ] Page displays at least 4-6 collections
+- [ ] Each collection shows title and image
+- [ ] Each collection shows product count (e.g., "12 items")
+- [ ] Collections are clickable
+- [ ] Grid layout shows 2 columns on mobile (< 600px)
+- [ ] Grid layout shows 3-4 columns on desktop (> 600px)
+- [ ] Navigation from navbar/homepage works
 
+### 2.5. Dummy Collection Page (5%)
+**Implementation Tasks**
 - [ ] Create pages/collection_page.dart accepting collectionName parameter
 - [ ] Add app bar with dynamic collection name as title
 - [ ] Add collection description text below title
@@ -64,8 +108,21 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Update collections page to pass collection name on navigation
 - [ ] Test collection page displays correctly with filters visible
 
-### 2.6. Dummy Product Page (4%)
+**Tests**
+- [ ] Collection page accessible with parameter (e.g., `/collection/hoodies`)
+- [ ] Page displays collection name dynamically in app bar
+- [ ] Collection description text appears
+- [ ] Filter dropdown visible (FILTER BY: All products)
+- [ ] Sort dropdown visible (SORT BY: Featured)
+- [ ] Product count displays (e.g., "10 products")
+- [ ] At least 6-10 products display in grid
+- [ ] Products show image, name, and price
+- [ ] Product cards are clickable
+- [ ] Grid is responsive (2 cols mobile, 3 cols desktop)
+- [ ] Dropdowns are visible but non-functional (acceptable)
 
+### 2.6. Dummy Product Page (4%)
+**Implementation Tasks**
 - [ ] Open existing pages/product_page.dart and enhance structure
 - [ ] Add large product image on left side (with image carousel thumbnails below)
 - [ ] Add product title, price, and "Tax included" text on right side
@@ -82,8 +139,26 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Style page with proper layout and spacing
 - [ ] Test product page displays correctly on mobile and desktop
 
-### 2.7. Sale Collection (4%)
+**Tests**
+- [ ] Product page accessible via route
+- [ ] Main product image displays
+- [ ] Image carousel/thumbnails visible below main image
+- [ ] Product name displays prominently
+- [ ] Price displays with "Tax included" text
+- [ ] Color dropdown shows options
+- [ ] Size dropdown shows options (S, M, L, XL)
+- [ ] Quantity field displays (default 1)
+- [ ] "ADD TO CART" button visible
+- [ ] "Buy with Shop Pay" button visible
+- [ ] Product description paragraph visible
+- [ ] Material/care details visible
+- [ ] Social share buttons display
+- [ ] Size guide table visible
+- [ ] Back button navigates to previous page
+- [ ] Layout works on mobile (stacked) and desktop (two-column)
 
+### 2.7. Sale Collection (4%)
+**Implementation Tasks**
 - [ ] Create pages/sale_page.dart with basic structure
 - [ ] Add app bar with "SALE" title
 - [ ] Add promotional message "Don't miss out! Get yours before they're all gone!"
@@ -98,8 +173,23 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Add navigation link from navbar to sale page
 - [ ] Test sale page displays with correct pricing format
 
-### 2.8. Authentication UI (3%)
+**Tests**
+- [ ] Sale page accessible via `/sale` route
+- [ ] "SALE" heading displays prominently
+- [ ] Promotional message appears below title
+- [ ] Discount notice visible
+- [ ] Filter and sort dropdowns present (non-functional acceptable)
+- [ ] Product count displays
+- [ ] At least 6 sale products display
+- [ ] Products show images and names
+- [ ] Original price shows with strikethrough (e.g., ~~£17.00~~)
+- [ ] Sale price shows prominently in different color (e.g., £10.99)
+- [ ] Some products show "SALE" badge overlay
+- [ ] Grid is responsive (2 cols mobile, 3 cols desktop)
+- [ ] Navigation from navbar works
 
+### 2.8. Authentication UI (3%)
+**Implementation Tasks**
 - [ ] Create pages/auth_page.dart with basic structure
 - [ ] Add Union logo at top center
 - [ ] Add "Sign in" heading and subtitle "Choose how you'd like to sign in"
@@ -112,8 +202,23 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Add navigation from account icon in navbar
 - [ ] Test auth page displays correctly centered on screen
 
-### 2.9. Static Navbar (5%)
+**Tests**
+- [ ] Auth page accessible via `/auth` route
+- [ ] Union logo displays at top
+- [ ] "Sign in" heading displays
+- [ ] Subtitle text visible
+- [ ] "Sign in with shop" button displays (purple)
+- [ ] "or" divider text visible
+- [ ] Email input field displays with proper styling
+- [ ] Email field has placeholder text
+- [ ] "Continue" button displays (grey)
+- [ ] Page is centered on screen with white card
+- [ ] Layout works on mobile and desktop
+- [ ] Navigation from navbar account icon works
+- [ ] Buttons are non-functional (acceptable for basic feature)
 
+### 2.9. Static Navbar (5%)
+**Implementation Tasks**
 - [ ] Create widgets/navbar.dart file
 - [ ] Add Union logo on the left side (clickable, links to home)
 - [ ] Add desktop navigation links (Home, Shop, The Print Shack, SALE!, About, UPSU.net)
@@ -126,5 +231,23 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Replace existing AppBar on all pages with custom navbar
 - [ ] Test navbar displays correctly on desktop and mobile views
 - [ ] Test navbar collapses to hamburger menu on mobile
+
+**Tests**
+- [ ] Navbar displays on all pages
+- [ ] Union logo visible on left and clickable
+- [ ] Logo navigation returns to homepage
+- [ ] Desktop shows all links horizontally (Home, Shop, Print Shack, SALE!, About, UPSU.net)
+- [ ] Shop link shows dropdown arrow indicator (∨)
+- [ ] The Print Shack link shows dropdown arrow
+- [ ] Search icon displays on right
+- [ ] Account icon displays on right
+- [ ] Cart icon displays with badge number
+- [ ] At width > 600px, full navbar displays
+- [ ] At width < 600px, navbar shows hamburger menu icon
+- [ ] Hamburger menu opens drawer on tap
+- [ ] Drawer contains all navigation links
+- [ ] Drawer closes after selecting item
+- [ ] Navbar consistent across all pages
+
 
 ---
