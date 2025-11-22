@@ -1,3 +1,66 @@
+# Union Shop Flutter Application
+
+[![Flutter Tests](https://github.com/MattCodez21/union_shop/actions/workflows/flutter_test.yml/badge.svg)](https://github.com/MattCodez21/union_shop/actions/workflows/flutter_test.yml)
+
+> **Note:** This project uses GitHub Actions for automated testing and continuous integration.
+
+## 🧪 Automated Testing & CI/CD
+
+This project implements **Continuous Integration** using GitHub Actions, which automatically:
+- ✅ Runs all tests on every commit
+- ✅ Generates test coverage reports
+- ✅ Verifies code quality with Flutter analyze
+- ✅ Ensures minimum 50% test coverage
+
+### Viewing Test Results
+1. Go to the [Actions tab](https://github.com/MattCodez21/union_shop/actions)
+2. Click on any workflow run to see detailed test results
+3. Green checkmark ✅ = All tests passed
+4. Red X ❌ = Tests failed (need to fix)
+
+### Running Tests Locally
+```bash
+# Run all tests
+flutter test
+
+# Run with coverage report
+flutter test --coverage
+```
+
+**Current Test Coverage:** Check the latest [Actions run](https://github.com/MattCodez21/union_shop/actions) for coverage percentage.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Union Shop — Flutter Coursework
 
 This repository contains the coursework project for students enrolled in the **Programming Applications and Programming Languages (M30235)** and **User Experience Design and Implementation (M32605)** modules at the University of Portsmouth.
