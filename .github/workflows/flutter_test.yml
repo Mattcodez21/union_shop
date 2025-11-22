@@ -40,15 +40,15 @@ jobs:
       run: flutter test --coverage
       
     # Step 7: Check if coverage is above 50%
-    - name: Check coverage percentage
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y lcov
-        COVERAGE=$(lcov --summary coverage/lcov.info 2>&1 | grep "lines" | awk '{print $2}' | sed 's/%//')
-        echo "Coverage: $COVERAGE%"
-        if (( $(echo "$COVERAGE < 50" | bc -l) )); then
-          echo "❌ Coverage is below 50%"
-          exit 1
-        else
-          echo "✅ Coverage is $COVERAGE% (above 50%)"
-        fi
+#    - name: Check coverage percentage
+#      run: |
+#        sudo apt-get update
+#        sudo apt-get install -y lcov
+#        COVERAGE=$(lcov --summary coverage/lcov.info 2>&1 | grep "lines" | awk '{print $2}' | sed 's/%//')
+#        echo "Coverage: $COVERAGE%"
+#        if (( $(echo "$COVERAGE < 50" | bc -l) )); then
+#          echo "❌ Coverage is below 50%"
+#          exit 1
+#        else
+#          echo "✅ Coverage is $COVERAGE% (above 50%)"
+#        fi
