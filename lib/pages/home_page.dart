@@ -151,9 +151,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(),
-                        ),
+                        decoration: BoxDecoration(),
                       ),
                     ),
                   ),
