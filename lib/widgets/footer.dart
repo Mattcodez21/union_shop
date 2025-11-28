@@ -92,7 +92,7 @@ class Footer extends StatelessWidget {
                     const SizedBox(height: 8),
                     ElevatedButton(
                       onPressed: () {},
-                      child: Text('Subscribe'),
+                      child: const Text('Subscribe'),
                     ),
                   ],
                 ),
