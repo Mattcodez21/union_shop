@@ -80,14 +80,51 @@ class Footer extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      'Placeholder content',
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey[600],
+                    const TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Enter your email',
+                        border: OutlineInputBorder(),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       ),
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    const SizedBox(height: 8),
+                    ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Subscribe'),
                     ),
                   ],
+                ),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 24),
+
+          // Social Media Icons Row
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  // Placeholder for Facebook link
+                },
+                icon: Icon(
+                  Icons.facebook,
+                  color: Colors.grey[600],
+                  size: 24,
+                ),
+              ),
+              const SizedBox(width: 16),
+              IconButton(
+                onPressed: () {
+                  // Placeholder for Twitter link
+                },
+                icon: Icon(
+                  Icons.alternate_email, // Twitter-like icon
+                  color: Colors.grey[600],
+                  size: 24,
                 ),
               ),
             ],
