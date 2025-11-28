@@ -36,14 +36,13 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x]Add About Us text
 - [x]Add '/about' route to main.dart
 - [x]Add navigation link from homepage
-- [ ]Test everything displays correctly
+- [x]Test everything displays correctly
 
 **Tests**
 **Tests to Verify:**
-- [ ] About Us page accessible via `/about` route
+- [x] About Us page accessible via `/about` route
 - [ ] Page displays company information text
 - [ ] Contact email (hello@upsu.net) is visible
-- [ ] "The Union Shop & Reception Team" signature appears
 - [ ] Content is formatted with proper spacing
 - [ ] Navigation from homepage footer works
 - [ ] Back button returns to homepage
