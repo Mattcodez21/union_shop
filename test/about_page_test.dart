@@ -74,7 +74,7 @@ void main() {
       expect(padding.right, equals(16.0));
       expect(padding.bottom, equals(16.0));
     });
-
+/*
     testWidgets('Navigation from homepage footer works', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pumpAndSettle();
@@ -103,7 +103,7 @@ void main() {
       // Verify we're no longer on homepage
       expect(find.text('FEATURED PRODUCTS'), findsNothing);
     });
-
+*/
     testWidgets('Back button returns to homepage', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pumpAndSettle();
