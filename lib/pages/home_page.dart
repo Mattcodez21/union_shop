@@ -151,7 +151,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                       ),
                     ),
                   ),
