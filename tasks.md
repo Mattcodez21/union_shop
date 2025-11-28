@@ -47,7 +47,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Back button returns to homepage
 ### 2.3. Footer (4%)
 **Implementation Tasks**
-- [ ] Create lib/widgets/footer.dart with Footer widget class
+- [x] Create lib/widgets/footer.dart with Footer widget class
 - [ ] Add three-column layout (Opening Hours, Help and Information, Latest Offers)
 - [ ] Add "Opening Hours" section with winter break closure notice and term times
 - [ ] Add "Help and Information" section with Search and Terms & Conditions links
