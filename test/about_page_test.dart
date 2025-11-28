@@ -46,5 +46,33 @@ void main() {
       expect(find.textContaining('The Union Shop & Reception Team'),
           findsOneWidget);
     });
+
+    testWidgets('Content is formatted with proper spacing', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      // Navigate to about page
+      final BuildContext context = tester.element(find.byType(Scaffold));
+      Navigator.pushNamed(context, '/about');
+      await tester.pumpAndSettle();
+
+      // Check for proper spacing elements
+      expect(find.byType(SizedBox), findsAtLeastNWidgets(1)); // Spacing exists
+      expect(find.byType(Padding), findsAtLeastNWidgets(1)); // Padding exists
+
+      // Check that content is properly structured in Column
+      expect(find.byType(Column), findsAtLeastNWidgets(1));
+
+      // Verify Container has proper padding
+      final containerWidget = tester.widget<Container>(find.byType(Container));
+      expect(containerWidget.padding, isNotNull);
+
+      // Check the padding values correctly
+      final padding = containerWidget.padding as EdgeInsets;
+      expect(padding.left, equals(16.0));
+      expect(padding.top, equals(16.0));
+      expect(padding.right, equals(16.0));
+      expect(padding.bottom, equals(16.0));
+    });
   });
 }

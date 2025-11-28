@@ -42,7 +42,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Tests to Verify:**
 - [x] About Us page accessible via `/about` route
 - [x] Page displays company information text & contact email
-- [ ] Content is formatted with proper spacing
+- [x] Content is formatted with proper spacing
 - [ ] Navigation from homepage footer works
 - [ ] Back button returns to homepage
 ### 2.3. Footer (4%)
