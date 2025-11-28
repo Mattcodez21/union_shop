@@ -53,7 +53,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add "Help and Information" section with Search and Terms & Conditions links
 - [x] Add "Latest Offers" section with email subscription input and button
 - [x] Add social media icons row (Facebook, Twitter)
-- [ ] Add copyright text and "Powered by Shopify" at bottom
+- [x] Add copyright text and "Powered by Shopify" at bottom
 - [ ] Replace homepage footer placeholder with Footer widget
 - [ ] Test footer displays correctly and is responsive
 
