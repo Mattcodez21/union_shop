@@ -16,7 +16,19 @@ class AboutPage extends StatelessWidget {
         ),
       ),
       body: Container(
-        child: Text('About Page'),
+        padding: const EdgeInsets.all(16.0),
+        child: const Column(
+          children: [
+            Text(
+              'About Us',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }
