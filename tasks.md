@@ -33,7 +33,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x]Create pages/about_page.dart with basic structure
 - [x]Add app bar with "About" title and back button
 - [x]Add "About Us" heading centred at the top
-- [ ]Add About Us text
+- [x]Add About Us text
 - [ ]Add '/about' route to main.dart
 - [ ]Add navigation link from homepage
 - [ ]Test everything displays correctly
