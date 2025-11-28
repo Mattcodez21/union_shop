@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                               navigateToHome(context);
                             },
                             child: Image.asset(
-                              'assets/images/herobanner.png',
+                              'assets/images/upsu_logo.png',
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
