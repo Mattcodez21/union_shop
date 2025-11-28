@@ -30,8 +30,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ### 2.2. About Us Page (5%)
 **Implementation Tasks**
-- [ ]Create pages/about_page.dart with basic structure
-- [ ]Add app bar with "About" title and back button
+- [x]Create pages/about_page.dart with basic structure
+- [x]Add app bar with "About" title and back button
 - [ ]Add "About Us" heading centred at the top
 - [ ]Add About Us text
 - [ ]Add '/about' route to main.dart
