@@ -20,5 +20,31 @@ void main() {
       expect(find.text('About Us'), findsOneWidget); // Page heading
       expect(find.byType(AppBar), findsOneWidget); // App bar exists
     });
+
+    testWidgets('Page displays company information text & contact email',
+        (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      // Navigate to about page
+      final BuildContext context = tester.element(find.byType(Scaffold));
+      Navigator.pushNamed(context, '/about');
+      await tester.pumpAndSettle();
+
+      // Check for company information text
+      expect(find.textContaining('Welcome to the Union Shop!'), findsOneWidget);
+      expect(
+          find.textContaining('University branded products'), findsOneWidget);
+      expect(find.textContaining('personalisation service'), findsOneWidget);
+      expect(find.textContaining('delivery or instore collection'),
+          findsOneWidget);
+
+      // Check for contact email
+      expect(find.textContaining('hello@upsu.net'), findsOneWidget);
+
+      // Check for team signature
+      expect(find.textContaining('The Union Shop & Reception Team'),
+          findsOneWidget);
+    });
   });
 }

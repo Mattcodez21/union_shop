@@ -41,8 +41,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Tests**
 **Tests to Verify:**
 - [x] About Us page accessible via `/about` route
-- [ ] Page displays company information text
-- [ ] Contact email (hello@upsu.net) is visible
+- [x] Page displays company information text & contact email
 - [ ] Content is formatted with proper spacing
 - [ ] Navigation from homepage footer works
 - [ ] Back button returns to homepage
