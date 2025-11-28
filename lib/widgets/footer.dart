@@ -30,7 +30,7 @@ class Footer extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Placeholder content',
+                      'Winter Break Closure:\nClosed 20 Dec - 6 Jan\n\nTerm Time:\nMon-Fri: 9:00 AM - 5:00 PM\nSat-Sun: 10:00 AM - 4:00 PM',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
@@ -55,10 +55,11 @@ class Footer extends StatelessWidget {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      'Placeholder content',
+                      'Search\nTerms & Conditions',
                       style: TextStyle(
                         fontSize: 14,
                         color: Colors.grey[600],
+                        height: 1.4,
                       ),
                     ),
                   ],

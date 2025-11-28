@@ -49,8 +49,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Implementation Tasks**
 - [x] Create lib/widgets/footer.dart with Footer widget class
 - [x] Add three-column layout (Opening Hours, Help and Information, Latest Offers)
-- [ ] Add "Opening Hours" section with winter break closure notice and term times
-- [ ] Add "Help and Information" section with Search and Terms & Conditions links
+- [x] Add "Opening Hours" section with winter break closure notice and term times
+- [x] Add "Help and Information" section with Search and Terms & Conditions links
 - [ ] Add "Latest Offers" section with email subscription input and button
 - [ ] Add social media icons row (Facebook, Twitter)
 - [ ] Add copyright text and "Powered by Shopify" at bottom
