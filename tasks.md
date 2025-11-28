@@ -35,7 +35,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x]Add "About Us" heading centred at the top
 - [x]Add About Us text
 - [x]Add '/about' route to main.dart
-- [ ]Add navigation link from homepage
+- [x]Add navigation link from homepage
 - [ ]Test everything displays correctly
 
 **Tests**
