@@ -44,7 +44,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Page displays company information text & contact email
 - [x] Content is formatted with proper spacing
 - [x] Navigation from homepage footer works
-- [ ] Back button returns to homepage
+- [x] Back button returns to homepage
 ### 2.3. Footer (4%)
 **Implementation Tasks**
 - [ ] Create lib/widgets/footer.dart with Footer widget class

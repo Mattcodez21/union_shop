@@ -103,5 +103,32 @@ void main() {
       // Verify we're no longer on homepage
       expect(find.text('FEATURED PRODUCTS'), findsNothing);
     });
+
+    testWidgets('Back button returns to homepage', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      // Navigate to about page first
+      final BuildContext context = tester.element(find.byType(Scaffold));
+      Navigator.pushNamed(context, '/about');
+      await tester.pumpAndSettle();
+
+      // Verify we're on the About page
+      expect(find.text('About Us'), findsOneWidget);
+
+      // Find and tap the back button in the app bar
+      final backButton = find.byIcon(Icons.arrow_back);
+      expect(backButton, findsOneWidget);
+
+      await tester.tap(backButton);
+      await tester.pumpAndSettle();
+
+      // Verify we're back on the homepage
+      expect(find.text('FEATURED PRODUCTS'), findsOneWidget);
+      expect(find.text('BROWSE PRODUCTS'), findsOneWidget);
+
+      // Verify we're no longer on the About page
+      expect(find.text('About Us'), findsNothing);
+    });
   });
 }
