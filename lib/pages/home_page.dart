@@ -48,9 +48,8 @@ class HomeScreen extends StatelessWidget {
                             onTap: () {
                               navigateToHome(context);
                             },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
+                            child: Image.asset(
+                              'assets/images/herobanner.png',
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
@@ -145,15 +144,15 @@ class HomeScreen extends StatelessWidget {
                     child: Container(
                       decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                          image: AssetImage(
+                            'assets/images/hero_banner.png',
                           ),
                           fit: BoxFit.cover,
                         ),
                       ),
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
+                          color: Colors.black.withOpacity(0.7),
                         ),
                       ),
                     ),
@@ -234,26 +233,22 @@ class HomeScreen extends StatelessWidget {
                         ProductCard(
                           title: 'Signature Hoodie',
                           price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/signature_hoodie.png',
                         ),
                         ProductCard(
                           title: 'Signature T-Shirt',
                           price: '£14.99',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/signature_tshirt.png',
                         ),
                         ProductCard(
                           title: 'Essential T-Shirt',
                           price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/essential_tshirt.png',
                         ),
                         ProductCard(
                           title: 'Portsmouth City Magnet',
                           price: '£4.50',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                          imageUrl: 'assets/images/portsmouth_magnet.png',
                         ),
                       ],
                     ),
@@ -305,7 +300,7 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-            child: Image.network(
+            child: Image.asset(
               imageUrl,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
