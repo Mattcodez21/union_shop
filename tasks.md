@@ -6,7 +6,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ## Progress Summary
 **Overall Progress**:
-- Basic Features: 1/9 (10% of 40%)
+- Basic Features: 3/9 (10% of 40%)
 - Intermediate Features: 0/7 (0% of 35%)
 - Advanced Features: 0/3 (0% of 25%)
 
@@ -70,7 +70,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ### 2.4. Dummy Collections Page (5%)
 **Implementaion Tasks**
-- [ ] Create pages/collections_page.dart with basic structure
+- [x] Create pages/collections_page.dart with basic structure
 - [ ] Add app bar with "Collections" title
 - [ ] Create hardcoded list of collection data (names and image URLs)
 - [ ] Implement GridView for collections with 2 columns on mobile
