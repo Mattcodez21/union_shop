@@ -199,5 +199,68 @@ void main() {
       expect(find.textContaining('©'), findsOneWidget);
       expect(find.textContaining('Shopify'), findsOneWidget);
     });
+
+    testWidgets('Footer is responsive and readable at all widths',
+        (tester) async {
+      // Test various screen widths to ensure footer is responsive
+      final List<Size> testSizes = [
+        const Size(320, 800), // Small mobile
+        const Size(480, 800), // Large mobile
+        const Size(768, 600), // Tablet
+        const Size(1024, 600), // Desktop
+        const Size(1440, 600), // Large desktop
+      ];
+
+      for (final size in testSizes) {
+        await tester.binding.setSurfaceSize(size);
+
+        await tester.pumpWidget(
+          const MaterialApp(
+            home: Scaffold(
+              body: SingleChildScrollView(
+                child: Footer(),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pump();
+
+        // Verify footer exists at this width
+        expect(find.byType(Footer), findsOneWidget,
+            reason: 'Footer should exist at width ${size.width}');
+
+        // Verify all three main sections are readable
+        expect(find.text('Opening Hours'), findsOneWidget,
+            reason: 'Opening Hours should be readable at width ${size.width}');
+        expect(find.text('Help and Information'), findsOneWidget,
+            reason:
+                'Help and Information should be readable at width ${size.width}');
+        expect(find.text('Latest Offers'), findsOneWidget,
+            reason: 'Latest Offers should be readable at width ${size.width}');
+
+        // Verify key content is accessible
+        expect(find.textContaining('Winter Break Closure'), findsOneWidget,
+            reason:
+                'Opening hours content should be readable at width ${size.width}');
+        expect(find.textContaining('Search'), findsOneWidget,
+            reason: 'Help links should be readable at width ${size.width}');
+        expect(find.text('Subscribe'), findsOneWidget,
+            reason:
+                'Subscribe button should be readable at width ${size.width}');
+
+        // Verify social media icons are present
+        expect(find.byType(IconButton), findsNWidgets(2),
+            reason:
+                'Social media icons should be present at width ${size.width}');
+
+        // Verify copyright text is present
+        expect(find.textContaining('© 2025'), findsOneWidget,
+            reason: 'Copyright should be readable at width ${size.width}');
+      }
+
+      // Reset to default size
+      await tester.binding.setSurfaceSize(null);
+    });
   });
 }

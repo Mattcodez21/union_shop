@@ -66,7 +66,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Email subscription form exists
 - [x] Social media icons (Facebook, Twitter) display
 - [x] Copyright text includes "© 2025" and Shopify credit
-- [ ] Footer is responsive and readable at all widths
+- [x] Footer is responsive and readable at all widths
 
 ### 2.4. Dummy Collections Page (5%)
 **Implementaion Tasks**
