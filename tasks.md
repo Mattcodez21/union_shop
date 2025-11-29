@@ -72,7 +72,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Implementaion Tasks**
 - [x] Create pages/collections_page.dart with basic structure
 - [x] Create hardcoded list of collection data (names and image URLs)
-- [ ] Implement GridView for collections with 2 columns on mobile
+- [x] Implement GridView for collections with 2 columns on mobile
 - [ ] Create collection card widget with image, title, and item count
 - [ ] Add GestureDetector for navigation to individual collection page
 - [ ] Add '/collections' route in main.dart
