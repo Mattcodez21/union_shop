@@ -6,7 +6,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ## Progress Summary
 **Overall Progress**:
-- Basic Features: 4/9 (10% of 40%)
+- Basic Features: 5/9 (55% of 40%)
 - Intermediate Features: 0/7 (0% of 35%)
 - Advanced Features: 0/3 (0% of 25%)
 
@@ -105,7 +105,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Test collection page displays correctly with filters visible
 
 **Tests**
-- [ ] Collection page accessible with parameter (e.g., `/collection/hoodies`)
+- [x] Collection page accessible with parameter (e.g., `/collection/hoodies`)
 - [ ] Page displays collection name dynamically in app bar
 - [ ] Collection description text appears
 - [ ] Filter dropdown visible (FILTER BY: All products)
