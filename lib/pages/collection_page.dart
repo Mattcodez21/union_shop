@@ -69,14 +69,16 @@ class CollectionPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
-                if (collection != null)
-                  Text(
-                    '${collection['itemCount']} items',
-                    style: const TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey,
-                    ),
+                Text(
+                  collection != null
+                      ? '${collection['itemCount']} products'
+                      : '10 products',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black87,
                   ),
+                ),
               ],
             ),
           ),
