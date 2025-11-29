@@ -176,5 +176,28 @@ void main() {
       expect(facebookIcon.size, equals(24.0));
       expect(twitterIcon.size, equals(24.0));
     });
+
+    testWidgets('Copyright text includes "© 2025" and Shopify credit',
+        (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: Footer(),
+          ),
+        ),
+      );
+
+      // Verify copyright text with current year
+      expect(find.textContaining('© 2025'), findsOneWidget);
+      expect(find.text('© 2025 Union Shop'), findsOneWidget);
+
+      // Verify Shopify credit text
+      expect(find.textContaining('Powered by Shopify'), findsOneWidget);
+      expect(find.text('Powered by Shopify'), findsOneWidget);
+
+      // Verify both copyright elements exist
+      expect(find.textContaining('©'), findsOneWidget);
+      expect(find.textContaining('Shopify'), findsOneWidget);
+    });
   });
 }
