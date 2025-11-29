@@ -133,7 +133,7 @@ class ProductPage extends StatelessWidget {
 // Product details
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   bool isDesktop = constraints.maxWidth > 600;
@@ -150,20 +150,28 @@ class ProductPage extends StatelessWidget {
                             children: [
                               // Main large product image
                               Container(
-                                height: 400,
+                                height: 500,
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.grey[100],
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color:
+                                          Colors.black.withValues(alpha: 0.1),
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
                                 ),
                                 child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(12),
                                   child: Image.network(
                                     'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, error, stackTrace) {
                                       return Container(
-                                        color: Colors.grey[300],
+                                        color: Colors.grey[200],
                                         child: const Center(
                                           child: Column(
                                             mainAxisAlignment:
@@ -189,7 +197,7 @@ class ProductPage extends StatelessWidget {
                                 ),
                               ),
 
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 20),
 
                               // Image carousel thumbnails
                               SizedBox(
@@ -213,29 +221,40 @@ class ProductPage extends StatelessWidget {
                                         width: 80,
                                         height: 80,
                                         margin: EdgeInsets.only(
-                                          right: index < 3 ? 12 : 0,
+                                          right: index < 3 ? 16 : 0,
                                         ),
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(8),
+                                              BorderRadius.circular(12),
                                           border: Border.all(
                                             color: index == 0
                                                 ? const Color(0xFF4d2963)
                                                 : Colors.grey[300]!,
                                             width: 2,
                                           ),
-                                          color: Colors.grey[200],
+                                          boxShadow: index == 0
+                                              ? [
+                                                  BoxShadow(
+                                                    color:
+                                                        const Color(0xFF4d2963)
+                                                            .withValues(
+                                                                alpha: 0.2),
+                                                    blurRadius: 4,
+                                                    offset: const Offset(0, 2),
+                                                  ),
+                                                ]
+                                              : null,
                                         ),
                                         child: ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(6),
+                                              BorderRadius.circular(10),
                                           child: Image.network(
                                             thumbnailImages[index],
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) {
                                               return Container(
-                                                color: Colors.grey[300],
+                                                color: Colors.grey[200],
                                                 child: const Center(
                                                   child: Icon(
                                                     Icons.image_not_supported,
@@ -265,31 +284,33 @@ class ProductPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                'Placeholder Product Name',
+                                'Portsmouth City Magnet',
                                 style: TextStyle(
-                                  fontSize: 28,
+                                  fontSize: 32,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.black,
+                                  color: Colors.black87,
+                                  height: 1.2,
                                 ),
                               ),
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 16),
                               const Text(
                                 '£15.00',
                                 style: TextStyle(
-                                  fontSize: 24,
+                                  fontSize: 28,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF4d2963),
                                 ),
                               ),
-                              const SizedBox(height: 4),
+                              const SizedBox(height: 6),
                               Text(
                                 'Tax included',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey[600],
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 32),
 
                               // Product options row
                               Row(
@@ -430,7 +451,7 @@ class ProductPage extends StatelessWidget {
                                 ],
                               ),
 
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 32),
 
                               // Add to Cart button
                               SizedBox(
@@ -440,7 +461,11 @@ class ProductPage extends StatelessWidget {
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFF4d2963),
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
+                                        vertical: 18),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    elevation: 2,
                                   ),
                                   child: const Text(
                                     'ADD TO CART',
@@ -448,12 +473,13 @@ class ProductPage extends StatelessWidget {
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white,
+                                      letterSpacing: 0.5,
                                     ),
                                   ),
                                 ),
                               ),
 
-                              const SizedBox(height: 12),
+                              const SizedBox(height: 16),
 
                               // Buy with Shop Pay button
                               SizedBox(
@@ -462,96 +488,108 @@ class ProductPage extends StatelessWidget {
                                   onPressed: placeholderCallbackForButtons,
                                   style: OutlinedButton.styleFrom(
                                     padding: const EdgeInsets.symmetric(
-                                        vertical: 16),
-                                    side: BorderSide(color: Colors.grey[400]!),
+                                        vertical: 18),
+                                    side: BorderSide(
+                                        color: Colors.grey[400]!, width: 1.5),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
                                   ),
                                   child: const Text(
                                     'Buy with Shop Pay',
                                     style: TextStyle(
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w500,
+                                      fontWeight: FontWeight.w600,
                                       color: Colors.black87,
                                     ),
                                   ),
                                 ),
                               ),
 
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 40),
 
                               const Text(
                                 'Description',
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 12),
                               const Text(
                                 'Bringing to you, our best selling Portsmouth City magnet! Perfect for showing your city pride or as a memorable gift for visitors and locals alike.',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: Colors.grey,
-                                  height: 1.5,
+                                  color: Colors.black54,
+                                  height: 1.6,
                                 ),
                               ),
-                              const SizedBox(height: 16),
+                              const SizedBox(height: 24),
                               const Text(
                                 'Product Details',
                                 style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.black,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 12),
                               const Text(
                                 'Soft, comfortable, 50% cotton blend material. High-quality print that won\'t fade. Durable construction built to last. Available in multiple colors and sizes to suit your style.',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: Colors.grey,
-                                  height: 1.5,
+                                  color: Colors.black54,
+                                  height: 1.6,
                                 ),
                               ),
 
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 32),
 
                               // Social share buttons
-                              Row(
+                              Wrap(
+                                spacing: 12,
                                 children: [
                                   OutlinedButton.icon(
                                     onPressed: placeholderCallbackForButtons,
-                                    icon: const Icon(Icons.share, size: 16),
+                                    icon: const Icon(Icons.share, size: 18),
                                     label: const Text('SHARE'),
                                     style: OutlinedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 8),
+                                          horizontal: 20, vertical: 12),
                                       side:
-                                          BorderSide(color: Colors.grey[400]!),
+                                          BorderSide(color: Colors.grey[300]!),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(width: 8),
                                   OutlinedButton.icon(
                                     onPressed: placeholderCallbackForButtons,
-                                    icon: const Icon(Icons.link, size: 16),
+                                    icon: const Icon(Icons.link, size: 18),
                                     label: const Text('TWEET'),
                                     style: OutlinedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 8),
+                                          horizontal: 20, vertical: 12),
                                       side:
-                                          BorderSide(color: Colors.grey[400]!),
+                                          BorderSide(color: Colors.grey[300]!),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
                                     ),
                                   ),
-                                  const SizedBox(width: 8),
                                   OutlinedButton.icon(
                                     onPressed: placeholderCallbackForButtons,
-                                    icon: const Icon(Icons.push_pin, size: 16),
+                                    icon: const Icon(Icons.push_pin, size: 18),
                                     label: const Text('PIN IT'),
                                     style: OutlinedButton.styleFrom(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 16, vertical: 8),
+                                          horizontal: 20, vertical: 12),
                                       side:
-                                          BorderSide(color: Colors.grey[400]!),
+                                          BorderSide(color: Colors.grey[300]!),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(6),
+                                      ),
                                     ),
                                   ),
                                 ],
@@ -571,20 +609,27 @@ class ProductPage extends StatelessWidget {
                           children: [
                             // Main large product image
                             Container(
-                              height: 400,
+                              height: 350,
                               width: double.infinity,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.grey[100],
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.1),
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 4),
+                                  ),
+                                ],
                               ),
                               child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
+                                borderRadius: BorderRadius.circular(12),
                                 child: Image.network(
                                   'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Container(
-                                      color: Colors.grey[300],
+                                      color: Colors.grey[200],
                                       child: const Center(
                                         child: Column(
                                           mainAxisAlignment:
@@ -610,7 +655,7 @@ class ProductPage extends StatelessWidget {
                               ),
                             ),
 
-                            const SizedBox(height: 16),
+                            const SizedBox(height: 20),
 
                             // Image carousel thumbnails
                             SizedBox(
@@ -637,24 +682,33 @@ class ProductPage extends StatelessWidget {
                                         right: index < 3 ? 12 : 0,
                                       ),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius: BorderRadius.circular(12),
                                         border: Border.all(
                                           color: index == 0
                                               ? const Color(0xFF4d2963)
                                               : Colors.grey[300]!,
                                           width: 2,
                                         ),
-                                        color: Colors.grey[200],
+                                        boxShadow: index == 0
+                                            ? [
+                                                BoxShadow(
+                                                  color: const Color(0xFF4d2963)
+                                                      .withValues(alpha: 0.2),
+                                                  blurRadius: 4,
+                                                  offset: const Offset(0, 2),
+                                                ),
+                                              ]
+                                            : null,
                                       ),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(6),
+                                        borderRadius: BorderRadius.circular(10),
                                         child: Image.network(
                                           thumbnailImages[index],
                                           fit: BoxFit.cover,
                                           errorBuilder:
                                               (context, error, stackTrace) {
                                             return Container(
-                                              color: Colors.grey[300],
+                                              color: Colors.grey[200],
                                               child: const Center(
                                                 child: Icon(
                                                   Icons.image_not_supported,
@@ -674,35 +728,37 @@ class ProductPage extends StatelessWidget {
                           ],
                         ),
 
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
 
                         // Product info (mobile)
                         const Text(
-                          'Placeholder Product Name',
+                          'Portsmouth City Magnet',
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.black87,
+                            height: 1.2,
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 16),
                         const Text(
                           '£15.00',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF4d2963),
                           ),
                         ),
-                        const SizedBox(height: 4),
+                        const SizedBox(height: 6),
                         Text(
                           'Tax included',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[600],
+                            fontWeight: FontWeight.w500,
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
 
                         // Product options (mobile)
                         Column(
@@ -854,16 +910,20 @@ class ProductPage extends StatelessWidget {
                           ],
                         ),
 
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
 
-                        // Add to Cart button (mobile)
+                        // Add to Cart button (mobile) - same styling as desktop
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: placeholderCallbackForButtons,
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4d2963),
-                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              padding: const EdgeInsets.symmetric(vertical: 18),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              elevation: 2,
                             ),
                             child: const Text(
                               'ADD TO CART',
@@ -871,27 +931,32 @@ class ProductPage extends StatelessWidget {
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.white,
+                                letterSpacing: 0.5,
                               ),
                             ),
                           ),
                         ),
 
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 16),
 
-                        // Buy with Shop Pay button (mobile)
+                        // Buy with Shop Pay button (mobile) - same styling as desktop
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton(
                             onPressed: placeholderCallbackForButtons,
                             style: OutlinedButton.styleFrom(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              side: BorderSide(color: Colors.grey[400]!),
+                              padding: const EdgeInsets.symmetric(vertical: 18),
+                              side: BorderSide(
+                                  color: Colors.grey[400]!, width: 1.5),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
                             ),
                             child: const Text(
                               'Buy with Shop Pay',
                               style: TextStyle(
                                 fontSize: 16,
-                                fontWeight: FontWeight.w500,
+                                fontWeight: FontWeight.w600,
                                 color: Colors.black87,
                               ),
                             ),
@@ -913,8 +978,8 @@ class ProductPage extends StatelessWidget {
                           'Bringing to you, our best selling Portsmouth City magnet! Perfect for showing your city pride or as a memorable gift for visitors and locals alike.',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
-                            height: 1.5,
+                            color: Colors.black54,
+                            height: 1.6,
                           ),
                         ),
                         const SizedBox(height: 16),
@@ -931,12 +996,12 @@ class ProductPage extends StatelessWidget {
                           'Soft, comfortable, 50% cotton blend material. High-quality print that won\'t fade. Durable construction built to last. Available in multiple colors and sizes to suit your style.',
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.grey,
-                            height: 1.5,
+                            color: Colors.black54,
+                            height: 1.6,
                           ),
                         ),
 
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
 
                         // Social share buttons (mobile)
                         Row(
@@ -976,7 +1041,7 @@ class ProductPage extends StatelessWidget {
                           ],
                         ),
 
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
                       ],
                     );
                   }
@@ -986,20 +1051,23 @@ class ProductPage extends StatelessWidget {
 
             // Back to collection button
             Container(
-              color: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              color: Colors.grey[50],
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
               child: SizedBox(
                 width: double.infinity,
                 child: OutlinedButton.icon(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: const Icon(Icons.arrow_back, size: 16),
+                  icon: const Icon(Icons.arrow_back, size: 18),
                   label: const Text('BACK TO COLLECTION'),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    side: BorderSide(color: Colors.grey[400]!),
+                    side: BorderSide(color: Colors.grey[400]!, width: 1.5),
                     foregroundColor: Colors.black87,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
               ),
