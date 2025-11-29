@@ -105,7 +105,7 @@ class CollectionPage extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: 'All Items',
+                    initialValue: 'All Items',
                     items: const [
                       DropdownMenuItem(
                           value: 'All Items', child: Text('All Items')),
@@ -130,7 +130,7 @@ class CollectionPage extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: 'Featured',
+                    initialValue: 'Featured',
                     items: const [
                       DropdownMenuItem(
                           value: 'Featured', child: Text('Featured')),
