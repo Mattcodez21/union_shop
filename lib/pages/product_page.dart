@@ -290,6 +290,194 @@ class ProductPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 24),
+
+                              // Product options row
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Color',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey[300]!),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          child: DropdownButton<String>(
+                                            value: 'Black',
+                                            isExpanded: true,
+                                            underline: const SizedBox(),
+                                            items: [
+                                              'Black',
+                                              'Purple',
+                                              'Green',
+                                              'Grey'
+                                            ].map((String color) {
+                                              return DropdownMenuItem<String>(
+                                                value: color,
+                                                child: Text(color),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? newValue) {
+                                              placeholderCallbackForButtons();
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Size',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey[300]!),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          child: DropdownButton<String>(
+                                            value: 'M',
+                                            isExpanded: true,
+                                            underline: const SizedBox(),
+                                            items: ['S', 'M', 'L', 'XL']
+                                                .map((String size) {
+                                              return DropdownMenuItem<String>(
+                                                value: size,
+                                                child: Text(size),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? newValue) {
+                                              placeholderCallbackForButtons();
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          'Quantity',
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 4),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 12),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.grey[300]!),
+                                            borderRadius:
+                                                BorderRadius.circular(4),
+                                          ),
+                                          child: DropdownButton<int>(
+                                            value: 1,
+                                            isExpanded: true,
+                                            underline: const SizedBox(),
+                                            items: List<
+                                                DropdownMenuItem<int>>.generate(
+                                              10,
+                                              (index) => DropdownMenuItem<int>(
+                                                value: index + 1,
+                                                child: Text('${index + 1}'),
+                                              ),
+                                            ),
+                                            onChanged: (int? newValue) {
+                                              placeholderCallbackForButtons();
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              const SizedBox(height: 24),
+
+                              // Add to Cart button
+                              SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  onPressed: placeholderCallbackForButtons,
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFF4d2963),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                  ),
+                                  child: const Text(
+                                    'ADD TO CART',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 12),
+
+                              // Buy with Shop Pay button
+                              SizedBox(
+                                width: double.infinity,
+                                child: OutlinedButton(
+                                  onPressed: placeholderCallbackForButtons,
+                                  style: OutlinedButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    side: BorderSide(color: Colors.grey[400]!),
+                                  ),
+                                  child: const Text(
+                                    'Buy with Shop Pay',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ),
+                              ),
+
+                              const SizedBox(height: 24),
+
                               const Text(
                                 'Description',
                                 style: TextStyle(
@@ -454,6 +642,203 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 24),
+
+                        // Product options (mobile)
+                        Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Color',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey[300]!),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                        child: DropdownButton<String>(
+                                          value: 'Black',
+                                          isExpanded: true,
+                                          underline: const SizedBox(),
+                                          items: [
+                                            'Black',
+                                            'Purple',
+                                            'Green',
+                                            'Grey'
+                                          ].map((String color) {
+                                            return DropdownMenuItem<String>(
+                                              value: color,
+                                              child: Text(color),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? newValue) {
+                                            placeholderCallbackForButtons();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Size',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey[300]!),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                        child: DropdownButton<String>(
+                                          value: 'M',
+                                          isExpanded: true,
+                                          underline: const SizedBox(),
+                                          items: ['S', 'M', 'L', 'XL']
+                                              .map((String size) {
+                                            return DropdownMenuItem<String>(
+                                              value: size,
+                                              child: Text(size),
+                                            );
+                                          }).toList(),
+                                          onChanged: (String? newValue) {
+                                            placeholderCallbackForButtons();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 12),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      const Text(
+                                        'Quantity',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 4),
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 12),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.grey[300]!),
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                        ),
+                                        child: DropdownButton<int>(
+                                          value: 1,
+                                          isExpanded: true,
+                                          underline: const SizedBox(),
+                                          items: List<
+                                              DropdownMenuItem<int>>.generate(
+                                            10,
+                                            (index) => DropdownMenuItem<int>(
+                                              value: index + 1,
+                                              child: Text('${index + 1}'),
+                                            ),
+                                          ),
+                                          onChanged: (int? newValue) {
+                                            placeholderCallbackForButtons();
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                const Expanded(
+                                    child: SizedBox()), // Empty space
+                              ],
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        // Add to Cart button (mobile)
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: placeholderCallbackForButtons,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF4d2963),
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                            ),
+                            child: const Text(
+                              'ADD TO CART',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 12),
+
+                        // Buy with Shop Pay button (mobile)
+                        SizedBox(
+                          width: double.infinity,
+                          child: OutlinedButton(
+                            onPressed: placeholderCallbackForButtons,
+                            style: OutlinedButton.styleFrom(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              side: BorderSide(color: Colors.grey[400]!),
+                            ),
+                            child: const Text(
+                              'Buy with Shop Pay',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 24),
+
                         const Text(
                           'Description',
                           style: TextStyle(

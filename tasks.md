@@ -121,11 +121,11 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Open existing pages/product_page.dart and enhance structure
 - [x] Add large product image on left side (with image carousel thumbnails below)
 - [x] Add product title, price, and "Tax included" text on right side
-- [ ] Add Color dropdown with options (Black, Purple, Green, Grey)
-- [ ] Add Size dropdown with options (S, M, L, XL)
-- [ ] Add Quantity number input field
-- [ ] Add "ADD TO CART" button (non-functional for now)
-- [ ] Add "Buy with Shop Pay" button placeholder
+- [x] Add Color dropdown with options (Black, Purple, Green, Grey)
+- [x] Add Size dropdown with options (S, M, L, XL)
+- [x] Add Quantity number input field
+- [x] Add "ADD TO CART" button (non-functional for now)
+- [x] Add "Buy with Shop Pay" button placeholder
 - [ ] Add product description text ("Bringing to you, our best selling...")
 - [ ] Add product details text ("Soft, comfortable, 50% cotton...")
 - [ ] Add social share buttons (SHARE, TWEET, PIN IT - non-functional)
