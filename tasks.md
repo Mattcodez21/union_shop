@@ -6,7 +6,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ## Progress Summary
 **Overall Progress**:
-- Basic Features: 3/9 (10% of 40%)
+- Basic Features: 4/9 (10% of 40%)
 - Intermediate Features: 0/7 (0% of 35%)
 - Advanced Features: 0/3 (0% of 25%)
 

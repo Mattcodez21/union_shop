@@ -134,7 +134,9 @@ void main() {
           expect(find.text('Home Living'), findsOneWidget);
         } else if (find.text('Home').evaluate().isNotEmpty) {
           expect(find.text('Home'), findsOneWidget);
-        } else {}
+        } else {
+          // Home & Living collection not visible in current viewport
+        }
       }
 
       // Verify images are present
