@@ -256,6 +256,29 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
+            const SizedBox(height: 40),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/collections');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4d2963),
+                  foregroundColor: Colors.white,
+                  shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.zero,
+                  ),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                ),
+                child: const Text(
+                  'VIEW ALL COLLECTIONS',
+                  style: TextStyle(fontSize: 14, letterSpacing: 1),
+                ),
+              ),
+            ),
+            const SizedBox(height: 40),
+
 // Footer
             const Footer()
           ],
