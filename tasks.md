@@ -75,7 +75,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Implement GridView for collections with 2 columns on mobile
 - [x] Create collection card widget with image, title, and item count
 - [x] Add GestureDetector for navigation to individual collection page
-- [ ] Add '/collections' route in main.dart
+- [x] Add '/collections' route in main.dart
 - [ ] Add navigation link from homepage/navbar to collections
 - [ ] Test collections page displays and navigation works
 
