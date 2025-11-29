@@ -110,5 +110,34 @@ void main() {
       // Verify the combined text widget exists
       expect(find.text('Search\nTerms & Conditions'), findsOneWidget);
     });
+
+    testWidgets('Email subscription form exists', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: Footer(),
+          ),
+        ),
+      );
+
+      // Verify Latest Offers section header
+      expect(find.text('Latest Offers'), findsOneWidget);
+
+      // Verify email input field exists
+      expect(find.byType(TextField), findsOneWidget);
+
+      // Verify email input has correct hint text
+      final textField = tester.widget<TextField>(find.byType(TextField));
+      expect(textField.decoration?.hintText, equals('Enter your email'));
+
+      // Verify subscribe button exists
+      expect(find.byType(ElevatedButton), findsOneWidget);
+      expect(find.text('Subscribe'), findsOneWidget);
+
+      // Verify button is tappable (but don't test functionality)
+      final subscribeButton =
+          tester.widget<ElevatedButton>(find.byType(ElevatedButton));
+      expect(subscribeButton.onPressed, isNotNull);
+    });
   });
 }
