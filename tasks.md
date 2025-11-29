@@ -85,7 +85,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Each collection shows title and image
 - [x] Each collection shows product count (e.g., "12 items")
 - [x] Collections are clickable
-- [ ] Grid layout shows 2 columns on mobile (< 600px)
+- [x] Grid layout shows 2 columns on mobile (< 600px)
 - [ ] Grid layout shows 3-4 columns on desktop (> 600px)
 - [ ] Navigation from navbar/homepage works
 

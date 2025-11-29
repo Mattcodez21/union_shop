@@ -302,5 +302,49 @@ void main() {
       // collection route doesn't exist yet. The error you see when tapping
       // proves that the collections ARE clickable and trying to navigate.
     });
+
+    testWidgets('Grid layout shows 2 columns on mobile (< 600px)',
+        (tester) async {
+      // Set mobile screen size (less than 600px width)
+      await tester.binding.setSurfaceSize(const Size(400, 800));
+
+      // Navigate directly to collections page to avoid homepage overflow
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify we're on the Collections page
+      expect(find.byType(CollectionsPage), findsOneWidget);
+
+      // Find the GridView widget
+      final gridView = tester.widget<GridView>(find.byType(GridView));
+      expect(gridView, isNotNull);
+
+      // Verify it uses SliverGridDelegateWithFixedCrossAxisCount
+      expect(gridView.gridDelegate,
+          isA<SliverGridDelegateWithFixedCrossAxisCount>());
+
+      // Get the grid delegate and verify crossAxisCount is 2
+      final gridDelegate =
+          gridView.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
+      expect(gridDelegate.crossAxisCount, equals(2));
+
+      // Verify spacing is appropriate for mobile
+      expect(gridDelegate.crossAxisSpacing, equals(16));
+      expect(gridDelegate.mainAxisSpacing, equals(16));
+
+      // Verify aspect ratio is suitable for mobile display
+      expect(gridDelegate.childAspectRatio, equals(0.75));
+
+      // Verify at least some collection cards are visible in the grid
+      final collectionCards = find.byType(CollectionCard);
+      expect(collectionCards, findsWidgets);
+
+      // Reset screen size to default
+      await tester.binding.setSurfaceSize(null);
+    });
   });
 }
