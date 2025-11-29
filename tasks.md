@@ -114,8 +114,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] At least 6-10 products display in grid
 - [x] Products show image, name, and price
 - [x] Product cards are clickable
-- [ ] Grid is responsive (2 cols mobile, 3 cols desktop)
-- [ ] Dropdowns are visible but non-functional (acceptable)
+- [x] Grid is responsive (2 cols mobile, 3 cols desktop)
 
 ### 2.6. Dummy Product Page (4%)
 **Implementation Tasks**

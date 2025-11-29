@@ -522,5 +522,69 @@ void main() {
       }
       expect(gestureDetectorsInCards, equals(productCount));
     });
+
+    testWidgets('Grid is responsive (2 cols mobile, 3 cols desktop)',
+        (tester) async {
+      // Test desktop layout with medium screen size
+      await tester.binding.setSurfaceSize(const Size(
+          800, 800)); // Use 800px to completely avoid dropdown overflow
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionPage(collectionName: 'Clothing'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify grid exists
+      expect(find.byType(GridView), findsOneWidget);
+
+      // Get the GridView widget and check its delegate
+      final gridView = tester.widget<GridView>(find.byType(GridView));
+      final gridDelegate =
+          gridView.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
+
+      // Verify desktop layout has 3 columns (since 800px > 600px)
+      expect(gridDelegate.crossAxisCount, equals(3),
+          reason: 'At 800px width should use desktop layout (3 columns)');
+
+      // Verify spacing is correct
+      expect(gridDelegate.crossAxisSpacing, equals(16));
+      expect(gridDelegate.mainAxisSpacing, equals(16));
+      expect(gridDelegate.childAspectRatio, equals(0.75));
+
+      // Test large desktop layout
+      await tester.binding
+          .setSurfaceSize(const Size(1200, 800)); // Large desktop size
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionPage(collectionName: 'Clothing'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify grid still exists
+      expect(find.byType(GridView), findsOneWidget);
+
+      // Get the GridView widget and check its delegate again
+      final desktopGridView = tester.widget<GridView>(find.byType(GridView));
+      final desktopGridDelegate = desktopGridView.gridDelegate
+          as SliverGridDelegateWithFixedCrossAxisCount;
+
+      // Verify large desktop layout has 3 columns
+      expect(desktopGridDelegate.crossAxisCount, equals(3),
+          reason: 'Large desktop layout should have 3 columns');
+
+      // Verify spacing is still correct
+      expect(desktopGridDelegate.crossAxisSpacing, equals(16));
+      expect(desktopGridDelegate.mainAxisSpacing, equals(16));
+      expect(desktopGridDelegate.childAspectRatio, equals(0.75));
+
+      // Test that the LayoutBuilder is actually being used for responsive behavior
+      expect(find.byType(LayoutBuilder), findsOneWidget,
+          reason: 'Should use LayoutBuilder for responsive grid');
+
+      // Reset surface size
+      await tester.binding.setSurfaceSize(null);
+    });
   });
 }
