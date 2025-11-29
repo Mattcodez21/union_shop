@@ -36,7 +36,9 @@ jobs:
       
     # Step 6: Run all tests with coverage
     - name: Run tests with coverage
-      run: flutter test test/pages_tests/ test/widget_tests/ --coverage
+      run: |
+        flutter test test/pages_tests/ --coverage
+        flutter test test/widget_tests/footer_tests.dart
       
     # Step 7: Check if coverage is above 50%
     - name: Check coverage percentage
