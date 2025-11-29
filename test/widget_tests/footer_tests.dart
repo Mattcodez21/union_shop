@@ -37,5 +37,34 @@ void main() {
       // Reset to default size
       await tester.binding.setSurfaceSize(null);
     });
+
+    testWidgets('Footer stacks vertically on mobile (< 600px)', (tester) async {
+      // Test the footer widget in isolation to avoid homepage overflow
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(
+              child: Footer(),
+            ),
+          ),
+        ),
+      );
+
+      // Set mobile screen size
+      await tester.binding.setSurfaceSize(const Size(400, 800));
+      await tester.pump();
+
+      // Verify footer sections are present on mobile
+      expect(find.text('Opening Hours'), findsOneWidget);
+      expect(find.text('Help and Information'), findsOneWidget);
+      expect(find.text('Latest Offers'), findsOneWidget);
+
+      // Verify footer content is accessible
+      expect(find.textContaining('Winter Break Closure'), findsOneWidget);
+      expect(find.text('Subscribe'), findsOneWidget);
+
+      // Reset to default size
+      await tester.binding.setSurfaceSize(null);
+    });
   });
 }

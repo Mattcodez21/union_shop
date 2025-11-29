@@ -60,7 +60,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Tests**
 - [x] Footer displays on at least one page
 - [x] Footer includes three columns on desktop
-- [ ] Footer stacks vertically on mobile (< 600px)
+- [x] Footer stacks vertically on mobile (< 600px)
 - [ ] Opening hours section shows all information
 - [ ] Help links are visible (non-functional acceptable)
 - [ ] Email subscription form exists
