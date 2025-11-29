@@ -94,5 +94,67 @@ void main() {
       expect(find.byType(CollectionPage), findsOneWidget);
       expect(find.text('Clothing'), findsNWidgets(2)); // AppBar + header
     });
+
+    testWidgets('Page displays collection name dynamically in app bar',
+        (tester) async {
+      final testCases = [
+        'Clothing',
+        'Accessories',
+        'Home & Living',
+        'Stationery',
+        'Gifts',
+        'University Branded',
+      ];
+
+      for (final collectionName in testCases) {
+        // Clear the widget tree before each test
+        await tester.binding.setSurfaceSize(null);
+        await tester.pumpWidget(Container()); // Clear previous widget
+        await tester.pump();
+
+        await tester.pumpWidget(
+          MaterialApp(
+            onGenerateRoute: (settings) {
+              if (settings.name!.startsWith('/collection/')) {
+                final encodedCollectionName = settings.name!.split('/')[2];
+                // Decode the URL-encoded collection name
+                final paramCollectionName =
+                    Uri.decodeComponent(encodedCollectionName);
+                return MaterialPageRoute(
+                  builder: (context) => CollectionPage(
+                    collectionName: paramCollectionName,
+                  ),
+                  settings: settings,
+                );
+              }
+              return null;
+            },
+            initialRoute: '/collection/${Uri.encodeComponent(collectionName)}',
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Verify AppBar displays the dynamic collection name
+        final appBar = tester.widget<AppBar>(find.byType(AppBar));
+        final titleWidget = appBar.title as Text;
+        expect(titleWidget.data, equals(collectionName),
+            reason: 'AppBar should display "$collectionName" as title');
+
+        // Verify the collection name appears in the AppBar
+        expect(
+            find.descendant(
+              of: find.byType(AppBar),
+              matching: find.text(collectionName),
+            ),
+            findsOneWidget,
+            reason:
+                'AppBar should contain the collection name "$collectionName"');
+
+        // Verify AppBar styling is consistent
+        expect(appBar.backgroundColor, equals(Colors.white));
+        expect(appBar.foregroundColor, equals(Colors.black));
+        expect(appBar.elevation, equals(1));
+      }
+    });
   });
 }

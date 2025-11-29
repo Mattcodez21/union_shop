@@ -106,7 +106,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 **Tests**
 - [x] Collection page accessible with parameter (e.g., `/collection/hoodies`)
-- [ ] Page displays collection name dynamically in app bar
+- [x] Page displays collection name dynamically in app bar
 - [ ] Collection description text appears
 - [ ] Filter dropdown visible (FILTER BY: All products)
 - [ ] Sort dropdown visible (SORT BY: Featured)
