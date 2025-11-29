@@ -30,6 +30,45 @@ class CollectionPage extends StatelessWidget {
     }
   }
 
+  // Hardcoded products list
+  List<Map<String, dynamic>> get products {
+    return [
+      {
+        'name': 'Signature T-Shirt',
+        'price': 14.99,
+        'imageUrl':
+            'assets/images/signature_tshirt.jpg', // Using your existing image
+      },
+      {
+        'name': 'Signature Hoodie',
+        'price': 20.00,
+        'imageUrl':
+            'assets/images/signature_hoodie.jpg', // Using your existing image
+      },
+      {
+        'name': 'Essential T-Shirt',
+        'price': 10.00,
+        'imageUrl':
+            'assets/images/essential_tshirt.jpg', // Using your existing image
+      },
+      {
+        'name': '$collectionName Premium Item',
+        'price': 24.99,
+        'imageUrl': 'assets/images/signature_tshirt.jpg', // Reusing image
+      },
+      {
+        'name': '$collectionName Special Edition',
+        'price': 34.99,
+        'imageUrl': 'assets/images/signature_hoodie.jpg', // Reusing image
+      },
+      {
+        'name': '$collectionName Classic',
+        'price': 18.99,
+        'imageUrl': 'assets/images/essential_tshirt.jpg', // Reusing image
+      },
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     // Extract collection data from route arguments if not provided directly
@@ -72,7 +111,7 @@ class CollectionPage extends StatelessWidget {
                 Text(
                   collection != null
                       ? '${collection['itemCount']} products'
-                      : '10 products',
+                      : '${products.length} products',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -155,15 +194,62 @@ class CollectionPage extends StatelessWidget {
             ),
           ),
 
-          // Products will be displayed here section
-          const Expanded(
-            child: Center(
-              child: Text(
-                'Collection products will be displayed here',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontStyle: FontStyle.italic,
-                ),
+          // Products List Section
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Products:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return Card(
+                          margin: const EdgeInsets.only(bottom: 12),
+                          child: ListTile(
+                            leading: Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Icon(
+                                Icons.shopping_bag,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            title: Text(
+                              product['name'],
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            subtitle: Text(
+                              '£${product['price'].toStringAsFixed(2)}',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Colors.green,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            trailing: const Icon(Icons.arrow_forward_ios),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
