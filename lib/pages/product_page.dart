@@ -44,8 +44,8 @@ class ProductPage extends StatelessWidget {
                             onTap: () {
                               navigateToHome(context);
                             },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                            child: Image.asset(
+                              'assets/images/upsu_logo.png',
                               height: 18,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
@@ -166,8 +166,8 @@ class ProductPage extends StatelessWidget {
                                 ),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12),
-                                  child: Image.network(
-                                    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                                  child: Image.asset(
+                                    'assets/images/signature_hoodie.png',
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, error, stackTrace) {
                                       return Container(
@@ -207,10 +207,10 @@ class ProductPage extends StatelessWidget {
                                   itemCount: 4,
                                   itemBuilder: (context, index) {
                                     final thumbnailImages = [
-                                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                                      'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                                      'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                                      'assets/images/signature_hoodie.png',
+                                      'assets/images/signature_hoodie.png',
+                                      'assets/images/signature_hoodie.png',
+                                      'assets/images/signature_hoodie.png',
                                     ];
 
                                     return GestureDetector(
@@ -248,7 +248,7 @@ class ProductPage extends StatelessWidget {
                                         child: ClipRRect(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          child: Image.network(
+                                          child: Image.asset(
                                             thumbnailImages[index],
                                             fit: BoxFit.cover,
                                             errorBuilder:
@@ -284,7 +284,7 @@ class ProductPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text(
-                                'Portsmouth City Magnet',
+                                'Signature Hoodie',
                                 style: TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,
@@ -518,7 +518,7 @@ class ProductPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 12),
                               const Text(
-                                'Bringing to you, our best selling Portsmouth City magnet! Perfect for showing your city pride or as a memorable gift for visitors and locals alike.',
+                                'Bringing to you, our best selling signature hoodie! Perfect for showing your university pride and staying comfortable during those long study sessions.',
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.black54,
@@ -624,8 +624,8 @@ class ProductPage extends StatelessWidget {
                               ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
-                                child: Image.network(
-                                  'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                                child: Image.asset(
+                                  'assets/images/signature_hoodie.png',
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Container(
@@ -665,10 +665,10 @@ class ProductPage extends StatelessWidget {
                                 itemCount: 4,
                                 itemBuilder: (context, index) {
                                   final thumbnailImages = [
-                                    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                                    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                                    'assets/images/signature_hoodie.png',
+                                    'assets/images/signature_hoodie.png',
+                                    'assets/images/signature_hoodie.png',
+                                    'assets/images/signature_hoodie.png',
                                   ];
 
                                   return GestureDetector(
@@ -702,7 +702,7 @@ class ProductPage extends StatelessWidget {
                                       ),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
-                                        child: Image.network(
+                                        child: Image.asset(
                                           thumbnailImages[index],
                                           fit: BoxFit.cover,
                                           errorBuilder:
@@ -732,7 +732,7 @@ class ProductPage extends StatelessWidget {
 
                         // Product info (mobile)
                         const Text(
-                          'Portsmouth City Magnet',
+                          'Signature Hoodie',
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -975,7 +975,7 @@ class ProductPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         const Text(
-                          'Bringing to you, our best selling Portsmouth City magnet! Perfect for showing your city pride or as a memorable gift for visitors and locals alike.',
+                          'Bringing to you, our best selling signature hoodie! Perfect for showing your university pride and staying comfortable during those long study sessions.',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.black54,

@@ -153,7 +153,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ### 2.7. Sale Collection (4%)
 **Implementation Tasks**
-- [ ] Create pages/sale_page.dart with basic structure
+- [x] Create pages/sale_page.dart with basic structure
 - [ ] Add app bar with "SALE" title
 - [ ] Add promotional message "Don't miss out! Get yours before they're all gone!"
 - [ ] Add discount notice text "All prices shown are inclusive of the discount"
