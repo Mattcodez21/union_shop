@@ -10,6 +10,26 @@ class CollectionPage extends StatelessWidget {
     this.collectionData,
   });
 
+  String getCollectionDescription(String collectionName) {
+    switch (collectionName.toLowerCase()) {
+      case 'clothing':
+        return 'Discover our premium clothing collection featuring comfortable and stylish apparel for every occasion.';
+      case 'accessories':
+        return 'Complete your look with our carefully curated selection of accessories and lifestyle products.';
+      case 'home & living':
+      case 'home living':
+        return 'Transform your living space with our modern and functional home decor items.';
+      case 'stationery':
+        return 'Essential stationery items for work, study, and creative projects.';
+      case 'gifts':
+        return 'Perfect gifts for your loved ones, carefully selected for special occasions.';
+      case 'university branded':
+        return 'Show your university pride with our exclusive branded merchandise and apparel.';
+      default:
+        return 'Explore our ${collectionName.toLowerCase()} collection with high-quality products at great prices.';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     // Extract collection data from route arguments if not provided directly
@@ -36,6 +56,20 @@ class CollectionPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
+            // Add collection description here
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Text(
+                getCollectionDescription(collectionName),
+                style: const TextStyle(
+                  fontSize: 16,
+                  color: Colors.grey,
+                  height: 1.4,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            const SizedBox(height: 24),
             if (collection != null) ...[
               Text(
                 'Items: ${collection['itemCount']}',
