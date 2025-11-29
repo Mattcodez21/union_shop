@@ -71,38 +71,32 @@ class CollectionsPage extends StatelessWidget {
   static const List<Map<String, dynamic>> collections = [
     {
       'name': 'Clothing',
-      'imageUrl':
-          'https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Clothing',
+      'imageUrl': 'assets/images/clothing_banner.png',
       'itemCount': 24,
     },
     {
       'name': 'Accessories',
-      'imageUrl':
-          'https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=Accessories',
+      'imageUrl': 'assets/images/accessories_banner.png',
       'itemCount': 18,
     },
     {
       'name': 'Home & Living',
-      'imageUrl':
-          'https://via.placeholder.com/300x200/45B7D1/FFFFFF?text=Home+Living',
+      'imageUrl': 'assets/images/home_living.png',
       'itemCount': 32,
     },
     {
       'name': 'Stationery',
-      'imageUrl':
-          'https://via.placeholder.com/300x200/96CEB4/FFFFFF?text=Stationery',
+      'imageUrl': 'assets/images/stationary_banner.png',
       'itemCount': 45,
     },
     {
       'name': 'Gifts',
-      'imageUrl':
-          'https://via.placeholder.com/300x200/FFEAA7/000000?text=Gifts',
+      'imageUrl': 'assets/images/gifts_banner2.png',
       'itemCount': 16,
     },
     {
       'name': 'University Branded',
-      'imageUrl':
-          'https://via.placeholder.com/300x200/DDA0DD/000000?text=University+Branded',
+      'imageUrl': 'assets/images/university_branded.png',
       'itemCount': 28,
     },
   ];
