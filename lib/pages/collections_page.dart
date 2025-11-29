@@ -140,7 +140,7 @@ class CollectionsPage extends StatelessWidget {
                     // Navigate to individual collection page
                     Navigator.pushNamed(
                       context,
-                      '/collection/${collection['name']}',
+                      '/collection/${Uri.encodeComponent(collection['name'])}',
                       arguments: collection,
                     );
                   },

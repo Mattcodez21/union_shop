@@ -3,6 +3,7 @@ import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/home_page.dart';
 import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/collections_page.dart';
+import 'package:union_shop/pages/collection_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -28,6 +29,29 @@ class UnionShopApp extends StatelessWidget {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(), // Add this line
+      },
+
+      onGenerateRoute: (settings) {
+        // Handle /collection/[collectionName] routes
+        if (settings.name!.startsWith('/collection/')) {
+          final collectionName = settings.name!.split('/')[2];
+          return MaterialPageRoute(
+            builder: (context) => CollectionPage(
+              collectionName: collectionName,
+              collectionData: settings.arguments as Map<String, dynamic>?,
+            ),
+            settings: settings,
+          );
+        }
+
+        // Return null for unknown routes (will trigger onUnknownRoute if defined)
+        return null;
+      },
+      // Optional: Handle unknown routes
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(
+          builder: (context) => const HomeScreen(),
+        );
       },
     );
   }

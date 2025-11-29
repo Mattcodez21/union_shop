@@ -100,8 +100,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Implement GridView for products (3 columns on desktop, 2 on mobile)
 - [x] Create product card widget showing image, name, and price
 - [x] Add GestureDetector to navigate to product page when card tapped
-- [ ] Add route with parameter in main.dart
-- [ ] Update collections page to pass collection name on navigation
+- [x] Add route with parameter in main.dart
+- [x] Update collections page to pass collection name on navigation
 - [ ] Test collection page displays correctly with filters visible
 
 **Tests**
