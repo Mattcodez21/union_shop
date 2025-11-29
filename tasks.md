@@ -118,8 +118,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ### 2.6. Dummy Product Page (4%)
 **Implementation Tasks**
-- [ ] Open existing pages/product_page.dart and enhance structure
-- [ ] Add large product image on left side (with image carousel thumbnails below)
+- [x] Open existing pages/product_page.dart and enhance structure
+- [x] Add large product image on left side (with image carousel thumbnails below)
 - [ ] Add product title, price, and "Tax included" text on right side
 - [ ] Add Color dropdown with options (Black, Purple, Green, Grey)
 - [ ] Add Size dropdown with options (S, M, L, XL)
