@@ -68,35 +68,42 @@ class CollectionCard extends StatelessWidget {
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
-  static const List<Map<String, String>> collections = [
+  static const List<Map<String, dynamic>> collections = [
     {
       'name': 'Clothing',
       'imageUrl':
-          'https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Clothing'
+          'https://via.placeholder.com/300x200/FF6B6B/FFFFFF?text=Clothing',
+      'itemCount': 24,
     },
     {
       'name': 'Accessories',
       'imageUrl':
-          'https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=Accessories'
+          'https://via.placeholder.com/300x200/4ECDC4/FFFFFF?text=Accessories',
+      'itemCount': 18,
     },
     {
       'name': 'Home & Living',
       'imageUrl':
-          'https://via.placeholder.com/300x200/45B7D1/FFFFFF?text=Home+Living'
+          'https://via.placeholder.com/300x200/45B7D1/FFFFFF?text=Home+Living',
+      'itemCount': 32,
     },
     {
       'name': 'Stationery',
       'imageUrl':
-          'https://via.placeholder.com/300x200/96CEB4/FFFFFF?text=Stationery'
+          'https://via.placeholder.com/300x200/96CEB4/FFFFFF?text=Stationery',
+      'itemCount': 45,
     },
     {
       'name': 'Gifts',
-      'imageUrl': 'https://via.placeholder.com/300x200/FFEAA7/000000?text=Gifts'
+      'imageUrl':
+          'https://via.placeholder.com/300x200/FFEAA7/000000?text=Gifts',
+      'itemCount': 16,
     },
     {
       'name': 'University Branded',
       'imageUrl':
-          'https://via.placeholder.com/300x200/DDA0DD/000000?text=University+Branded'
+          'https://via.placeholder.com/300x200/DDA0DD/000000?text=University+Branded',
+      'itemCount': 28,
     },
   ];
 
@@ -113,47 +120,27 @@ class CollectionsPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, // 2 columns on mobile
+            crossAxisCount: 2,
             crossAxisSpacing: 16,
             mainAxisSpacing: 16,
-            childAspectRatio: 0.8, // Adjust height ratio
+            childAspectRatio: 0.75,
           ),
           itemCount: collections.length,
           itemBuilder: (context, index) {
             final collection = collections[index];
-            return Card(
-              elevation: 2,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(
-                    child: Image.network(
-                      collection['imageUrl']!,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey[300],
-                          child: const Icon(
-                            Icons.image_not_supported,
-                            color: Colors.grey,
-                            size: 50,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      collection['name']!,
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                ],
+            return GestureDetector(
+              onTap: () {
+                // Navigate to individual collection page
+                Navigator.pushNamed(
+                  context,
+                  '/collection/${collection['name']}',
+                  arguments: collection,
+                );
+              },
+              child: CollectionCard(
+                name: collection['name'],
+                imageUrl: collection['imageUrl'],
+                itemCount: collection['itemCount'],
               ),
             );
           },
