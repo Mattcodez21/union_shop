@@ -488,12 +488,73 @@ class ProductPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 8),
                               const Text(
-                                'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
+                                'Bringing to you, our best selling Portsmouth City magnet! Perfect for showing your city pride or as a memorable gift for visitors and locals alike.',
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Colors.grey,
                                   height: 1.5,
                                 ),
+                              ),
+                              const SizedBox(height: 16),
+                              const Text(
+                                'Product Details',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              const Text(
+                                'Soft, comfortable, 50% cotton blend material. High-quality print that won\'t fade. Durable construction built to last. Available in multiple colors and sizes to suit your style.',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.grey,
+                                  height: 1.5,
+                                ),
+                              ),
+
+                              const SizedBox(height: 24),
+
+                              // Social share buttons
+                              Row(
+                                children: [
+                                  OutlinedButton.icon(
+                                    onPressed: placeholderCallbackForButtons,
+                                    icon: const Icon(Icons.share, size: 16),
+                                    label: const Text('SHARE'),
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      side:
+                                          BorderSide(color: Colors.grey[400]!),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  OutlinedButton.icon(
+                                    onPressed: placeholderCallbackForButtons,
+                                    icon: const Icon(Icons.link, size: 16),
+                                    label: const Text('TWEET'),
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      side:
+                                          BorderSide(color: Colors.grey[400]!),
+                                    ),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  OutlinedButton.icon(
+                                    onPressed: placeholderCallbackForButtons,
+                                    icon: const Icon(Icons.push_pin, size: 16),
+                                    label: const Text('PIN IT'),
+                                    style: OutlinedButton.styleFrom(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      side:
+                                          BorderSide(color: Colors.grey[400]!),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -849,13 +910,73 @@ class ProductPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 8),
                         const Text(
-                          'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
+                          'Bringing to you, our best selling Portsmouth City magnet! Perfect for showing your city pride or as a memorable gift for visitors and locals alike.',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
                             height: 1.5,
                           ),
                         ),
+                        const SizedBox(height: 16),
+                        const Text(
+                          'Product Details',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'Soft, comfortable, 50% cotton blend material. High-quality print that won\'t fade. Durable construction built to last. Available in multiple colors and sizes to suit your style.',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey,
+                            height: 1.5,
+                          ),
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        // Social share buttons (mobile)
+                        Row(
+                          children: [
+                            OutlinedButton.icon(
+                              onPressed: placeholderCallbackForButtons,
+                              icon: const Icon(Icons.share, size: 16),
+                              label: const Text('SHARE'),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                side: BorderSide(color: Colors.grey[400]!),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            OutlinedButton.icon(
+                              onPressed: placeholderCallbackForButtons,
+                              icon: const Icon(Icons.link, size: 16),
+                              label: const Text('TWEET'),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                side: BorderSide(color: Colors.grey[400]!),
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            OutlinedButton.icon(
+                              onPressed: placeholderCallbackForButtons,
+                              icon: const Icon(Icons.push_pin, size: 16),
+                              label: const Text('PIN IT'),
+                              style: OutlinedButton.styleFrom(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                side: BorderSide(color: Colors.grey[400]!),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 24),
                       ],
                     );
                   }

@@ -126,9 +126,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add Quantity number input field
 - [x] Add "ADD TO CART" button (non-functional for now)
 - [x] Add "Buy with Shop Pay" button placeholder
-- [ ] Add product description text ("Bringing to you, our best selling...")
-- [ ] Add product details text ("Soft, comfortable, 50% cotton...")
-- [ ] Add social share buttons (SHARE, TWEET, PIN IT - non-functional)
+- [x] Add product description text ("Bringing to you, our best selling...")
+- [x] Add product details text ("Soft, comfortable, 50% cotton...")
+- [x] Add social share buttons (SHARE, TWEET, PIN IT - non-functional)
 - [ ] Add size guide table below images
 - [ ] Add "BACK TO [COLLECTION]" button at bottom
 - [ ] Style page with proper layout and spacing
