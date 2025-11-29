@@ -35,6 +35,16 @@ class _SalePageState extends State<SalePage> {
             ),
             SizedBox(height: 20),
             Text(
+              "All prices shown are inclusive of the discount",
+              style: TextStyle(
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Text(
               'This is the sale page content.',
               style: TextStyle(fontSize: 16),
             ),

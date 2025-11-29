@@ -155,7 +155,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Implementation Tasks**
 - [x] Create pages/sale_page.dart with basic structure
 - [x] Add promotional message "Don't miss out! Get yours before they're all gone!"
-- [ ] Add discount notice text "All prices shown are inclusive of the discount"
+- [x] Add discount notice text "All prices shown are inclusive of the discount"
 - [ ] Add filter and sort dropdowns row (FILTER BY and SORT BY)
 - [ ] Add product count text (e.g., "14 products")
 - [ ] Create hardcoded list of sale products with original and sale prices
