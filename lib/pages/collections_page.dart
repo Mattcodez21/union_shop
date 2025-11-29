@@ -110,32 +110,47 @@ class CollectionsPage extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 1,
       ),
+      // In your CollectionsPage build method, replace the GridView.builder with:
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 0.75,
-          ),
-          itemCount: collections.length,
-          itemBuilder: (context, index) {
-            final collection = collections[index];
-            return GestureDetector(
-              onTap: () {
-                // Navigate to individual collection page
-                Navigator.pushNamed(
-                  context,
-                  '/collection/${collection['name']}',
-                  arguments: collection,
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            // Determine number of columns based on screen width
+            int crossAxisCount;
+            if (constraints.maxWidth < 600) {
+              crossAxisCount = 2; // Mobile: 2 columns
+            } else if (constraints.maxWidth < 900) {
+              crossAxisCount = 3; // Small desktop: 3 columns
+            } else {
+              crossAxisCount = 4; // Large desktop: 4 columns
+            }
+
+            return GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: 0.75,
+              ),
+              itemCount: collections.length,
+              itemBuilder: (context, index) {
+                final collection = collections[index];
+                return GestureDetector(
+                  onTap: () {
+                    // Navigate to individual collection page
+                    Navigator.pushNamed(
+                      context,
+                      '/collection/${collection['name']}',
+                      arguments: collection,
+                    );
+                  },
+                  child: CollectionCard(
+                    name: collection['name'],
+                    imageUrl: collection['imageUrl'],
+                    itemCount: collection['itemCount'],
+                  ),
                 );
               },
-              child: CollectionCard(
-                name: collection['name'],
-                imageUrl: collection['imageUrl'],
-                itemCount: collection['itemCount'],
-              ),
             );
           },
         ),

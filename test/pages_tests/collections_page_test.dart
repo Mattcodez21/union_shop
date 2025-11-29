@@ -346,5 +346,60 @@ void main() {
       // Reset screen size to default
       await tester.binding.setSurfaceSize(null);
     });
+
+    testWidgets('Grid layout shows 3-4 columns on desktop (> 600px)',
+        (tester) async {
+      // Set desktop screen size (greater than 600px width)
+      await tester.binding.setSurfaceSize(const Size(1024, 768));
+
+      // Navigate directly to collections page to avoid homepage overflow
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionsPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify we're on the Collections page
+      expect(find.byType(CollectionsPage), findsOneWidget);
+
+      // Find the GridView widget
+      final gridView = tester.widget<GridView>(find.byType(GridView));
+      expect(gridView, isNotNull);
+
+      // Verify it uses SliverGridDelegateWithFixedCrossAxisCount
+      expect(gridView.gridDelegate,
+          isA<SliverGridDelegateWithFixedCrossAxisCount>());
+
+      // Get the grid delegate and verify crossAxisCount is 3 or 4 for desktop
+      final gridDelegate =
+          gridView.gridDelegate as SliverGridDelegateWithFixedCrossAxisCount;
+      expect(gridDelegate.crossAxisCount, inInclusiveRange(3, 4));
+
+      // Verify spacing is appropriate for desktop
+      expect(gridDelegate.crossAxisSpacing, equals(16));
+      expect(gridDelegate.mainAxisSpacing, equals(16));
+
+      // Verify aspect ratio is suitable for desktop display
+      expect(gridDelegate.childAspectRatio, equals(0.75));
+
+      // Verify collection cards are visible in the grid
+      final collectionCards = find.byType(CollectionCard);
+      expect(collectionCards, findsWidgets);
+
+      // Test with larger desktop size as well
+      await tester.binding.setSurfaceSize(const Size(1440, 900));
+      await tester.pumpAndSettle();
+
+      // Re-check the grid layout on larger desktop
+      final largeDesktopGridView =
+          tester.widget<GridView>(find.byType(GridView));
+      final largeDesktopGridDelegate = largeDesktopGridView.gridDelegate
+          as SliverGridDelegateWithFixedCrossAxisCount;
+      expect(largeDesktopGridDelegate.crossAxisCount, inInclusiveRange(3, 4));
+
+      // Reset screen size to default
+      await tester.binding.setSurfaceSize(null);
+    });
   });
 }
