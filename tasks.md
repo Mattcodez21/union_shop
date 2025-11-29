@@ -97,7 +97,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add filter and sort dropdowns row (FILTER BY and SORT BY)
 - [x] Add product count text (e.g., "10 products")
 - [x] Create hardcoded list of products with images, names, and prices
-- [ ] Implement GridView for products (3 columns on desktop, 2 on mobile)
+- [x] Implement GridView for products (3 columns on desktop, 2 on mobile)
 - [ ] Create product card widget showing image, name, and price
 - [ ] Add GestureDetector to navigate to product page when card tapped
 - [ ] Add route with parameter in main.dart

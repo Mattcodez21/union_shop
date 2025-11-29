@@ -36,35 +36,32 @@ class CollectionPage extends StatelessWidget {
       {
         'name': 'Signature T-Shirt',
         'price': 14.99,
-        'imageUrl':
-            'assets/images/signature_tshirt.jpg', // Using your existing image
+        'imageUrl': 'assets/images/signature_tshirt.jpg',
       },
       {
         'name': 'Signature Hoodie',
         'price': 20.00,
-        'imageUrl':
-            'assets/images/signature_hoodie.jpg', // Using your existing image
+        'imageUrl': 'assets/images/signature_hoodie.jpg',
       },
       {
         'name': 'Essential T-Shirt',
         'price': 10.00,
-        'imageUrl':
-            'assets/images/essential_tshirt.jpg', // Using your existing image
+        'imageUrl': 'assets/images/essential_tshirt.jpg',
       },
       {
         'name': '$collectionName Premium Item',
         'price': 24.99,
-        'imageUrl': 'assets/images/signature_tshirt.jpg', // Reusing image
+        'imageUrl': 'assets/images/signature_tshirt.jpg',
       },
       {
         'name': '$collectionName Special Edition',
         'price': 34.99,
-        'imageUrl': 'assets/images/signature_hoodie.jpg', // Reusing image
+        'imageUrl': 'assets/images/signature_hoodie.jpg',
       },
       {
         'name': '$collectionName Classic',
         'price': 18.99,
-        'imageUrl': 'assets/images/essential_tshirt.jpg', // Reusing image
+        'imageUrl': 'assets/images/essential_tshirt.jpg',
       },
     ];
   }
@@ -194,7 +191,7 @@ class CollectionPage extends StatelessWidget {
             ),
           ),
 
-          // Products List Section
+          // Products Grid Section
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
@@ -210,47 +207,104 @@ class CollectionPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        final product = products[index];
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: ListTile(
-                            leading: Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(8),
-                              ),
-                              child: const Icon(
-                                Icons.shopping_bag,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            title: Text(
-                              product['name'],
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            subtitle: Text(
-                              '£${product['price'].toStringAsFixed(2)}',
-                              style: const TextStyle(
-                                fontSize: 16,
-                                color: Colors.green,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            trailing: const Icon(Icons.arrow_forward_ios),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        // Determine number of columns based on screen width
+                        int crossAxisCount;
+                        if (constraints.maxWidth < 600) {
+                          crossAxisCount = 2; // Mobile: 2 columns
+                        } else {
+                          crossAxisCount = 3; // Desktop: 3 columns
+                        }
+
+                        return GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            childAspectRatio: 0.75,
                           ),
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            final product = products[index];
+                            return ProductCard(
+                              name: product['name'],
+                              price: product['price'],
+                              imageUrl: product['imageUrl'],
+                            );
+                          },
                         );
                       },
                     ),
                   ),
                 ],
               ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProductCard extends StatelessWidget {
+  final String name;
+  final double price;
+  final String imageUrl;
+
+  const ProductCard({
+    super.key,
+    required this.name,
+    required this.price,
+    required this.imageUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(8)),
+              ),
+              child: const Icon(
+                Icons.shopping_bag,
+                size: 50,
+                color: Colors.grey,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  name,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '£${price.toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+              ],
             ),
           ),
         ],
