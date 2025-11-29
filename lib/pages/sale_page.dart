@@ -25,6 +25,16 @@ class _SalePageState extends State<SalePage> {
             ),
             SizedBox(height: 20),
             Text(
+              "Don't miss out! Get yours before they're all gone!",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Colors.red,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 20),
+            Text(
               'This is the sale page content.',
               style: TextStyle(fontSize: 16),
             ),
