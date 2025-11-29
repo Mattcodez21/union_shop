@@ -156,5 +156,69 @@ void main() {
         expect(appBar.elevation, equals(1));
       }
     });
+
+    testWidgets('Collection description text appears', (tester) async {
+      // Test that each collection displays its specific description
+      final collectionDescriptions = {
+        'Clothing':
+            'Discover our premium clothing collection featuring comfortable and stylish apparel for every occasion.',
+        'Accessories':
+            'Complete your look with our carefully curated selection of accessories and lifestyle products.',
+        'Home & Living':
+            'Transform your living space with our modern and functional home decor items.',
+        'Stationery':
+            'Essential stationery items for work, study, and creative projects.',
+        'Gifts':
+            'Perfect gifts for your loved ones, carefully selected for special occasions.',
+        'University Branded':
+            'Show your university pride with our exclusive branded merchandise and apparel.',
+      };
+
+      for (final entry in collectionDescriptions.entries) {
+        final collectionName = entry.key;
+        final expectedDescription = entry.value;
+
+        await tester.pumpWidget(
+          MaterialApp(
+            home: CollectionPage(collectionName: collectionName),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        // Verify the collection description appears on the page
+        expect(find.text(expectedDescription), findsOneWidget,
+            reason:
+                'Collection "$collectionName" should display its description');
+
+        // Verify the description has proper styling (grey color)
+        final descriptionWidget =
+            tester.widget<Text>(find.text(expectedDescription));
+        expect(descriptionWidget.style?.color, equals(Colors.grey));
+        expect(descriptionWidget.textAlign, equals(TextAlign.center));
+
+        // Verify description appears below the collection name
+        final collectionNameFinder = find.text(collectionName);
+        final descriptionFinder = find.text(expectedDescription);
+
+        expect(collectionNameFinder, findsWidgets);
+        expect(descriptionFinder, findsOneWidget);
+
+        // Clear widget for next iteration
+        await tester.pumpWidget(Container());
+        await tester.pump();
+      }
+
+      // Test fallback description for unknown collections
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionPage(collectionName: 'Unknown Collection'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify fallback description appears
+      expect(find.textContaining('Explore our unknown collection collection'),
+          findsOneWidget);
+    });
   });
 }
