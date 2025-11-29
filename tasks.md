@@ -80,7 +80,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Test collections page displays and navigation works
 
 **Tests**
-- [ ] Collections page accessible via `/collections` route
+- [x] Collections page accessible via `/collections` route
 - [ ] Page displays at least 4-6 collections
 - [ ] Each collection shows title and image
 - [ ] Each collection shows product count (e.g., "12 items")
