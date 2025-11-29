@@ -1,5 +1,70 @@
 import 'package:flutter/material.dart';
 
+class CollectionCard extends StatelessWidget {
+  final String name;
+  final String imageUrl;
+  final int itemCount;
+
+  const CollectionCard({
+    super.key,
+    required this.name,
+    required this.imageUrl,
+    required this.itemCount,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey[300],
+                  child: const Icon(
+                    Icons.image_not_supported,
+                    color: Colors.grey,
+                    size: 50,
+                  ),
+                );
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              children: [
+                Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  '$itemCount items',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
