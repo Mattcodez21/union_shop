@@ -109,7 +109,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Page displays collection name dynamically in app bar
 - [x] Collection description text appears
 - [x] Filter dropdown visible (FILTER BY: All products)
-- [ ] Sort dropdown visible (SORT BY: Featured)
+- [x] Sort dropdown visible (SORT BY: Featured)
 - [ ] Product count displays (e.g., "10 products")
 - [ ] At least 6-10 products display in grid
 - [ ] Products show image, name, and price

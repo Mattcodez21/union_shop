@@ -278,5 +278,81 @@ void main() {
       );
       expect(row, findsOneWidget);
     });
+
+    testWidgets('Sort dropdown visible (SORT BY: Featured)', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionPage(collectionName: 'Clothing'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify sort dropdown is visible
+      expect(find.byType(DropdownButtonFormField<String>),
+          findsNWidgets(2)); // Filter + Sort dropdowns
+
+      // Find the sort dropdown specifically by its label
+      final sortDropdown = find.ancestor(
+        of: find.text('SORT BY'),
+        matching: find.byType(DropdownButtonFormField<String>),
+      );
+      expect(sortDropdown, findsOneWidget);
+
+      // Verify the sort dropdown shows "Featured" as default value
+      final sortDropdownWidget =
+          tester.widget<DropdownButtonFormField<String>>(sortDropdown);
+      expect(sortDropdownWidget.initialValue, equals('Featured'));
+
+      // Verify the sort dropdown has correct label
+      expect(find.text('SORT BY'), findsOneWidget);
+
+      // Verify sort dropdown contains expected options
+      await tester.tap(sortDropdown);
+      await tester.pumpAndSettle();
+
+      // Check that sort options are available
+      expect(find.text('Featured'), findsWidgets);
+      expect(find.text('Price: Low to High'), findsOneWidget);
+      expect(find.text('Price: High to Low'), findsOneWidget);
+      expect(find.text('Name: A to Z'), findsOneWidget);
+      expect(find.text('Name: Z to A'), findsOneWidget);
+      expect(find.text('Newest'), findsOneWidget);
+
+      // Close the dropdown by tapping outside
+      await tester.tapAt(const Offset(10, 10));
+      await tester.pumpAndSettle();
+
+      // Verify dropdown is in the correct container with styling
+      final sortContainer = find.ancestor(
+        of: sortDropdown,
+        matching: find.byType(Container),
+      );
+      expect(sortContainer, findsWidgets);
+
+      // Verify the sort dropdown is properly positioned in a Row (same row as filter)
+      final row = find.ancestor(
+        of: sortDropdown,
+        matching: find.byType(Row),
+      );
+      expect(row, findsOneWidget);
+
+      // Verify both dropdowns are in the same row
+      final filterDropdown = find.ancestor(
+        of: find.text('FILTER BY'),
+        matching: find.byType(DropdownButtonFormField<String>),
+      );
+      final filterRow = find.ancestor(
+        of: filterDropdown,
+        matching: find.byType(Row),
+      );
+
+// Compare the actual Row widgets, not the finders
+      final sortRowWidget = tester.widget<Row>(row);
+      final filterRowWidget = tester.widget<Row>(filterRow);
+      expect(
+          sortRowWidget,
+          equals(
+              filterRowWidget)); // Both dropdowns should be in the same row // Both dropdowns should be in the same row
+    });
   });
 }
