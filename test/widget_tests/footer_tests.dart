@@ -66,5 +66,28 @@ void main() {
       // Reset to default size
       await tester.binding.setSurfaceSize(null);
     });
+
+    testWidgets('Opening hours section shows all information', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: Footer(),
+          ),
+        ),
+      );
+
+      // Verify Opening Hours section header
+      expect(find.text('Opening Hours'), findsOneWidget);
+
+      // Verify winter break closure notice
+      expect(find.textContaining('Winter Break Closure'), findsOneWidget);
+      expect(find.textContaining('Closed 20 Dec - 6 Jan'), findsOneWidget);
+
+      // Verify term time hours
+      expect(find.textContaining('Term Time'), findsOneWidget);
+      expect(find.textContaining('Mon-Fri: 9:00 AM - 5:00 PM'), findsOneWidget);
+      expect(
+          find.textContaining('Sat-Sun: 10:00 AM - 4:00 PM'), findsOneWidget);
+    });
   });
 }
