@@ -77,7 +77,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add GestureDetector for navigation to individual collection page
 - [x] Add '/collections' route in main.dart
 - [x] Add navigation link from homepage/navbar to collections
-- [ ] Test collections page displays and navigation works
+- [x] Test collections page displays and navigation works
 
 **Tests**
 - [x] Collections page accessible via `/collections` route
@@ -102,7 +102,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add GestureDetector to navigate to product page when card tapped
 - [x] Add route with parameter in main.dart
 - [x] Update collections page to pass collection name on navigation
-- [ ] Test collection page displays correctly with filters visible
+- [x] Test collection page displays correctly with filters visible
 
 **Tests**
 - [ ] Collection page accessible with parameter (e.g., `/collection/hoodies`)
