@@ -354,5 +354,85 @@ void main() {
           equals(
               filterRowWidget)); // Both dropdowns should be in the same row // Both dropdowns should be in the same row
     });
+
+    testWidgets('Products show image, name, and price', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionPage(collectionName: 'Clothing'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify products are displayed in a grid
+      expect(find.byType(GridView), findsOneWidget);
+
+      // Verify ProductCard widgets are present
+      expect(find.byType(ProductCard), findsWidgets);
+
+      // Get all product cards
+      final productCards = find.byType(ProductCard);
+      final productCount = tester.widgetList(productCards).length;
+      expect(productCount,
+          greaterThan(0)); // At least some products should be displayed
+
+      // Test each product card shows required elements
+      for (int i = 0; i < productCount; i++) {
+        final productCard = productCards.at(i);
+
+        // Verify each product card has an image placeholder (Icon)
+        expect(
+          find.descendant(
+            of: productCard,
+            matching: find.byIcon(Icons.shopping_bag),
+          ),
+          findsOneWidget,
+          reason: 'Product card $i should have an image placeholder',
+        );
+
+        // Verify each product card has a price (text starting with £)
+        final priceText = find.descendant(
+          of: productCard,
+          matching: find.textContaining('£'),
+        );
+        expect(priceText, findsOneWidget,
+            reason: 'Product card $i should display a price');
+
+        // Verify the price has green color styling
+        final priceWidget = tester.widget<Text>(priceText);
+        expect(priceWidget.style?.color, equals(Colors.green),
+            reason: 'Product price should be displayed in green');
+        expect(priceWidget.style?.fontWeight, equals(FontWeight.bold),
+            reason: 'Product price should be bold');
+      }
+
+      // Verify specific hardcoded products are displayed (based on debug output)
+      expect(find.text('Signature T-Shirt'), findsOneWidget);
+      expect(find.text('Signature Hoodie'), findsOneWidget);
+      expect(find.text('Essential T-Shirt'), findsOneWidget);
+      expect(find.text('£14.99'), findsOneWidget);
+      expect(find.text('£20.00'), findsOneWidget);
+      expect(find.text('£10.00'), findsOneWidget);
+
+      // Verify products section header
+      expect(find.text('Products:'), findsOneWidget);
+
+      // Verify product count display
+      expect(find.text('6 products'), findsOneWidget);
+
+      // Verify card structure - each card should be wrapped in GestureDetector
+      expect(find.byType(GestureDetector), findsWidgets);
+
+      // Verify cards have proper styling
+      expect(find.byType(Card), findsWidgets);
+
+      // Verify we have at least 3 product cards (the ones we can see in debug output)
+      expect(productCount, greaterThanOrEqualTo(3));
+
+      // Test that tapping a product card triggers navigation
+      await tester.tap(productCards.first);
+      await tester.pumpAndSettle();
+
+      // Note: Navigation would be tested separately, here we just verify the tap doesn't cause errors
+    });
   });
 }
