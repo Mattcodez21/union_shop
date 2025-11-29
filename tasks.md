@@ -94,7 +94,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Create pages/collection_page.dart accepting collectionName parameter
 - [x] Add app bar with dynamic collection name as title
 - [x] Add collection description text below title
-- [ ] Add filter and sort dropdowns row (FILTER BY and SORT BY)
+- [x] Add filter and sort dropdowns row (FILTER BY and SORT BY)
 - [ ] Add product count text (e.g., "10 products")
 - [ ] Create hardcoded list of products with images, names, and prices
 - [ ] Implement GridView for products (3 columns on desktop, 2 on mobile)

@@ -44,59 +44,128 @@ class CollectionPage extends StatelessWidget {
         foregroundColor: Colors.black,
         elevation: 1,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              collectionName,
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
+      body: Column(
+        children: [
+          // Collection Header Section
+          Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                Text(
+                  collectionName,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  getCollectionDescription(collectionName),
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                    height: 1.4,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                if (collection != null)
+                  Text(
+                    '${collection['itemCount']} items',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.grey,
+                    ),
+                  ),
+              ],
+            ),
+          ),
+
+          // Filter and Sort Dropdowns Row
+          Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              border: Border(
+                top: BorderSide(color: Colors.grey[300]!),
+                bottom: BorderSide(color: Colors.grey[300]!),
               ),
             ),
-            const SizedBox(height: 16),
-            // Add collection description here
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Row(
+              children: [
+                // Filter By Dropdown
+                Expanded(
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: 'FILTER BY',
+                      border: OutlineInputBorder(),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    ),
+                    value: 'All Items',
+                    items: const [
+                      DropdownMenuItem(
+                          value: 'All Items', child: Text('All Items')),
+                      DropdownMenuItem(value: 'Size', child: Text('Size')),
+                      DropdownMenuItem(value: 'Color', child: Text('Color')),
+                      DropdownMenuItem(
+                          value: 'Price Range', child: Text('Price Range')),
+                      DropdownMenuItem(value: 'Brand', child: Text('Brand')),
+                    ],
+                    onChanged: (value) {
+                      // Non-functional dropdown for now
+                    },
+                  ),
+                ),
+                const SizedBox(width: 16),
+                // Sort By Dropdown
+                Expanded(
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: 'SORT BY',
+                      border: OutlineInputBorder(),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    ),
+                    value: 'Featured',
+                    items: const [
+                      DropdownMenuItem(
+                          value: 'Featured', child: Text('Featured')),
+                      DropdownMenuItem(
+                          value: 'Price: Low to High',
+                          child: Text('Price: Low to High')),
+                      DropdownMenuItem(
+                          value: 'Price: High to Low',
+                          child: Text('Price: High to Low')),
+                      DropdownMenuItem(
+                          value: 'Name: A to Z', child: Text('Name: A to Z')),
+                      DropdownMenuItem(
+                          value: 'Name: Z to A', child: Text('Name: Z to A')),
+                      DropdownMenuItem(value: 'Newest', child: Text('Newest')),
+                    ],
+                    onChanged: (value) {
+                      // Non-functional dropdown for now
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+
+          // Products will be displayed here section
+          const Expanded(
+            child: Center(
               child: Text(
-                getCollectionDescription(collectionName),
-                style: const TextStyle(
+                'Collection products will be displayed here',
+                style: TextStyle(
                   fontSize: 16,
-                  color: Colors.grey,
-                  height: 1.4,
+                  fontStyle: FontStyle.italic,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 24),
-            if (collection != null) ...[
-              Text(
-                'Items: ${collection['itemCount']}',
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                ),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'Image: ${collection['imageUrl']}',
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.grey,
-                ),
-              ),
-            ],
-            const SizedBox(height: 24),
-            const Text(
-              'Collection products will be displayed here',
-              style: TextStyle(
-                fontSize: 16,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
