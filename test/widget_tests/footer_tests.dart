@@ -89,5 +89,26 @@ void main() {
       expect(
           find.textContaining('Sat-Sun: 10:00 AM - 4:00 PM'), findsOneWidget);
     });
+
+    testWidgets('Help links are visible (non-functional acceptable)',
+        (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: Footer(),
+          ),
+        ),
+      );
+
+      // Verify Help and Information section header
+      expect(find.text('Help and Information'), findsOneWidget);
+
+      // Verify help links are visible (they're in one text widget with line breaks)
+      expect(find.textContaining('Search'), findsOneWidget);
+      expect(find.textContaining('Terms & Conditions'), findsOneWidget);
+
+      // Verify the combined text widget exists
+      expect(find.text('Search\nTerms & Conditions'), findsOneWidget);
+    });
   });
 }
