@@ -129,8 +129,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add product description text ("Bringing to you, our best selling...")
 - [x] Add product details text ("Soft, comfortable, 50% cotton...")
 - [x] Add social share buttons (SHARE, TWEET, PIN IT - non-functional)
-- [ ] Add size guide table below images
-- [ ] Add "BACK TO [COLLECTION]" button at bottom
+- [x] Add "BACK TO [COLLECTION]" button at bottom
 - [ ] Style page with proper layout and spacing
 - [ ] Test product page displays correctly on mobile and desktop
 

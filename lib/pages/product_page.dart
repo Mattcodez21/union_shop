@@ -984,6 +984,27 @@ class ProductPage extends StatelessWidget {
               ),
             ),
 
+            // Back to collection button
+            Container(
+              color: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+              child: SizedBox(
+                width: double.infinity,
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.arrow_back, size: 16),
+                  label: const Text('BACK TO COLLECTION'),
+                  style: OutlinedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(vertical: 16),
+                    side: BorderSide(color: Colors.grey[400]!),
+                    foregroundColor: Colors.black87,
+                  ),
+                ),
+              ),
+            ),
+
             // Footer
             Container(
               width: double.infinity,
