@@ -220,5 +220,63 @@ void main() {
       expect(find.textContaining('Explore our unknown collection collection'),
           findsOneWidget);
     });
+
+    testWidgets('Filter dropdown visible (FILTER BY: All products)',
+        (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionPage(collectionName: 'Clothing'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify filter dropdown is visible
+      expect(find.byType(DropdownButtonFormField<String>),
+          findsNWidgets(2)); // Filter + Sort dropdowns
+
+      // Find the filter dropdown specifically by its label
+      final filterDropdown = find.ancestor(
+        of: find.text('FILTER BY'),
+        matching: find.byType(DropdownButtonFormField<String>),
+      );
+      expect(filterDropdown, findsOneWidget);
+
+      // Verify the filter dropdown shows "All Items" as default value
+      final filterDropdownWidget =
+          tester.widget<DropdownButtonFormField<String>>(filterDropdown);
+      expect(filterDropdownWidget.initialValue, equals('All Items'));
+
+      // Verify the filter dropdown has correct label
+      expect(find.text('FILTER BY'), findsOneWidget);
+
+      // Verify filter dropdown contains expected options
+      await tester.tap(filterDropdown);
+      await tester.pumpAndSettle();
+
+      // Check that filter options are available
+      expect(find.text('All Items'), findsWidgets);
+      expect(find.text('Size'), findsOneWidget);
+      expect(find.text('Color'), findsOneWidget);
+      expect(find.text('Price Range'), findsOneWidget);
+      expect(find.text('Brand'), findsOneWidget);
+
+      // Close the dropdown by tapping outside
+      await tester.tapAt(const Offset(10, 10));
+      await tester.pumpAndSettle();
+
+      // Verify dropdown is in the correct container with styling
+      final filterContainer = find.ancestor(
+        of: filterDropdown,
+        matching: find.byType(Container),
+      );
+      expect(filterContainer, findsWidgets);
+
+      // Verify the filter dropdown is properly positioned in a Row
+      final row = find.ancestor(
+        of: filterDropdown,
+        matching: find.byType(Row),
+      );
+      expect(row, findsOneWidget);
+    });
   });
 }
