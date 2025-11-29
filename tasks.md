@@ -113,7 +113,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Product count displays (e.g., "10 products")
 - [ ] At least 6-10 products display in grid
 - [x] Products show image, name, and price
-- [ ] Product cards are clickable
+- [x] Product cards are clickable
 - [ ] Grid is responsive (2 cols mobile, 3 cols desktop)
 - [ ] Dropdowns are visible but non-functional (acceptable)
 

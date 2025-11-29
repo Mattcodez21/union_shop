@@ -434,5 +434,93 @@ void main() {
 
       // Note: Navigation would be tested separately, here we just verify the tap doesn't cause errors
     });
+
+    testWidgets('Product cards are clickable', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: CollectionPage(collectionName: 'Clothing'),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify product cards are present
+      final productCards = find.byType(ProductCard);
+      expect(productCards, findsWidgets);
+
+      // Get the count of product cards
+      final productCount = tester.widgetList(productCards).length;
+      expect(productCount, greaterThan(0));
+
+      // Verify GestureDetectors exist (they're inside ProductCards)
+      final gestureDetectors = find.byType(GestureDetector);
+      expect(gestureDetectors, findsWidgets);
+
+      // Test clicking on each product card
+      for (int i = 0; i < productCount; i++) {
+        final productCard = productCards.at(i);
+
+        // Find the GestureDetector that is a descendant of this product card
+        final gestureDetector = find.descendant(
+          of: productCard,
+          matching: find.byType(GestureDetector),
+        );
+        expect(gestureDetector, findsOneWidget,
+            reason: 'Product card $i should contain a GestureDetector');
+
+        // Verify the GestureDetector has an onTap callback
+        final gestureWidget = tester.widget<GestureDetector>(gestureDetector);
+        expect(gestureWidget.onTap, isNotNull,
+            reason: 'Product card $i should have a tap handler');
+      }
+
+      // Test that tapping doesn't cause errors (without navigation testing)
+      final firstProductCard = productCards.first;
+      final firstGestureDetector = find.descendant(
+        of: firstProductCard,
+        matching: find.byType(GestureDetector),
+      );
+
+      // Tap on the GestureDetector directly - this should not crash
+      await tester.tap(firstGestureDetector, warnIfMissed: false);
+      await tester.pump(); // Just pump once, don't wait for navigation
+
+      // Verify we're still on the collection page (no crash occurred)
+      expect(find.byType(CollectionPage), findsOneWidget);
+      expect(find.text('Clothing'), findsWidgets);
+
+      // Test tapping multiple cards without navigation
+      if (productCount > 1) {
+        final secondProductCard = productCards.at(1);
+        final secondGestureDetector = find.descendant(
+          of: secondProductCard,
+          matching: find.byType(GestureDetector),
+        );
+
+        // Tap second card - should not crash
+        await tester.tap(secondGestureDetector, warnIfMissed: false);
+        await tester.pump();
+
+        // Still on collection page
+        expect(find.byType(CollectionPage), findsOneWidget);
+      }
+
+      // Verify cards are visually responsive to taps (no crashes)
+      // Verify cards are visually responsive to taps (no crashes)
+      expect(find.byType(Card), findsWidgets);
+
+// Count GestureDetectors specifically within ProductCards
+      int gestureDetectorsInCards = 0;
+      for (int i = 0; i < productCount; i++) {
+        final productCard = productCards.at(i);
+        final gestureDetector = find.descendant(
+          of: productCard,
+          matching: find.byType(GestureDetector),
+        );
+        if (tester.widgetList(gestureDetector).isNotEmpty) {
+          gestureDetectorsInCards++;
+        }
+      }
+      expect(gestureDetectorsInCards, equals(productCount));
+    });
   });
 }
