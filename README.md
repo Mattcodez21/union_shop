@@ -32,7 +32,8 @@ flutter test --coverage
 
 
 
-
+Run tests if green tick is not showing for footer tests;
+flutter test test/pages_tests/; flutter test test/widget_tests/footer_tests.dart
 
 
 
