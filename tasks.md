@@ -157,7 +157,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add promotional message "Don't miss out! Get yours before they're all gone!"
 - [x] Add discount notice text "All prices shown are inclusive of the discount"
 - [x] Add filter and sort dropdowns row (FILTER BY and SORT BY)
-- [ ] Add product count text (e.g., "14 products")
+- [x] Add product count text (e.g., "14 products")
 - [ ] Create hardcoded list of sale products with original and sale prices
 - [ ] Implement GridView for sale products (3 columns on desktop, 2 on mobile)
 - [ ] Create sale product card showing image, name, strikethrough original price, and sale price
