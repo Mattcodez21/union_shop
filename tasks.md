@@ -64,7 +64,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Opening hours section shows all information
 - [x] Help links are visible (non-functional acceptable)
 - [x] Email subscription form exists
-- [ ] Social media icons (Facebook, Twitter) display
+- [x] Social media icons (Facebook, Twitter) display
 - [ ] Copyright text includes "© 2025" and Shopify credit
 - [ ] Footer is responsive and readable at all widths
 

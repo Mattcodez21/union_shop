@@ -139,5 +139,42 @@ void main() {
           tester.widget<ElevatedButton>(find.byType(ElevatedButton));
       expect(subscribeButton.onPressed, isNotNull);
     });
+
+    testWidgets('Social media icons (Facebook, Twitter) display',
+        (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: Footer(),
+          ),
+        ),
+      );
+
+      // Verify social media icons exist
+      expect(find.byType(IconButton), findsNWidgets(2));
+
+      // Get the IconButton widgets
+      final iconButtons =
+          tester.widgetList<IconButton>(find.byType(IconButton));
+      final List<IconButton> buttons = iconButtons.toList();
+
+      // Verify Facebook icon (first icon button)
+      final facebookIcon = buttons[0].icon as Icon;
+      expect(facebookIcon.icon, equals(Icons.facebook));
+
+      // Verify Twitter icon (second icon button)
+      final twitterIcon = buttons[1].icon as Icon;
+      expect(twitterIcon.icon, equals(Icons.alternate_email));
+
+      // Verify both buttons are tappable (have onPressed functions)
+      expect(buttons[0].onPressed, isNotNull);
+      expect(buttons[1].onPressed, isNotNull);
+
+      // Verify both icons have proper styling
+      expect(facebookIcon.color, equals(Colors.grey[600]));
+      expect(twitterIcon.color, equals(Colors.grey[600]));
+      expect(facebookIcon.size, equals(24.0));
+      expect(twitterIcon.size, equals(24.0));
+    });
   });
 }
