@@ -29,7 +29,7 @@ class AuthPage extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 32.0),
                     child: Image.asset(
                       'assets/images/upsu_logo.png',
-                      height: 80,
+                      height: 200,
                     ),
                   ),
                   const Align(
