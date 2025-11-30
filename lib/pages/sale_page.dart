@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/navbar.dart';
 
 class SalePage extends StatefulWidget {
   const SalePage({Key? key}) : super(key: key);
@@ -41,10 +42,8 @@ class _SalePageState extends State<SalePage> {
     final crossAxisCount = isDesktop ? 3 : 2;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sale'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+      appBar: const Navbar(),
+      endDrawer: const MobileNavDrawer(),
       body: Column(
         children: <Widget>[
           const SizedBox(height: 20),
