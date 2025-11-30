@@ -96,6 +96,25 @@ class AuthPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 24),
+            // Continue button (grey, non-functional)
+            SizedBox(
+              width: 300,
+              child: ElevatedButton(
+                onPressed: null, // Non-functional
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.grey[400],
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  textStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text('Continue'),
+              ),
+            ),
+            const SizedBox(height: 24),
             const Text(
               'Authentication Page',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

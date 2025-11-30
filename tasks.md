@@ -188,7 +188,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add "Sign in with shop" button (purple, non-functional)
 - [x] Add "or" divider text
 - [x] Add email TextFormField with border styling
-- [ ] Add "Continue" button (grey, non-functional)
+- [x] Add "Continue" button (grey, non-functional)
 - [ ] Style page with centered card layout and white background
 - [ ] Add '/auth' route in main.dart
 - [ ] Add navigation from account icon in navbar
