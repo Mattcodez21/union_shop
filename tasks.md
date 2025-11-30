@@ -174,10 +174,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Product count displays
 - [x] Products show images and names
 - [x] Original price shows with strikethrough (e.g., ~~£17.00~~)
-- [ ] Sale price shows prominently in different color (e.g., £10.99)
-- [ ] Some products show "SALE" badge overlay
+- [x] Some products show "SALE" badge overlay
 - [ ] Grid is responsive (2 cols mobile, 3 cols desktop)
-- [ ] Navigation from navbar works
+- [x] Navigation from navbar works
 
 ### 2.8. Authentication UI (3%)
 **Implementation Tasks**

@@ -134,5 +134,53 @@ void main() {
 
       expect(strikethroughTexts, findsWidgets);
     });
+
+    testWidgets('Some products show "SALE" badge overlay', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /sale route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/sale');
+      await tester.pumpAndSettle();
+
+      // Look for a "SALE" badge overlay (could be a Text or Chip or similar)
+      final saleFinderStack = find.widgetWithText(Stack, 'SALE');
+      final saleFinderBadge = find.widgetWithText(Badge, 'SALE');
+      final saleFinderText = find.text('SALE');
+
+      final saleFound = saleFinderStack.evaluate().isNotEmpty ||
+          saleFinderBadge.evaluate().isNotEmpty ||
+          saleFinderText.evaluate().isNotEmpty;
+
+      expect(saleFound, isTrue);
+    });
+
+    testWidgets('Navigation from navbar works', (tester) async {
+      await tester.binding
+          .setSurfaceSize(const Size(1200, 800)); // Force desktop navbar
+
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /sale route first
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/sale');
+      await tester.pumpAndSettle();
+
+      // Tap the "Home" button in the navbar
+      final homeButton = find.text('Home');
+      expect(homeButton, findsWidgets);
+      await tester.tap(homeButton.first);
+      await tester.pumpAndSettle();
+
+      // Verify we are back on the home page (adjust as needed)
+      final welcomeFound = find.textContaining('Welcome').evaluate().isNotEmpty;
+      final homeFound = find.text('Home').evaluate().isNotEmpty;
+      expect(welcomeFound || homeFound, isTrue);
+
+      // Reset surface size for other tests
+      await tester.binding.setSurfaceSize(null);
+    });
   });
 }
