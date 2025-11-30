@@ -120,6 +120,33 @@ class Footer extends StatelessWidget {
 
           const SizedBox(height: 24),
 
+          // Account navigation link
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, '/auth');
+              },
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.account_circle, color: Colors.grey, size: 22),
+                  SizedBox(width: 8),
+                  Text(
+                    'Account',
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.grey,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 16),
+
           // Social Media Icons Row
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

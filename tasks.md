@@ -191,7 +191,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add "Continue" button (grey, non-functional)
 - [x] Style page with centered card layout and white background
 - [x] Add '/auth' route in main.dart
-- [ ] Add navigation from account icon in navbar
+- [x] Add navigation from account icon in navbar
 - [ ] Test auth page displays correctly centered on screen
 
 **Tests**
