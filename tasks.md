@@ -166,8 +166,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Test sale page displays with correct pricing format
 
 **Tests**
-- [ ] Sale page accessible via `/sale` route
-- [ ] "SALE" heading displays prominently
+- [x] Sale page accessible via `/sale` route
+- [x] "SALE" heading displays prominently
 - [ ] Promotional message appears below title
 - [ ] Discount notice visible
 - [ ] Filter and sort dropdowns present (non-functional acceptable)
