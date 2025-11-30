@@ -78,6 +78,24 @@ class AuthPage extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 24),
+            // Email TextFormField with border styling
+            SizedBox(
+              width: 300,
+              child: TextFormField(
+                decoration: InputDecoration(
+                  labelText: 'Email',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 14,
+                  ),
+                ),
+                keyboardType: TextInputType.emailAddress,
+              ),
+            ),
+            const SizedBox(height: 24),
             const Text(
               'Authentication Page',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
