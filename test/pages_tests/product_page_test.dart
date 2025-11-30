@@ -365,14 +365,9 @@ void main() {
 
           // Test that the button text exists - this confirms it's rendered
           // Navigation testing can be complex in widget tests
-          print('BACK TO COLLECTION button found and verified');
-        } else {
-          print(
-              'BACK TO COLLECTION button not found - may not be implemented yet');
-        }
+        } else {}
       } catch (e) {
         // If navigation fails, it might be because the route isn't properly configured
-        print('Product page navigation failed: $e');
         // Just verify the app builds without the ProductPage
         expect(find.byType(MaterialApp), findsOneWidget);
       }
