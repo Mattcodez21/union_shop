@@ -48,5 +48,40 @@ void main() {
       // Alternative: You can also check for any Image widget if the specific path check is too strict
       // expect(find.byType(Image), findsWidgets);
     });
+
+    testWidgets('Image carousel/thumbnails visible below main image',
+        (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Find the ListView.builder that contains the thumbnail images
+      final carouselFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is ListView &&
+            (widget as ListView).scrollDirection == Axis.horizontal,
+      );
+
+      expect(carouselFinder, findsWidgets);
+
+      // Verify that there are multiple thumbnail containers
+      final thumbnailContainers = find.byWidgetPredicate(
+        (widget) => widget is GestureDetector && widget.child is Container,
+      );
+
+      expect(thumbnailContainers, findsWidgets);
+
+      // Check that there are 4 thumbnail images (as specified in the code)
+      final thumbnailImages = find.byWidgetPredicate(
+        (widget) => widget is Image && widget.image is AssetImage,
+      );
+
+      // Should find at least 4 thumbnail images plus the main image
+      expect(thumbnailImages, findsWidgets);
+    });
   });
 }
