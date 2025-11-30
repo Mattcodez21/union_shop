@@ -39,6 +39,7 @@ jobs:
       run: |
         flutter test test/pages_tests/ --coverage
         flutter test test/widget_tests/footer_tests.dart
+        flutter test test/widget_tests/navbar_tests.dart
       
     # Step 7: Check if coverage is above 50%
     - name: Check coverage percentage

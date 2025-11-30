@@ -220,14 +220,14 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Test navbar collapses to hamburger menu on mobile
 
 **Tests**
-- [ ] Navbar displays on all pages
+- [x] Navbar displays on all pages
 - [ ] Union logo visible on left and clickable
 - [ ] Logo navigation returns to homepage
 - [ ] Desktop shows all links horizontally (Home, Shop, Print Shack, SALE!, About, UPSU.net)
 - [ ] Shop link shows dropdown arrow indicator (∨)
 - [ ] The Print Shack link shows dropdown arrow
-- [ ] Search icon displays on right
-- [ ] Account icon displays on right
+- [x] Search icon displays on right
+- [x] Account icon displays on right
 - [ ] Cart icon displays with badge number
 - [ ] At width > 600px, full navbar displays
 - [ ] At width < 600px, navbar shows hamburger menu icon
