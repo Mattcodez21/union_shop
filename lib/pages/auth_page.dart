@@ -10,16 +10,24 @@ class AuthPage extends StatelessWidget {
         title: const Text('Sign In / Register'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
-      body: const Center(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            // Union logo at the top center
+            Padding(
+              padding: const EdgeInsets.only(bottom: 32.0),
+              child: Image.asset(
+                'assets/images/upsu_logo.png', // Make sure this file exists in assets/images/
+                height: 80,
+              ),
+            ),
+            const Text(
               'Authentication Page',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'Sign in or create an account to continue.',
               style: TextStyle(fontSize: 16),
             ),
