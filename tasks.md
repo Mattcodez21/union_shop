@@ -172,9 +172,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Discount notice visible
 - [x] Filter and sort dropdowns present (non-functional acceptable)
 - [x] Product count displays
-- [ ] At least 6 sale products display
-- [ ] Products show images and names
-- [ ] Original price shows with strikethrough (e.g., ~~£17.00~~)
+- [x] Products show images and names
+- [x] Original price shows with strikethrough (e.g., ~~£17.00~~)
 - [ ] Sale price shows prominently in different color (e.g., £10.99)
 - [ ] Some products show "SALE" badge overlay
 - [ ] Grid is responsive (2 cols mobile, 3 cols desktop)

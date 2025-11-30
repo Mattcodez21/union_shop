@@ -94,5 +94,45 @@ void main() {
         findsWidgets,
       );
     });
+
+    testWidgets('Products show images and names', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /sale route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/sale');
+      await tester.pumpAndSettle();
+
+      // Look for product images (assume Image widgets are used)
+      expect(find.byType(Image), findsWidgets);
+
+      // Look for product names (assume they contain 'product' or adjust as needed)
+      expect(find.textContaining('product', findRichText: true), findsWidgets);
+    });
+
+    testWidgets('Original price shows with strikethrough (e.g., ~~£17.00~~)',
+        (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /sale route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/sale');
+      await tester.pumpAndSettle();
+
+      // Look for a Text widget with strikethrough decoration (original price)
+      final strikethroughTexts = find.byWidgetPredicate((widget) {
+        if (widget is Text) {
+          final style = widget.style;
+          return style != null &&
+              style.decoration != null &&
+              style.decoration!.contains(TextDecoration.lineThrough);
+        }
+        return false;
+      });
+
+      expect(strikethroughTexts, findsWidgets);
+    });
   });
 }
