@@ -131,10 +131,10 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add social share buttons (SHARE, TWEET, PIN IT - non-functional)
 - [x] Add "BACK TO [COLLECTION]" button at bottom
 - [x] Style page with proper layout and spacing
-- [ ] Test product page displays correctly on mobile and desktop
+- [x] Test product page displays correctly on mobile and desktop
 
 **Tests**
-- [ ] Product page accessible via route
+- [x] Product page accessible via route
 - [ ] Main product image displays
 - [ ] Image carousel/thumbnails visible below main image
 - [ ] Product name displays prominently
