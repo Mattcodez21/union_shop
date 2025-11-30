@@ -170,8 +170,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] "SALE" heading displays prominently
 - [x] Promotional message appears below title
 - [x] Discount notice visible
-- [ ] Filter and sort dropdowns present (non-functional acceptable)
-- [ ] Product count displays
+- [x] Filter and sort dropdowns present (non-functional acceptable)
+- [x] Product count displays
 - [ ] At least 6 sale products display
 - [ ] Products show images and names
 - [ ] Original price shows with strikethrough (e.g., ~~£17.00~~)

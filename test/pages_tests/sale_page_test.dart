@@ -63,5 +63,36 @@ void main() {
       final percentFound = find.textContaining('%').evaluate().isNotEmpty;
       expect(discountFound || percentFound, isTrue);
     });
+
+    testWidgets('Filter and sort dropdowns present (non-functional acceptable)',
+        (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /sale route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/sale');
+      await tester.pumpAndSettle();
+
+      // Look for filter and sort dropdowns (adjust text as needed)
+      expect(find.textContaining('FILTER BY'), findsWidgets);
+      expect(find.textContaining('SORT BY'), findsWidgets);
+    });
+
+    testWidgets('Product count displays', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /sale route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/sale');
+      await tester.pumpAndSettle();
+
+      // Look for product count text (adjust text as needed, e.g., "X products")
+      expect(
+        find.textContaining('product'),
+        findsWidgets,
+      );
+    });
   });
 }
