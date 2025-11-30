@@ -199,11 +199,10 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Subtitle text visible
 - [x] "Sign in with shop" button displays 
 - [ ] Email input field displays with proper styling
-- [ ] "Continue" button displays (grey)
-- [ ] Page is centered on screen with white card
-- [ ] Layout works on mobile and desktop
-- [ ] Navigation from navbar account icon works
-- [ ] Buttons are non-functional (acceptable for basic feature)
+- [x] "Continue" button displays (grey)
+- [x] Layout works on mobile and desktop
+- [x] Navigation from navbar account icon works
+- [x] Buttons are non-functional (acceptable for basic feature)
 
 ### 2.9. Static Navbar (5%)
 **Implementation Tasks**
