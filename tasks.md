@@ -141,7 +141,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Price displays with "Tax included" text
 - [x] Color dropdown shows options
 - [x] Size dropdown shows options (S, M, L, XL)
-- [ ] Quantity field displays (default 1)
+- [x] Quantity field displays (default 1)
 - [ ] "ADD TO CART" button visible
 - [ ] "Buy with Shop Pay" button visible
 - [ ] Product description paragraph visible

@@ -205,5 +205,45 @@ void main() {
       // The dropdown should now show 'L' as selected (though this is placeholder functionality)
       // In a real implementation, this would update the selected value
     });
+
+    testWidgets('Quantity field displays (default 1)',
+        (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Find the Quantity dropdown button
+      final quantityDropdownFinder = find.byWidgetPredicate(
+        (widget) => widget is DropdownButton<int> && (widget).value == 1,
+      );
+
+      expect(quantityDropdownFinder, findsOneWidget);
+
+      // Verify that the "Quantity" label is displayed
+      final quantityLabelFinder = find.text('Quantity');
+      expect(quantityLabelFinder, findsOneWidget);
+
+      // Tap the dropdown to open it and verify options
+      await tester.tap(quantityDropdownFinder);
+      await tester.pumpAndSettle();
+
+      // Verify that quantity options 1-10 are available
+      expect(find.text('1'),
+          findsWidgets); // Will find multiple (dropdown value + option)
+      expect(find.text('2'), findsOneWidget);
+      expect(find.text('5'), findsOneWidget);
+      expect(find.text('10'), findsOneWidget);
+
+      // Verify we can select a different quantity
+      await tester.tap(find.text('3').last);
+      await tester.pumpAndSettle();
+
+      // The dropdown should now show '3' as selected (though this is placeholder functionality)
+      // In a real implementation, this would update the selected value
+    });
   });
 }
