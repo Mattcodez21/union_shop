@@ -50,7 +50,34 @@ class AuthPage extends StatelessWidget {
                 child: const Text('Sign in with shop'),
               ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 24),
+            // "or" divider text
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    indent: 40,
+                    endIndent: 12,
+                    color: Colors.grey[300],
+                  ),
+                ),
+                const Text(
+                  'or',
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    indent: 12,
+                    endIndent: 40,
+                    color: Colors.grey[300],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
             const Text(
               'Authentication Page',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

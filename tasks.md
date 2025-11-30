@@ -186,7 +186,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add Union logo at top center
 - [x] Add "Sign in" heading and subtitle "Choose how you'd like to sign in"
 - [x] Add "Sign in with shop" button (purple, non-functional)
-- [ ] Add "or" divider text
+- [x] Add "or" divider text
 - [ ] Add email TextFormField with border styling
 - [ ] Add "Continue" button (grey, non-functional)
 - [ ] Style page with centered card layout and white background
