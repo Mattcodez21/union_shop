@@ -159,7 +159,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add filter and sort dropdowns row (FILTER BY and SORT BY)
 - [x] Add product count text (e.g., "14 products")
 - [x] Create hardcoded list of sale products with original and sale prices
-- [ ] Implement GridView for sale products (3 columns on desktop, 2 on mobile)
+- [x] Implement GridView for sale products (3 columns on desktop, 2 on mobile)
 - [ ] Create sale product card showing image, name, strikethrough original price, and sale price
 - [ ] Add "SALE" badge overlay on product with sale (optional, some don't have it)
 - [ ] Add '/sale' route in main.dart
