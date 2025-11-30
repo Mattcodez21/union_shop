@@ -213,7 +213,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Implementation Tasks**
 - [x] Create widgets/navbar.dart file
 - [x] Add Union logo on the left side (clickable, links to home)
-- [ ] Add desktop navigation links (Home, Shop, The Print Shack, SALE!, About, UPSU.net)
+- [x] Add desktop navigation links (Home, Shop, The Print Shack, SALE!, About, UPSU.net)
 - [ ] Add dropdown arrow indicators for Shop and The Print Shack links
 - [ ] Add right-side icons (Search, Account, Cart with badge)
 - [ ] Add LayoutBuilder to detect screen width (>600px = desktop)

@@ -41,6 +41,16 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
               },
               child: const Text('Shop'),
             ),
+            const TextButton(
+              onPressed: null, // Not functional
+              child: Text(
+                'The Print Shack',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/sale');
