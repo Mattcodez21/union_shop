@@ -13,7 +13,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
         return AppBar(
           backgroundColor: Colors.white,
           elevation: 2,
-          automaticallyImplyLeading: false,
+          automaticallyImplyLeading: Navigator.of(context).canPop(),
           titleSpacing: 0,
           toolbarHeight: kToolbarHeight,
           title: isDesktop
@@ -170,8 +170,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
-
-// ..._NavBarButton and MobileNavDrawer unchanged...
 
 class _NavBarButton extends StatelessWidget {
   final String label;
