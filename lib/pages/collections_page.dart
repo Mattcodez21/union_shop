@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/navbar.dart';
 
 class CollectionCard extends StatelessWidget {
   final String name;
@@ -104,13 +105,8 @@ class CollectionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Collections'),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 1,
-      ),
-      // In your CollectionsPage build method, replace the GridView.builder with:
+      appBar: const Navbar(),
+      endDrawer: const MobileNavDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: LayoutBuilder(
