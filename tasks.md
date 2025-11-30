@@ -190,7 +190,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add email TextFormField with border styling
 - [x] Add "Continue" button (grey, non-functional)
 - [x] Style page with centered card layout and white background
-- [ ] Add '/auth' route in main.dart
+- [x] Add '/auth' route in main.dart
 - [ ] Add navigation from account icon in navbar
 - [ ] Test auth page displays correctly centered on screen
 

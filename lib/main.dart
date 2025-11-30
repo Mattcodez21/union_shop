@@ -5,6 +5,7 @@ import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/collections_page.dart';
 import 'package:union_shop/pages/collection_page.dart';
 import 'package:union_shop/pages/sale_page.dart';
+import 'package:union_shop/pages/auth_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -30,7 +31,8 @@ class UnionShopApp extends StatelessWidget {
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
-        '/sale': (context) => const SalePage(), // Add this line
+        '/sale': (context) => const SalePage(),
+        '/auth': (context) => const AuthPage(), // Add this line
       },
 
       onGenerateRoute: (settings) {
