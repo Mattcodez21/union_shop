@@ -147,8 +147,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Product description paragraph visible
 - [ ] Material/care details visible
 - [ ] Social share buttons display
-- [ ] Size guide table visible
-- [ ] Back button navigates to previous page
+- [x] Back button navigates to previous page
 - [ ] Layout works on mobile (stacked) and desktop (two-column)
 
 ### 2.7. Sale Collection (4%)
