@@ -63,18 +63,16 @@ void main() {
       // Check that content is properly structured in Column
       expect(find.byType(Column), findsAtLeastNWidgets(1));
 
-      // Verify Container has proper padding
-      final containerWidget = tester.widget<Container>(find.byType(Container));
-      expect(containerWidget.padding, isNotNull);
-
-      // Check the padding values correctly
-      final padding = containerWidget.padding as EdgeInsets;
-      expect(padding.left, equals(16.0));
-      expect(padding.top, equals(16.0));
-      expect(padding.right, equals(16.0));
-      expect(padding.bottom, equals(16.0));
+      // Verify Padding has proper EdgeInsets
+      final paddingWidget = tester.widget<Padding>(find.byType(Padding).first);
+      final padding = paddingWidget.padding as EdgeInsets;
+      expect(padding.left, equals(32.0));
+      expect(padding.top, equals(32.0));
+      expect(padding.right, equals(32.0));
+      expect(padding.bottom, equals(32.0));
     });
-/*
+
+    /*
     testWidgets('Navigation from homepage footer works', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pumpAndSettle();
@@ -103,7 +101,8 @@ void main() {
       // Verify we're no longer on homepage
       expect(find.text('FEATURED PRODUCTS'), findsNothing);
     });
-*/
+    */
+
     testWidgets('Back button returns to homepage', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pumpAndSettle();
