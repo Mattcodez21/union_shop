@@ -6,7 +6,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ## Progress Summary
 **Overall Progress**:
-- Basic Features: 5/9 (55% of 40%)
+- Basic Features: 9/9 (40% of 40%)
 - Intermediate Features: 0/7 (0% of 35%)
 - Advanced Features: 0/3 (0% of 25%)
 
@@ -193,8 +193,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Test auth page displays correctly centered on screen
 
 **Tests**
-- [ ] Auth page accessible via `/auth` route
-- [ ] Union logo displays at top
+- [x] Auth page accessible via `/auth` route
+- [x] Union logo displays at top
 - [ ] "Sign in" heading displays
 - [ ] Subtitle text visible
 - [ ] "Sign in with shop" button displays (purple)
