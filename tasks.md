@@ -158,7 +158,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add discount notice text "All prices shown are inclusive of the discount"
 - [x] Add filter and sort dropdowns row (FILTER BY and SORT BY)
 - [x] Add product count text (e.g., "14 products")
-- [ ] Create hardcoded list of sale products with original and sale prices
+- [x] Create hardcoded list of sale products with original and sale prices
 - [ ] Implement GridView for sale products (3 columns on desktop, 2 on mobile)
 - [ ] Create sale product card showing image, name, strikethrough original price, and sale price
 - [ ] Add "SALE" badge overlay on product with sale (optional, some don't have it)
