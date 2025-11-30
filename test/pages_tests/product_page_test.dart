@@ -134,5 +134,41 @@ void main() {
       expect(taxWidget.style?.fontSize, 14);
       expect(taxWidget.style?.fontWeight, FontWeight.w500);
     });
+
+    testWidgets('Color dropdown shows options', (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Find the Color dropdown button
+      final colorDropdownFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is DropdownButton<String> &&
+            (widget as DropdownButton<String>).value == 'Black',
+      );
+
+      expect(colorDropdownFinder, findsOneWidget);
+
+      // Tap the dropdown to open it
+      await tester.tap(colorDropdownFinder);
+      await tester.pumpAndSettle();
+
+      // Verify that the color options are displayed
+      expect(find.text('Black'), findsWidgets);
+      expect(find.text('Purple'), findsOneWidget);
+      expect(find.text('Green'), findsOneWidget);
+      expect(find.text('Grey'), findsOneWidget);
+
+      // Verify we can select a different option
+      await tester.tap(find.text('Purple').last);
+      await tester.pumpAndSettle();
+
+      // The dropdown should now show 'Purple' as selected (though this is placeholder functionality)
+      // In a real implementation, this would update the selected value
+    });
   });
 }
