@@ -18,10 +18,20 @@ class AuthPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(bottom: 32.0),
               child: Image.asset(
-                'assets/images/upsu_logo.png', // Make sure this file exists in assets/images/
+                'assets/images/upsu_logo.png',
                 height: 80,
               ),
             ),
+            const Text(
+              'Sign in',
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              "Choose how you'd like to sign in",
+              style: TextStyle(fontSize: 16, color: Colors.grey),
+            ),
+            const SizedBox(height: 32),
             const Text(
               'Authentication Page',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
