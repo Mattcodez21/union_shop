@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/navbar.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -14,123 +15,23 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: const Navbar(),
+      endDrawer: const MobileNavDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
+            // Top banner
             Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  // Top banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'PLACEHOLDER HEADER TEXT',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.asset(
-                              'assets/images/upsu_logo.png',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              color: const Color(0xFF4d2963),
+              child: const Text(
+                'PLACEHOLDER HEADER TEXT',
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
-
-// Product details
+            // Product details
             Container(
               color: Colors.white,
               padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
@@ -157,8 +58,7 @@ class ProductPage extends StatelessWidget {
                                   color: Colors.grey[100],
                                   boxShadow: [
                                     BoxShadow(
-                                      color:
-                                          Colors.black.withValues(alpha: 0.1),
+                                      color: Colors.black.withAlpha(25),
                                       blurRadius: 8,
                                       offset: const Offset(0, 4),
                                     ),
@@ -196,9 +96,7 @@ class ProductPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
                               const SizedBox(height: 20),
-
                               // Image carousel thumbnails
                               SizedBox(
                                 height: 80,
@@ -237,8 +135,7 @@ class ProductPage extends StatelessWidget {
                                                   BoxShadow(
                                                     color:
                                                         const Color(0xFF4d2963)
-                                                            .withValues(
-                                                                alpha: 0.2),
+                                                            .withAlpha(50),
                                                     blurRadius: 4,
                                                     offset: const Offset(0, 2),
                                                   ),
@@ -274,9 +171,7 @@ class ProductPage extends StatelessWidget {
                             ],
                           ),
                         ),
-
                         const SizedBox(width: 48),
-
                         // Right side: Product info
                         Expanded(
                           flex: 1,
@@ -311,7 +206,6 @@ class ProductPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 32),
-
                               // Product options row
                               Row(
                                 children: [
@@ -450,9 +344,7 @@ class ProductPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-
                               const SizedBox(height: 32),
-
                               // Add to Cart button
                               SizedBox(
                                 width: double.infinity,
@@ -478,9 +370,7 @@ class ProductPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
                               const SizedBox(height: 16),
-
                               // Buy with Shop Pay button
                               SizedBox(
                                 width: double.infinity,
@@ -505,9 +395,7 @@ class ProductPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-
                               const SizedBox(height: 40),
-
                               const Text(
                                 'Description',
                                 style: TextStyle(
@@ -543,9 +431,7 @@ class ProductPage extends StatelessWidget {
                                   height: 1.6,
                                 ),
                               ),
-
                               const SizedBox(height: 32),
-
                               // Social share buttons
                               Wrap(
                                 spacing: 12,
@@ -616,7 +502,7 @@ class ProductPage extends StatelessWidget {
                                 color: Colors.grey[100],
                                 boxShadow: [
                                   BoxShadow(
-                                    color: Colors.black.withValues(alpha: 0.1),
+                                    color: Colors.black.withAlpha(25),
                                     blurRadius: 8,
                                     offset: const Offset(0, 4),
                                   ),
@@ -654,9 +540,7 @@ class ProductPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-
                             const SizedBox(height: 20),
-
                             // Image carousel thumbnails
                             SizedBox(
                               height: 80,
@@ -693,7 +577,7 @@ class ProductPage extends StatelessWidget {
                                             ? [
                                                 BoxShadow(
                                                   color: const Color(0xFF4d2963)
-                                                      .withValues(alpha: 0.2),
+                                                      .withAlpha(50),
                                                   blurRadius: 4,
                                                   offset: const Offset(0, 2),
                                                 ),
@@ -727,9 +611,7 @@ class ProductPage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 32),
-
                         // Product info (mobile)
                         const Text(
                           'Signature Hoodie',
@@ -759,7 +641,6 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 32),
-
                         // Product options (mobile)
                         Column(
                           children: [
@@ -903,16 +784,13 @@ class ProductPage extends StatelessWidget {
                                   ),
                                 ),
                                 const SizedBox(width: 12),
-                                const Expanded(
-                                    child: SizedBox()), // Empty space
+                                const Expanded(child: SizedBox()),
                               ],
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 32),
-
-                        // Add to Cart button (mobile) - same styling as desktop
+                        // Add to Cart button (mobile)
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -936,10 +814,8 @@ class ProductPage extends StatelessWidget {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
-                        // Buy with Shop Pay button (mobile) - same styling as desktop
+                        // Buy with Shop Pay button (mobile)
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton(
@@ -962,9 +838,7 @@ class ProductPage extends StatelessWidget {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 24),
-
                         const Text(
                           'Description',
                           style: TextStyle(
@@ -1000,9 +874,7 @@ class ProductPage extends StatelessWidget {
                             height: 1.6,
                           ),
                         ),
-
                         const SizedBox(height: 32),
-
                         // Social share buttons (mobile)
                         Row(
                           children: [
@@ -1040,7 +912,6 @@ class ProductPage extends StatelessWidget {
                             ),
                           ],
                         ),
-
                         const SizedBox(height: 32),
                       ],
                     );
@@ -1048,7 +919,6 @@ class ProductPage extends StatelessWidget {
                 },
               ),
             ),
-
             // Back to collection button
             Container(
               color: Colors.grey[50],
@@ -1072,7 +942,6 @@ class ProductPage extends StatelessWidget {
                 ),
               ),
             ),
-
             // Footer
             Container(
               width: double.infinity,
