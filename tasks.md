@@ -135,7 +135,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 **Tests**
 - [x] Product page accessible via route
-- [ ] Main product image displays
+- [x] Main product image displays
 - [ ] Image carousel/thumbnails visible below main image
 - [ ] Product name displays prominently
 - [ ] Price displays with "Tax included" text
