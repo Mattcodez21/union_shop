@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/navbar.dart';
 
 class CollectionPage extends StatelessWidget {
   final String collectionName;
@@ -74,12 +75,8 @@ class CollectionPage extends StatelessWidget {
     final collection = collectionData ?? routeArgs;
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(collectionName),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
-        elevation: 1,
-      ),
+      appBar: const Navbar(),
+      endDrawer: const MobileNavDrawer(),
       body: Column(
         children: [
           // Collection Header Section
