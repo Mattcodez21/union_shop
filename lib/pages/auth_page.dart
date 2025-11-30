@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/navbar.dart';
 
 class AuthPage extends StatelessWidget {
   const AuthPage({Key? key}) : super(key: key);
@@ -6,10 +7,8 @@ class AuthPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sign In / Register'),
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-      ),
+      appBar: const Navbar(),
+      endDrawer: const MobileNavDrawer(),
       body: Center(
         child: SingleChildScrollView(
           child: Card(
@@ -24,12 +23,11 @@ class AuthPage extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Union logo at the top center
                   Padding(
                     padding: const EdgeInsets.only(bottom: 32.0),
                     child: Image.asset(
                       'assets/images/upsu_logo.png',
-                      height: 200,
+                      height: 120,
                     ),
                   ),
                   const Align(
@@ -49,13 +47,12 @@ class AuthPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  // Sign in with shop button
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: null, // Non-functional
+                      onPressed: null,
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4d2963), // Purple
+                        backgroundColor: const Color(0xFF4d2963),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         textStyle: const TextStyle(
@@ -68,7 +65,6 @@ class AuthPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // "or" divider text
                   Row(
                     children: [
                       Expanded(
@@ -92,7 +88,6 @@ class AuthPage extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(height: 20),
-                  // Email TextFormField with border styling
                   SizedBox(
                     width: double.infinity,
                     child: TextFormField(
@@ -110,11 +105,10 @@ class AuthPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  // Continue button (grey, non-functional)
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: null, // Non-functional
+                      onPressed: null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey[300],
                         foregroundColor: Colors.black54,
