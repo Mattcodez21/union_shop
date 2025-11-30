@@ -195,8 +195,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Tests**
 - [x] Auth page accessible via `/auth` route
 - [x] Union logo displays at top
-- [ ] "Sign in" heading displays
-- [ ] Subtitle text visible
+- [x] "Sign in" heading displays
+- [x] Subtitle text visible
 - [ ] "Sign in with shop" button displays (purple)
 - [ ] "or" divider text visible
 - [ ] Email input field displays with proper styling

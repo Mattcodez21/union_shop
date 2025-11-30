@@ -36,5 +36,36 @@ void main() {
         findsAtLeastNWidgets(1),
       );
     });
+
+    testWidgets('"Sign in" heading displays', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /auth route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/auth');
+      await tester.pumpAndSettle();
+
+      // Check for "Sign in" heading
+      expect(find.text('Sign in'), findsWidgets);
+    });
+
+    testWidgets('Subtitle text visible', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /auth route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/auth');
+      await tester.pumpAndSettle();
+
+      // Check for subtitle text (adjust as needed)
+      // Ensure at least one variant of subtitle text is present
+      final bool subtitleFound =
+          find.textContaining('sign in').evaluate().isNotEmpty ||
+              find.textContaining('account').evaluate().isNotEmpty ||
+              find.textContaining('continue').evaluate().isNotEmpty;
+      expect(subtitleFound, isTrue);
+    });
   });
 }
