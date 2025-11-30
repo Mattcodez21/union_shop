@@ -105,7 +105,7 @@ class CollectionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Navbar(),
+      appBar: const Navbar(title: 'Collections'),
       endDrawer: const MobileNavDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
