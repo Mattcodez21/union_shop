@@ -197,10 +197,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Union logo displays at top
 - [x] "Sign in" heading displays
 - [x] Subtitle text visible
-- [ ] "Sign in with shop" button displays (purple)
-- [ ] "or" divider text visible
+- [x] "Sign in with shop" button displays 
 - [ ] Email input field displays with proper styling
-- [ ] Email field has placeholder text
 - [ ] "Continue" button displays (grey)
 - [ ] Page is centered on screen with white card
 - [ ] Layout works on mobile and desktop

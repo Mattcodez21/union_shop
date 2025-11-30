@@ -67,5 +67,38 @@ void main() {
               find.textContaining('continue').evaluate().isNotEmpty;
       expect(subtitleFound, isTrue);
     });
+
+    testWidgets('"Sign in with shop" button displays', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /auth route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/auth');
+      await tester.pumpAndSettle();
+
+      // Check for "Sign in with shop" button
+      expect(find.widgetWithText(ElevatedButton, 'Sign in with shop'),
+          findsOneWidget);
+    });
+
+    testWidgets('"Continue" button displays (grey)', (tester) async {
+      await tester.pumpWidget(const UnionShopApp());
+
+      // Navigate to /auth route
+      final navigator =
+          Navigator.of(tester.element(find.byType(Scaffold).first));
+      navigator.pushNamed('/auth');
+      await tester.pumpAndSettle();
+
+      // Find a button with text "Continue"
+      final continueButton = find.widgetWithText(ElevatedButton, 'Continue');
+      expect(continueButton, findsOneWidget);
+
+      // Check if the button is disabled (onPressed == null)
+      final ElevatedButton buttonWidget = tester.widget(continueButton);
+      expect(buttonWidget.onPressed, isNull,
+          reason: 'Continue button should be disabled (grey)');
+    });
   });
 }
