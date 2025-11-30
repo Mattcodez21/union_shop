@@ -7,123 +7,139 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isDesktop = constraints.maxWidth > 600;
+        final isDesktop =
+            constraints.maxWidth > 900; // Switch to mobile nav sooner
 
         return AppBar(
           backgroundColor: Colors.white,
           elevation: 2,
           automaticallyImplyLeading: false,
           titleSpacing: 0,
-          toolbarHeight: kToolbarHeight, // Ensures no overflow
-          title: Row(
-            children: [
-              InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, '/');
-                },
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Image.asset(
-                    'assets/images/upsu_logo.png',
-                    height: 32, // Keep logo smaller than toolbarHeight
-                    fit: BoxFit.contain,
-                  ),
-                ),
-              ),
-              if (isDesktop) ...[
-                const SizedBox(width: 32),
-                _NavBarButton(
-                  label: 'Home',
-                  onPressed: () => Navigator.pushNamed(context, '/'),
-                ),
-                const SizedBox(width: 24),
-                Row(
+          toolbarHeight: kToolbarHeight,
+          title: isDesktop
+              ? Row(
                   children: [
-                    _NavBarButton(
-                      label: 'Shop',
-                      onPressed: () =>
-                          Navigator.pushNamed(context, '/collections'),
-                    ),
-                    const Icon(Icons.arrow_drop_down,
-                        color: Colors.black54, size: 20),
-                  ],
-                ),
-                const SizedBox(width: 24),
-                const Row(
-                  children: [
-                    _NavBarButton(
-                      label: 'The Print Shack',
-                      onPressed: null,
-                      style: TextStyle(
-                        color: Colors.black54,
-                        fontWeight: FontWeight.w500,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Image.asset(
+                          'assets/images/upsu_logo.png',
+                          height: 32,
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
-                    Icon(Icons.arrow_drop_down,
-                        color: Colors.black54, size: 20),
+                    const SizedBox(width: 32),
+                    _NavBarButton(
+                      label: 'Home',
+                      onPressed: () => Navigator.pushNamed(context, '/'),
+                    ),
+                    const SizedBox(width: 24),
+                    Row(
+                      children: [
+                        _NavBarButton(
+                          label: 'Shop',
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/collections'),
+                        ),
+                        const Icon(Icons.arrow_drop_down,
+                            color: Colors.black54, size: 20),
+                      ],
+                    ),
+                    const SizedBox(width: 24),
+                    const Row(
+                      children: [
+                        _NavBarButton(
+                          label: 'The Print Shack',
+                          onPressed: null,
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Icon(Icons.arrow_drop_down,
+                            color: Colors.black54, size: 20),
+                      ],
+                    ),
+                    const SizedBox(width: 24),
+                    _NavBarButton(
+                      label: 'SALE!',
+                      onPressed: () => Navigator.pushNamed(context, '/sale'),
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.2,
+                      ),
+                    ),
+                    const SizedBox(width: 24),
+                    _NavBarButton(
+                      label: 'About',
+                      onPressed: () => Navigator.pushNamed(context, '/about'),
+                    ),
+                    const SizedBox(width: 24),
+                    const _NavBarButton(
+                      label: 'UPSU.net',
+                      onPressed: null,
+                      style: TextStyle(
+                        decoration: TextDecoration.underline,
+                      ),
+                    ),
+                    const Spacer(),
+                    Row(
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.search, color: Colors.black54),
+                          onPressed: () {},
+                          tooltip: 'Search',
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.person_outline,
+                              color: Colors.black54),
+                          onPressed: () {},
+                          tooltip: 'Account',
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.shopping_bag_outlined,
+                              color: Colors.black54),
+                          onPressed: () {},
+                          tooltip: 'Cart',
+                        ),
+                      ],
+                    ),
+                    const SizedBox(width: 24),
                   ],
-                ),
-                const SizedBox(width: 24),
-                _NavBarButton(
-                  label: 'SALE!',
-                  onPressed: () => Navigator.pushNamed(context, '/sale'),
-                  style: const TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
-                    letterSpacing: 1.2,
-                  ),
-                ),
-                const SizedBox(width: 24),
-                _NavBarButton(
-                  label: 'About',
-                  onPressed: () => Navigator.pushNamed(context, '/about'),
-                ),
-                const SizedBox(width: 24),
-                const _NavBarButton(
-                  label: 'UPSU.net',
-                  onPressed: null,
-                  style: TextStyle(
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-                const Spacer(),
-                Row(
+                )
+              : Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.search, color: Colors.black54),
-                      onPressed: () {},
-                      tooltip: 'Search',
+                    InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, '/');
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: Image.asset(
+                          'assets/images/upsu_logo.png',
+                          height: 32,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
-                    IconButton(
-                      icon: const Icon(Icons.person_outline,
-                          color: Colors.black54),
-                      onPressed: () {},
-                      tooltip: 'Account',
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.shopping_bag_outlined,
-                          color: Colors.black54),
-                      onPressed: () {},
-                      tooltip: 'Cart',
+                    const Spacer(),
+                    Builder(
+                      builder: (context) => IconButton(
+                        icon: const Icon(Icons.menu,
+                            color: Colors.black54, size: 28),
+                        onPressed: () {
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                        tooltip: 'Menu',
+                      ),
                     ),
                   ],
                 ),
-                const SizedBox(width: 24),
-              ] else ...[
-                const Spacer(),
-                Builder(
-                  builder: (context) => IconButton(
-                    icon:
-                        const Icon(Icons.menu, color: Colors.black54, size: 28),
-                    onPressed: () {
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                    tooltip: 'Menu',
-                  ),
-                ),
-              ],
-            ],
-          ),
         );
       },
     );
