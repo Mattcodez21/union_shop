@@ -288,7 +288,7 @@ class MobileNavDrawer extends StatelessWidget {
               onTap: () {},
             ),
             ListTile(
-              leading: const Icon(Icons.shopping_bag_outlined),
+              leading: const Icon(Icons.shopping_bag),
               title: const Text('Cart'),
               onTap: () {},
             ),
