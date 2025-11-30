@@ -8,7 +8,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isDesktop = constraints.maxWidth > 900;
+        final isDesktop = constraints.maxWidth > 600;
 
         return AppBar(
           backgroundColor: Colors.white,
