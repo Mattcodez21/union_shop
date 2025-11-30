@@ -17,21 +17,21 @@ class _SalePageState extends State<SalePage> {
       'originalPrice': 25.00,
       'salePrice': 18.00,
       'category': 'T-Shirts',
-      'image': 'assets/images/essential_tshirt.jpg',
+      'image': 'images/essential_tshirt.png',
     },
     {
       'name': 'Signature T-Shirt',
       'originalPrice': 35.00,
       'salePrice': 24.50,
       'category': 'T-Shirts',
-      'image': 'assets/images/signature_tshirt.jpg',
+      'image': 'images/signature_tshirt.png',
     },
     {
       'name': 'Signature Hoodie',
       'originalPrice': 65.00,
       'salePrice': 45.50,
       'category': 'Hoodies',
-      'image': 'assets/images/signature_hoodie.jpg',
+      'image': 'images/signature_hoodie.png',
     },
   ];
 
@@ -190,13 +190,24 @@ class _SalePageState extends State<SalePage> {
                               Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[200],
                                   borderRadius: BorderRadius.circular(8),
                                 ),
-                                child: const Icon(
-                                  Icons.image,
-                                  color: Colors.grey,
-                                  size: 40,
+                                child: Image.asset(
+                                  product['image'],
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.grey[200],
+                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: const Icon(
+                                        Icons.image,
+                                        color: Colors.grey,
+                                        size: 40,
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
                               Positioned(
