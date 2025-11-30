@@ -8,7 +8,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isDesktop = constraints.maxWidth > 600;
+        final isDesktop = constraints.maxWidth > 900;
 
         return AppBar(
           backgroundColor: Colors.white,
@@ -113,7 +113,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           tooltip: 'Account',
                         ),
                         IconButton(
-                          icon: const Icon(Icons.shopping_bag_outlined,
+                          icon: const Icon(Icons.shopping_bag,
                               color: Colors.black54),
                           onPressed: () {},
                           tooltip: 'Cart',
