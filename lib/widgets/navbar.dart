@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
-  const Navbar({Key? key}) : super(key: key);
+  final String? title;
+  const Navbar({Key? key, this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isDesktop =
-            constraints.maxWidth > 900; // Switch to mobile nav sooner
+        final isDesktop = constraints.maxWidth > 900;
 
         return AppBar(
           backgroundColor: Colors.white,
@@ -32,6 +32,17 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ),
                     ),
+                    if (title != null) ...[
+                      const SizedBox(width: 24),
+                      Text(
+                        title!,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
                     const SizedBox(width: 32),
                     _NavBarButton(
                       label: 'Home',
@@ -127,6 +138,17 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                       ),
                     ),
+                    if (title != null) ...[
+                      const SizedBox(width: 16),
+                      Text(
+                        title!,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black87,
+                        ),
+                      ),
+                    ],
                     const Spacer(),
                     Builder(
                       builder: (context) => IconButton(
@@ -148,6 +170,8 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
+
+// ..._NavBarButton and MobileNavDrawer unchanged...
 
 class _NavBarButton extends StatelessWidget {
   final String label;
