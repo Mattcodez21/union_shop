@@ -32,19 +32,26 @@ class AuthPage extends StatelessWidget {
                       height: 80,
                     ),
                   ),
-                  const Text(
-                    'Sign in',
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Sign in',
+                      style:
+                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    "Choose how you'd like to sign in",
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  const SizedBox(height: 4),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "Choose how you'd like to sign in",
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 24),
                   // Sign in with shop button
                   SizedBox(
-                    width: 260,
+                    width: double.infinity,
                     child: ElevatedButton(
                       onPressed: null, // Non-functional
                       style: ElevatedButton.styleFrom(
@@ -54,48 +61,45 @@ class AuthPage extends StatelessWidget {
                         textStyle: const TextStyle(
                             fontSize: 16, fontWeight: FontWeight.bold),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(6),
                         ),
                       ),
                       child: const Text('Sign in with shop'),
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   // "or" divider text
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Divider(
                           thickness: 1,
-                          indent: 40,
-                          endIndent: 12,
                           color: Colors.grey[300],
+                          endIndent: 12,
                         ),
                       ),
                       const Text(
                         'or',
-                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                        style: TextStyle(fontSize: 14, color: Colors.grey),
                       ),
                       Expanded(
                         child: Divider(
                           thickness: 1,
-                          indent: 12,
-                          endIndent: 40,
                           color: Colors.grey[300],
+                          indent: 12,
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 20),
                   // Email TextFormField with border styling
                   SizedBox(
-                    width: 300,
+                    width: double.infinity,
                     child: TextFormField(
                       decoration: InputDecoration(
                         labelText: 'Email',
                         border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(6),
                         ),
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
@@ -105,34 +109,25 @@ class AuthPage extends StatelessWidget {
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  const SizedBox(height: 16),
                   // Continue button (grey, non-functional)
                   SizedBox(
-                    width: 300,
+                    width: double.infinity,
                     child: ElevatedButton(
                       onPressed: null, // Non-functional
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[400],
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        backgroundColor: Colors.grey[300],
+                        foregroundColor: Colors.black54,
+                        padding: const EdgeInsets.symmetric(vertical: 14),
                         textStyle: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            fontSize: 16, fontWeight: FontWeight.normal),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(6),
                         ),
+                        elevation: 0,
                       ),
                       child: const Text('Continue'),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  const Text(
-                    'Authentication Page',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Sign in or create an account to continue.',
-                    style: TextStyle(fontSize: 16),
                   ),
                 ],
               ),
