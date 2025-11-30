@@ -199,6 +199,8 @@ class MobileNavDrawer extends StatelessWidget {
               leading: const Icon(Icons.print),
               title: const Text('The Print Shack'),
               onTap: () {}, // Not functional
+              trailing:
+                  const Icon(Icons.arrow_drop_down, color: Colors.black54),
             ),
             ListTile(
               leading: const Icon(Icons.local_offer, color: Colors.red),
@@ -224,8 +226,29 @@ class MobileNavDrawer extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.link),
-              title: const Text('UPSU.net'),
+              title: const Text(
+                'UPSU.net',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                ),
+              ),
               onTap: () {}, // External link, not functional here
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.search),
+              title: const Text('Search'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.person_outline),
+              title: const Text('Account'),
+              onTap: () {},
+            ),
+            ListTile(
+              leading: const Icon(Icons.shopping_bag_outlined),
+              title: const Text('Cart'),
+              onTap: () {},
             ),
           ],
         ),
