@@ -21,6 +21,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const Navbar(),
+      endDrawer: const MobileNavDrawer(),
       body: SingleChildScrollView(
         child: Column(
           children: [

@@ -219,8 +219,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add LayoutBuilder to detect screen width (>600px = desktop)
 - [x] Create mobile version with hamburger menu icon
 - [x] Create Drawer widget for mobile navigation menu
-- [ ] Add all navigation items to drawer
-- [ ] Replace existing AppBar on all pages with custom navbar
+- [x] Add all navigation items to drawer
+- [x] Replace existing AppBar on all pages with custom navbar
 - [ ] Test navbar displays correctly on desktop and mobile views
 - [ ] Test navbar collapses to hamburger menu on mobile
 
