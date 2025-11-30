@@ -304,5 +304,37 @@ void main() {
 
       // The button should be interactive (no exceptions thrown)
     });
+
+    testWidgets('Product description paragraph visible',
+        (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Find the "Description" heading
+      final descriptionHeadingFinder = find.text('Description');
+      expect(descriptionHeadingFinder, findsOneWidget);
+
+      // Find the description paragraph text
+      final descriptionTextFinder = find.text(
+        'Bringing to you, our best selling signature hoodie! Perfect for showing your university pride and staying comfortable during those long study sessions.',
+      );
+      expect(descriptionTextFinder, findsOneWidget);
+
+      // Verify the description heading styling
+      final headingWidget = tester.widget<Text>(descriptionHeadingFinder);
+      expect(headingWidget.style?.fontWeight, FontWeight.bold);
+      expect(headingWidget.style?.fontSize,
+          greaterThanOrEqualTo(18)); // 20 on desktop, 18 on mobile
+
+      // Verify the description text styling
+      final textWidget = tester.widget<Text>(descriptionTextFinder);
+      expect(textWidget.style?.fontSize, 16);
+      expect(textWidget.style?.height, 1.6); // Line height for readability
+    });
   });
 }

@@ -144,7 +144,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Quantity field displays (default 1)
 - [x] "ADD TO CART" button visible
 - [x] "Buy with Shop Pay" button visible
-- [ ] Product description paragraph visible
+- [x] Product description paragraph visible
 - [ ] Material/care details visible
 - [ ] Social share buttons display
 - [ ] Size guide table visible
