@@ -16,29 +16,27 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           titleSpacing: 0,
           title: Row(
             children: [
-              // Bigger UPSU logo on the left
+              // UPSU logo on the left
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/');
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 32.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
                   child: Image.asset(
                     'assets/images/upsu_logo.png',
-                    height: 150, // Increased logo size
+                    height: isDesktop ? 150 : 48,
                     fit: BoxFit.contain,
                   ),
                 ),
               ),
               if (isDesktop) ...[
                 const SizedBox(width: 32),
-                // Navigation buttons with more spacing
                 _NavBarButton(
                   label: 'Home',
                   onPressed: () => Navigator.pushNamed(context, '/'),
                 ),
                 const SizedBox(width: 24),
-                // Shop with dropdown arrow
                 Row(
                   children: [
                     _NavBarButton(
@@ -51,12 +49,11 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                   ],
                 ),
                 const SizedBox(width: 24),
-                // The Print Shack with dropdown arrow
                 const Row(
                   children: [
                     _NavBarButton(
                       label: 'The Print Shack',
-                      onPressed: null, // Not functional
+                      onPressed: null,
                       style: TextStyle(
                         color: Colors.black54,
                         fontWeight: FontWeight.w500,
@@ -84,37 +81,44 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(width: 24),
                 const _NavBarButton(
                   label: 'UPSU.net',
-                  onPressed: null, // External link, not functional here
+                  onPressed: null,
                   style: TextStyle(
                     decoration: TextDecoration.underline,
                   ),
                 ),
+                const Spacer(),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.search, color: Colors.black54),
+                      onPressed: () {},
+                      tooltip: 'Search',
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.person_outline,
+                          color: Colors.black54),
+                      onPressed: () {},
+                      tooltip: 'Account',
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.shopping_bag_outlined,
+                          color: Colors.black54),
+                      onPressed: () {},
+                      tooltip: 'Cart',
+                    ),
+                  ],
+                ),
+                const SizedBox(width: 24),
+              ] else ...[
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.menu, color: Colors.black54, size: 28),
+                  onPressed: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  tooltip: 'Menu',
+                ),
               ],
-              // Spacer to push icons to the right
-              const Spacer(),
-              // Header icons on the far right
-              Row(
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.search, color: Colors.black54),
-                    onPressed: () {},
-                    tooltip: 'Search',
-                  ),
-                  IconButton(
-                    icon:
-                        const Icon(Icons.person_outline, color: Colors.black54),
-                    onPressed: () {},
-                    tooltip: 'Account',
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.shopping_bag_outlined,
-                        color: Colors.black54),
-                    onPressed: () {},
-                    tooltip: 'Cart',
-                  ),
-                ],
-              ),
-              const SizedBox(width: 24),
             ],
           ),
         );
