@@ -103,5 +103,36 @@ void main() {
       expect(textWidget.style?.fontSize, greaterThan(24)); // Should be 28 or 32
       expect(textWidget.style?.fontWeight, FontWeight.bold);
     });
+
+    testWidgets('Price displays with "Tax included" text',
+        (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Verify that the price is displayed
+      final priceFinder = find.text('£15.00');
+      expect(priceFinder, findsOneWidget);
+
+      // Verify that "Tax included" text is displayed
+      final taxIncludedFinder = find.text('Tax included');
+      expect(taxIncludedFinder, findsOneWidget);
+
+      // Verify the price styling is prominent (large font size and bold)
+      final priceWidget = tester.widget<Text>(priceFinder);
+      expect(
+          priceWidget.style?.fontSize, greaterThan(24)); // Should be 26 or 28
+      expect(priceWidget.style?.fontWeight, FontWeight.bold);
+      expect(priceWidget.style?.color, const Color(0xFF4d2963)); // Purple color
+
+      // Verify "Tax included" styling is smaller and grey
+      final taxWidget = tester.widget<Text>(taxIncludedFinder);
+      expect(taxWidget.style?.fontSize, 14);
+      expect(taxWidget.style?.fontWeight, FontWeight.w500);
+    });
   });
 }

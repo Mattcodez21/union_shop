@@ -138,7 +138,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Main product image displays
 - [x] Image carousel/thumbnails visible below main image
 - [x] Product name displays prominently
-- [ ] Price displays with "Tax included" text
+- [x] Price displays with "Tax included" text
 - [ ] Color dropdown shows options
 - [ ] Size dropdown shows options (S, M, L, XL)
 - [ ] Quantity field displays (default 1)
