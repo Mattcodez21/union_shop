@@ -14,18 +14,18 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
           elevation: 2,
           automaticallyImplyLeading: false,
           titleSpacing: 0,
+          toolbarHeight: kToolbarHeight, // Ensures no overflow
           title: Row(
             children: [
-              // UPSU logo on the left
               InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, '/');
                 },
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
                   child: Image.asset(
                     'assets/images/upsu_logo.png',
-                    height: isDesktop ? 150 : 48,
+                    height: 32, // Keep logo smaller than toolbarHeight
                     fit: BoxFit.contain,
                   ),
                 ),
@@ -111,12 +111,15 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                 const SizedBox(width: 24),
               ] else ...[
                 const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.menu, color: Colors.black54, size: 28),
-                  onPressed: () {
-                    Scaffold.of(context).openEndDrawer();
-                  },
-                  tooltip: 'Menu',
+                Builder(
+                  builder: (context) => IconButton(
+                    icon:
+                        const Icon(Icons.menu, color: Colors.black54, size: 28),
+                    onPressed: () {
+                      Scaffold.of(context).openEndDrawer();
+                    },
+                    tooltip: 'Menu',
+                  ),
                 ),
               ],
             ],
@@ -156,7 +159,6 @@ class _NavBarButton extends StatelessWidget {
   }
 }
 
-// Drawer widget for mobile navigation menu
 class MobileNavDrawer extends StatelessWidget {
   const MobileNavDrawer({Key? key}) : super(key: key);
 
