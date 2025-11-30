@@ -32,6 +32,25 @@ class AuthPage extends StatelessWidget {
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 32),
+            // Sign in with shop button
+            SizedBox(
+              width: 260,
+              child: ElevatedButton(
+                onPressed: null, // Non-functional
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF4d2963), // Purple
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  textStyle: const TextStyle(
+                      fontSize: 16, fontWeight: FontWeight.bold),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+                child: const Text('Sign in with shop'),
+              ),
+            ),
+            const SizedBox(height: 32),
             const Text(
               'Authentication Page',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
