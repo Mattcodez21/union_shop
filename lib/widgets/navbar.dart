@@ -155,3 +155,81 @@ class _NavBarButton extends StatelessWidget {
     );
   }
 }
+
+// Drawer widget for mobile navigation menu
+class MobileNavDrawer extends StatelessWidget {
+  const MobileNavDrawer({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: SafeArea(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Center(
+                child: Image.asset(
+                  'assets/images/upsu_logo.png',
+                  height: 64,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pushNamed(context, '/');
+                Navigator.of(context).maybePop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.storefront),
+              title: const Text('Shop'),
+              onTap: () {
+                Navigator.pushNamed(context, '/collections');
+                Navigator.of(context).maybePop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.print),
+              title: const Text('The Print Shack'),
+              onTap: () {}, // Not functional
+            ),
+            ListTile(
+              leading: const Icon(Icons.local_offer, color: Colors.red),
+              title: const Text(
+                'SALE!',
+                style: TextStyle(
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onTap: () {
+                Navigator.pushNamed(context, '/sale');
+                Navigator.of(context).maybePop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About'),
+              onTap: () {
+                Navigator.pushNamed(context, '/about');
+                Navigator.of(context).maybePop();
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.link),
+              title: const Text('UPSU.net'),
+              onTap: () {}, // External link, not functional here
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

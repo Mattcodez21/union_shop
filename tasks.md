@@ -217,8 +217,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add dropdown arrow indicators for Shop and The Print Shack links
 - [x] Add right-side icons (Search, Account, Cart with badge)
 - [x] Add LayoutBuilder to detect screen width (>600px = desktop)
-- [ ] Create mobile version with hamburger menu icon
-- [ ] Create Drawer widget for mobile navigation menu
+- [x] Create mobile version with hamburger menu icon
+- [x] Create Drawer widget for mobile navigation menu
 - [ ] Add all navigation items to drawer
 - [ ] Replace existing AppBar on all pages with custom navbar
 - [ ] Test navbar displays correctly on desktop and mobile views
