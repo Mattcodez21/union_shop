@@ -147,8 +147,7 @@ void main() {
       // Find the Color dropdown button
       final colorDropdownFinder = find.byWidgetPredicate(
         (widget) =>
-            widget is DropdownButton<String> &&
-            (widget as DropdownButton<String>).value == 'Black',
+            widget is DropdownButton<String> && (widget).value == 'Black',
       );
 
       expect(colorDropdownFinder, findsOneWidget);
@@ -168,6 +167,42 @@ void main() {
       await tester.pumpAndSettle();
 
       // The dropdown should now show 'Purple' as selected (though this is placeholder functionality)
+      // In a real implementation, this would update the selected value
+    });
+
+    testWidgets('Size dropdown shows options (S, M, L, XL)',
+        (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Find the Size dropdown button
+      final sizeDropdownFinder = find.byWidgetPredicate(
+        (widget) => widget is DropdownButton<String> && (widget).value == 'M',
+      );
+
+      expect(sizeDropdownFinder, findsOneWidget);
+
+      // Tap the dropdown to open it
+      await tester.tap(sizeDropdownFinder);
+      await tester.pumpAndSettle();
+
+      // Verify that all size options are displayed
+      expect(find.text('S'), findsOneWidget);
+      expect(find.text('M'),
+          findsWidgets); // Will find multiple (dropdown value + option)
+      expect(find.text('L'), findsOneWidget);
+      expect(find.text('XL'), findsOneWidget);
+
+      // Verify we can select a different option
+      await tester.tap(find.text('L').last);
+      await tester.pumpAndSettle();
+
+      // The dropdown should now show 'L' as selected (though this is placeholder functionality)
       // In a real implementation, this would update the selected value
     });
   });
