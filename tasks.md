@@ -162,7 +162,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Implement GridView for sale products (3 columns on desktop, 2 on mobile)
 - [x] Create sale product card showing image, name, strikethrough original price, and sale price
 - [x] Add "SALE" badge overlay on product with sale (optional, some don't have it)
-- [ ] Add '/sale' route in main.dart
+- [x] Add '/sale' route in main.dart
 - [ ] Add navigation link from navbar to sale page
 - [ ] Test sale page displays with correct pricing format
 
