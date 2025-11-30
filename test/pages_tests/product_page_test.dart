@@ -279,5 +279,30 @@ void main() {
 
       // The button should be interactive (no exceptions thrown)
     });
+
+    testWidgets('"Buy with Shop Pay" button visible',
+        (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Find the "Buy with Shop Pay" button text
+      final shopPayButtonFinder = find.text('Buy with Shop Pay');
+      expect(shopPayButtonFinder, findsOneWidget);
+
+      // Verify it's inside an OutlinedButton (simplified check)
+      final outlinedButtonFinder = find.byType(OutlinedButton);
+      expect(outlinedButtonFinder, findsOneWidget);
+
+      // Verify the button is tappable
+      await tester.tap(shopPayButtonFinder);
+      await tester.pumpAndSettle();
+
+      // The button should be interactive (no exceptions thrown)
+    });
   });
 }
