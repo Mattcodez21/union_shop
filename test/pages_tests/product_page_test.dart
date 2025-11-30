@@ -245,5 +245,39 @@ void main() {
       // The dropdown should now show '3' as selected (though this is placeholder functionality)
       // In a real implementation, this would update the selected value
     });
+
+    testWidgets('"ADD TO CART" button visible', (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Find the "ADD TO CART" button
+      final addToCartButtonFinder = find.text('ADD TO CART');
+      expect(addToCartButtonFinder, findsOneWidget);
+
+      // Verify it's an ElevatedButton
+      final elevatedButtonFinder = find.byWidgetPredicate(
+        (widget) =>
+            widget is ElevatedButton &&
+            widget.child is Text &&
+            (widget.child as Text).data == 'ADD TO CART',
+      );
+      expect(elevatedButtonFinder, findsOneWidget);
+
+      // Verify the button styling (purple background)
+      final buttonWidget = tester.widget<ElevatedButton>(elevatedButtonFinder);
+      expect(buttonWidget.style?.backgroundColor?.resolve({}),
+          const Color(0xFF4d2963));
+
+      // Verify the button is tappable
+      await tester.tap(addToCartButtonFinder);
+      await tester.pumpAndSettle();
+
+      // The button should be interactive (no exceptions thrown)
+    });
   });
 }
