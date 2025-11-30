@@ -137,7 +137,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Product page accessible via route
 - [x] Main product image displays
 - [x] Image carousel/thumbnails visible below main image
-- [ ] Product name displays prominently
+- [x] Product name displays prominently
 - [ ] Price displays with "Tax included" text
 - [ ] Color dropdown shows options
 - [ ] Size dropdown shows options (S, M, L, XL)
@@ -164,7 +164,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add "SALE" badge overlay on product with sale (optional, some don't have it)
 - [x] Add '/sale' route in main.dart
 - [ ] Add navigation link from navbar to sale page
-- [ ] Test sale page displays with correct pricing format
+- [x] Test sale page displays with correct pricing format
 
 **Tests**
 - [ ] Sale page accessible via `/sale` route

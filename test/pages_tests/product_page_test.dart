@@ -62,8 +62,7 @@ void main() {
       // Find the ListView.builder that contains the thumbnail images
       final carouselFinder = find.byWidgetPredicate(
         (widget) =>
-            widget is ListView &&
-            (widget as ListView).scrollDirection == Axis.horizontal,
+            widget is ListView && (widget).scrollDirection == Axis.horizontal,
       );
 
       expect(carouselFinder, findsWidgets);
@@ -82,6 +81,27 @@ void main() {
 
       // Should find at least 4 thumbnail images plus the main image
       expect(thumbnailImages, findsWidgets);
+    });
+
+    testWidgets('Product name displays prominently',
+        (WidgetTester tester) async {
+      // Build the app and navigate to product page
+      await tester.pumpWidget(const UnionShopApp());
+      await tester.pumpAndSettle();
+
+      final NavigatorState navigator = tester.state(find.byType(Navigator));
+      navigator.pushNamed('/product');
+      await tester.pumpAndSettle();
+
+      // Verify that the product name is displayed prominently
+      final productNameFinder = find.text('Signature Hoodie');
+
+      expect(productNameFinder, findsWidgets);
+
+      // Verify the text style is prominent (large font size and bold)
+      final textWidget = tester.widget<Text>(productNameFinder.first);
+      expect(textWidget.style?.fontSize, greaterThan(24)); // Should be 28 or 32
+      expect(textWidget.style?.fontWeight, FontWeight.bold);
     });
   });
 }
