@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
+  final String productId;
+
+  const ProductPage({super.key, required this.productId});
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -14,6 +16,8 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // You can use productId to fetch/display product details here
+
     return Scaffold(
       appBar: const Navbar(),
       endDrawer: const MobileNavDrawer(),
@@ -25,10 +29,10 @@ class ProductPage extends StatelessWidget {
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 8),
               color: const Color(0xFF4d2963),
-              child: const Text(
-                'PLACEHOLDER HEADER TEXT',
+              child: Text(
+                'PLACEHOLDER HEADER TEXT (Product ID: $productId)',
                 textAlign: TextAlign.center,
-                style: TextStyle(color: Colors.white, fontSize: 16),
+                style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
             // Product details
