@@ -42,6 +42,18 @@ class _CollectionPageState extends State<CollectionPage> {
     }
   }
 
+  List<Product> filterProducts(List<Product> products) {
+    return products.where((product) {
+      final matchesCategory =
+          product.category.toLowerCase() == widget.collectionName.toLowerCase();
+      final matchesSize =
+          selectedSize == 'All' || product.sizes.contains(selectedSize);
+      final matchesColor =
+          selectedColor == 'All' || product.colors.contains(selectedColor);
+      return matchesCategory && matchesSize && matchesColor;
+    }).toList();
+  }
+
   List<Product> sortProducts(List<Product> products) {
     switch (selectedSort) {
       case 'Price: Low to High':
@@ -63,10 +75,6 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final routeArgs =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    final collection = widget.collectionData ?? routeArgs;
-
     // Gather all unique sizes and colors for dropdowns
     final allSizes = <String>{};
     final allColors = <String>{};
@@ -78,16 +86,8 @@ class _CollectionPageState extends State<CollectionPage> {
     final sizeOptions = ['All', ...allSizes.where((s) => s.isNotEmpty)];
     final colorOptions = ['All', ...allColors.where((c) => c.isNotEmpty)];
 
-    // Filter products by category/collection name and selected filters
-    List<Product> filteredProducts = products
-        .where((product) =>
-            product.category.toLowerCase() ==
-                widget.collectionName.toLowerCase() &&
-            (selectedSize == 'All' || product.sizes.contains(selectedSize)) &&
-            (selectedColor == 'All' || product.colors.contains(selectedColor)))
-        .toList();
-
-    // Sort products using the sorting logic method
+    // Filter and sort products
+    List<Product> filteredProducts = filterProducts(products);
     filteredProducts = sortProducts(filteredProducts);
 
     return Scaffold(
@@ -119,9 +119,7 @@ class _CollectionPageState extends State<CollectionPage> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  collection != null
-                      ? '${collection['itemCount']} products'
-                      : '${filteredProducts.length} products',
+                  '${filteredProducts.length} product${filteredProducts.length == 1 ? '' : 's'}',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -154,7 +152,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: selectedSize,
+                    initialValue: selectedSize,
                     items: sizeOptions
                         .map((size) =>
                             DropdownMenuItem(value: size, child: Text(size)))
@@ -176,7 +174,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: selectedColor,
+                    initialValue: selectedColor,
                     items: colorOptions
                         .map((color) =>
                             DropdownMenuItem(value: color, child: Text(color)))
@@ -198,7 +196,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: selectedSort,
+                    initialValue: selectedSort,
                     items: const [
                       DropdownMenuItem(
                           value: 'Featured', child: Text('Featured')),
