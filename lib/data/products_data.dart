@@ -210,3 +210,12 @@ List<Product> getProductsByCollection(String collectionName) {
           product.category.toLowerCase() == collectionName.toLowerCase())
       .toList();
 }
+
+// Add this function to fetch a product by its ID
+Product? getProductById(String id) {
+  try {
+    return products.firstWhere((product) => product.id == id);
+  } catch (e) {
+    return null;
+  }
+}

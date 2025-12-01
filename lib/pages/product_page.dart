@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/data/products_data.dart';
+import 'package:union_shop/models/product.dart';
 
 class ProductPage extends StatelessWidget {
   final String productId;
@@ -16,7 +18,8 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // You can use productId to fetch/display product details here
+    // Fetch the product by ID
+    final Product? product = getProductById(productId);
 
     return Scaffold(
       appBar: const Navbar(),
@@ -30,7 +33,9 @@ class ProductPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               color: const Color(0xFF4d2963),
               child: Text(
-                'PLACEHOLDER HEADER TEXT (Product ID: $productId)',
+                product != null
+                    ? product.name
+                    : 'Product not found (ID: $productId)',
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
@@ -42,6 +47,31 @@ class ProductPage extends StatelessWidget {
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   bool isDesktop = constraints.maxWidth > 600;
+
+                  if (product == null) {
+                    return const Center(
+                      child: Padding(
+                        padding: EdgeInsets.all(32.0),
+                        child: Text(
+                          'Sorry, this product could not be found.',
+                          style: TextStyle(fontSize: 20, color: Colors.red),
+                        ),
+                      ),
+                    );
+                  }
+
+                  // Use product fields instead of hardcoded values
+                  final mainImage = product.imageUrls.isNotEmpty
+                      ? product.imageUrls.first
+                      : '';
+                  final thumbnails = product.imageUrls.isNotEmpty
+                      ? product.imageUrls
+                      : [
+                          'assets/images/signature_hoodie.png',
+                          'assets/images/signature_hoodie.png',
+                          'assets/images/signature_hoodie.png',
+                          'assets/images/signature_hoodie.png',
+                        ];
 
                   if (isDesktop) {
                     // Desktop: Two-column layout
@@ -71,7 +101,7 @@ class ProductPage extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(12),
                                   child: Image.asset(
-                                    'assets/images/signature_hoodie.png',
+                                    mainImage,
                                     fit: BoxFit.cover,
                                     errorBuilder: (context, error, stackTrace) {
                                       return Container(
@@ -106,15 +136,8 @@ class ProductPage extends StatelessWidget {
                                 height: 80,
                                 child: ListView.builder(
                                   scrollDirection: Axis.horizontal,
-                                  itemCount: 4,
+                                  itemCount: thumbnails.length,
                                   itemBuilder: (context, index) {
-                                    final thumbnailImages = [
-                                      'assets/images/signature_hoodie.png',
-                                      'assets/images/signature_hoodie.png',
-                                      'assets/images/signature_hoodie.png',
-                                      'assets/images/signature_hoodie.png',
-                                    ];
-
                                     return GestureDetector(
                                       onTap: () {
                                         placeholderCallbackForButtons();
@@ -123,7 +146,9 @@ class ProductPage extends StatelessWidget {
                                         width: 80,
                                         height: 80,
                                         margin: EdgeInsets.only(
-                                          right: index < 3 ? 16 : 0,
+                                          right: index < thumbnails.length - 1
+                                              ? 16
+                                              : 0,
                                         ),
                                         decoration: BoxDecoration(
                                           borderRadius:
@@ -150,7 +175,7 @@ class ProductPage extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           child: Image.asset(
-                                            thumbnailImages[index],
+                                            thumbnails[index],
                                             fit: BoxFit.cover,
                                             errorBuilder:
                                                 (context, error, stackTrace) {
@@ -182,9 +207,9 @@ class ProductPage extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
-                                'Signature Hoodie',
-                                style: TextStyle(
+                              Text(
+                                product.name,
+                                style: const TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black87,
@@ -192,9 +217,9 @@ class ProductPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              const Text(
-                                '£15.00',
-                                style: TextStyle(
+                              Text(
+                                '£${product.price.toStringAsFixed(2)}',
+                                style: const TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF4d2963),
@@ -237,15 +262,13 @@ class ProductPage extends StatelessWidget {
                                                 BorderRadius.circular(4),
                                           ),
                                           child: DropdownButton<String>(
-                                            value: 'Black',
+                                            value: product.colors.isNotEmpty
+                                                ? product.colors.first
+                                                : null,
                                             isExpanded: true,
                                             underline: const SizedBox(),
-                                            items: [
-                                              'Black',
-                                              'Purple',
-                                              'Green',
-                                              'Grey'
-                                            ].map((String color) {
+                                            items: product.colors
+                                                .map((String color) {
                                               return DropdownMenuItem<String>(
                                                 value: color,
                                                 child: Text(color),
@@ -284,10 +307,12 @@ class ProductPage extends StatelessWidget {
                                                 BorderRadius.circular(4),
                                           ),
                                           child: DropdownButton<String>(
-                                            value: 'M',
+                                            value: product.sizes.isNotEmpty
+                                                ? product.sizes.first
+                                                : null,
                                             isExpanded: true,
                                             underline: const SizedBox(),
-                                            items: ['S', 'M', 'L', 'XL']
+                                            items: product.sizes
                                                 .map((String size) {
                                               return DropdownMenuItem<String>(
                                                 value: size,
@@ -409,9 +434,9 @@ class ProductPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              const Text(
-                                'Bringing to you, our best selling signature hoodie! Perfect for showing your university pride and staying comfortable during those long study sessions.',
-                                style: TextStyle(
+                              Text(
+                                product.description,
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black54,
                                   height: 1.6,
@@ -427,9 +452,10 @@ class ProductPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              const Text(
-                                'Soft, comfortable, 50% cotton blend material. High-quality print that won\'t fade. Durable construction built to last. Available in multiple colors and sizes to suit your style.',
-                                style: TextStyle(
+                              // You can add more product details here if available
+                              Text(
+                                'Category: ${product.category}',
+                                style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black54,
                                   height: 1.6,
@@ -515,7 +541,7 @@ class ProductPage extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(12),
                                 child: Image.asset(
-                                  'assets/images/signature_hoodie.png',
+                                  mainImage,
                                   fit: BoxFit.cover,
                                   errorBuilder: (context, error, stackTrace) {
                                     return Container(
@@ -550,15 +576,8 @@ class ProductPage extends StatelessWidget {
                               height: 80,
                               child: ListView.builder(
                                 scrollDirection: Axis.horizontal,
-                                itemCount: 4,
+                                itemCount: thumbnails.length,
                                 itemBuilder: (context, index) {
-                                  final thumbnailImages = [
-                                    'assets/images/signature_hoodie.png',
-                                    'assets/images/signature_hoodie.png',
-                                    'assets/images/signature_hoodie.png',
-                                    'assets/images/signature_hoodie.png',
-                                  ];
-
                                   return GestureDetector(
                                     onTap: () {
                                       placeholderCallbackForButtons();
@@ -567,7 +586,9 @@ class ProductPage extends StatelessWidget {
                                       width: 80,
                                       height: 80,
                                       margin: EdgeInsets.only(
-                                        right: index < 3 ? 12 : 0,
+                                        right: index < thumbnails.length - 1
+                                            ? 12
+                                            : 0,
                                       ),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(12),
@@ -591,7 +612,7 @@ class ProductPage extends StatelessWidget {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(10),
                                         child: Image.asset(
-                                          thumbnailImages[index],
+                                          thumbnails[index],
                                           fit: BoxFit.cover,
                                           errorBuilder:
                                               (context, error, stackTrace) {
@@ -617,9 +638,9 @@ class ProductPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 32),
                         // Product info (mobile)
-                        const Text(
-                          'Signature Hoodie',
-                          style: TextStyle(
+                        Text(
+                          product.name,
+                          style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -627,9 +648,9 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        const Text(
-                          '£15.00',
-                          style: TextStyle(
+                        Text(
+                          '£${product.price.toStringAsFixed(2)}',
+                          style: const TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF4d2963),
@@ -674,15 +695,13 @@ class ProductPage extends StatelessWidget {
                                               BorderRadius.circular(4),
                                         ),
                                         child: DropdownButton<String>(
-                                          value: 'Black',
+                                          value: product.colors.isNotEmpty
+                                              ? product.colors.first
+                                              : null,
                                           isExpanded: true,
                                           underline: const SizedBox(),
-                                          items: [
-                                            'Black',
-                                            'Purple',
-                                            'Green',
-                                            'Grey'
-                                          ].map((String color) {
+                                          items: product.colors
+                                              .map((String color) {
                                             return DropdownMenuItem<String>(
                                               value: color,
                                               child: Text(color),
@@ -721,11 +740,13 @@ class ProductPage extends StatelessWidget {
                                               BorderRadius.circular(4),
                                         ),
                                         child: DropdownButton<String>(
-                                          value: 'M',
+                                          value: product.sizes.isNotEmpty
+                                              ? product.sizes.first
+                                              : null,
                                           isExpanded: true,
                                           underline: const SizedBox(),
-                                          items: ['S', 'M', 'L', 'XL']
-                                              .map((String size) {
+                                          items:
+                                              product.sizes.map((String size) {
                                             return DropdownMenuItem<String>(
                                               value: size,
                                               child: Text(size),
@@ -852,9 +873,9 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'Bringing to you, our best selling signature hoodie! Perfect for showing your university pride and staying comfortable during those long study sessions.',
-                          style: TextStyle(
+                        Text(
+                          product.description,
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black54,
                             height: 1.6,
@@ -870,9 +891,9 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8),
-                        const Text(
-                          'Soft, comfortable, 50% cotton blend material. High-quality print that won\'t fade. Durable construction built to last. Available in multiple colors and sizes to suit your style.',
-                          style: TextStyle(
+                        Text(
+                          'Category: ${product.category}',
+                          style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black54,
                             height: 1.6,
