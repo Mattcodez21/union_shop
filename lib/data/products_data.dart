@@ -203,3 +203,10 @@ final List<Product> products = [
     imageUrls: ['assets/images/products/highlighters1.jpg'],
   ),
 ];
+
+List<Product> getProductsByCollection(String collectionName) {
+  return products
+      .where((product) =>
+          product.category.toLowerCase() == collectionName.toLowerCase())
+      .toList();
+}

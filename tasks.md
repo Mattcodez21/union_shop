@@ -274,8 +274,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Ensure products have varied categories, sizes, colors for filtering
 - [x] Convert CollectionPage to StatefulWidget
 - [x] Add state variables: selectedSort, selectedSize, selectedColor
-- [ ] Create method to get products by collection from data
-- [ ] Implement sort dropdown with all sort options (Featured, Price Low-High, Price High-Low, A-Z)
+- [x] Create method to get products by collection from data
+- [x] Implement sort dropdown with all sort options (Featured, Price Low-High, Price High-Low, A-Z)
 - [ ] Create sorting logic method handling price and name sorts
 - [ ] Implement size filter dropdown
 - [ ] Implement color filter dropdown
