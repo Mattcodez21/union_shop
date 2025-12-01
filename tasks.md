@@ -312,8 +312,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Initialize state with default values (first size/color, quantity: 1)
 - [x] Create size dropdown using DropdownButton
 - [x] Populate size dropdown from product.sizes
-- [ ] Add onChanged handler for size dropdown
-- [ ] Create color dropdown using DropdownButton
+- [x] Add onChanged handler for size dropdown
+- [x] Create color dropdown using DropdownButton
 - [ ] Populate color dropdown from product.colors
 - [ ] Add onChanged handler for color dropdown
 - [ ] Create quantity counter UI (Row with -, number, +)

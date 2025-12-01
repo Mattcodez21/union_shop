@@ -33,7 +33,6 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    // Schedule redirect if product is null and not already scheduled
     if (product == null && !_redirectScheduled) {
       _redirectScheduled = true;
       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -53,13 +52,10 @@ class _ProductPageState extends State<ProductPage> {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
-  }
+  void placeholderCallbackForButtons() {}
 
   @override
   Widget build(BuildContext context) {
-    // Use the product loaded in initState
     if (product == null) {
       return Scaffold(
         appBar: const Navbar(),
@@ -96,7 +92,6 @@ class _ProductPageState extends State<ProductPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Top banner
             Container(
               width: double.infinity,
               padding: const EdgeInsets.symmetric(vertical: 8),
@@ -126,17 +121,62 @@ class _ProductPageState extends State<ProductPage> {
                           'assets/images/signature_hoodie.png',
                         ];
 
+                  Widget colorDropdown = Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey[300]!),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: DropdownButton<String>(
+                      value: selectedColor,
+                      isExpanded: true,
+                      underline: const SizedBox(),
+                      items: product!.colors.map((String color) {
+                        return DropdownMenuItem<String>(
+                          value: color,
+                          child: Text(color),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedColor = newValue;
+                        });
+                      },
+                    ),
+                  );
+
+                  Widget sizeDropdown = Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey[300]!),
+                      borderRadius: BorderRadius.circular(4),
+                    ),
+                    child: DropdownButton<String>(
+                      value: selectedSize,
+                      isExpanded: true,
+                      underline: const SizedBox(),
+                      items: product!.sizes.map((String size) {
+                        return DropdownMenuItem<String>(
+                          value: size,
+                          child: Text(size),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedSize = newValue;
+                        });
+                      },
+                    ),
+                  );
+
                   if (isDesktop) {
-                    // Desktop: Two-column layout
                     return Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Left side: Product images
                         Expanded(
                           flex: 1,
                           child: Column(
                             children: [
-                              // Main large product image
                               Container(
                                 height: 500,
                                 width: double.infinity,
@@ -184,7 +224,6 @@ class _ProductPageState extends State<ProductPage> {
                                 ),
                               ),
                               const SizedBox(height: 20),
-                              // Image carousel thumbnails
                               SizedBox(
                                 height: 80,
                                 child: ListView.builder(
@@ -254,7 +293,6 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                         const SizedBox(width: 48),
-                        // Right side: Product info
                         Expanded(
                           flex: 1,
                           child: Column(
@@ -288,7 +326,6 @@ class _ProductPageState extends State<ProductPage> {
                                 ),
                               ),
                               const SizedBox(height: 32),
-                              // Product options row
                               Row(
                                 children: [
                                   Expanded(
@@ -305,33 +342,7 @@ class _ProductPageState extends State<ProductPage> {
                                           ),
                                         ),
                                         const SizedBox(height: 4),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey[300]!),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          child: DropdownButton<String>(
-                                            value: selectedColor,
-                                            isExpanded: true,
-                                            underline: const SizedBox(),
-                                            items: product!.colors
-                                                .map((String color) {
-                                              return DropdownMenuItem<String>(
-                                                value: color,
-                                                child: Text(color),
-                                              );
-                                            }).toList(),
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                selectedColor = newValue;
-                                              });
-                                            },
-                                          ),
-                                        ),
+                                        colorDropdown,
                                       ],
                                     ),
                                   ),
@@ -350,33 +361,7 @@ class _ProductPageState extends State<ProductPage> {
                                           ),
                                         ),
                                         const SizedBox(height: 4),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey[300]!),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          child: DropdownButton<String>(
-                                            value: selectedSize,
-                                            isExpanded: true,
-                                            underline: const SizedBox(),
-                                            items: product!.sizes
-                                                .map((String size) {
-                                              return DropdownMenuItem<String>(
-                                                value: size,
-                                                child: Text(size),
-                                              );
-                                            }).toList(),
-                                            onChanged: (String? newValue) {
-                                              setState(() {
-                                                selectedSize = newValue;
-                                              });
-                                            },
-                                          ),
-                                        ),
+                                        sizeDropdown,
                                       ],
                                     ),
                                   ),
@@ -429,7 +414,6 @@ class _ProductPageState extends State<ProductPage> {
                                 ],
                               ),
                               const SizedBox(height: 32),
-                              // Add to Cart button
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
@@ -455,7 +439,6 @@ class _ProductPageState extends State<ProductPage> {
                                 ),
                               ),
                               const SizedBox(height: 16),
-                              // Buy with Shop Pay button
                               SizedBox(
                                 width: double.infinity,
                                 child: OutlinedButton(
@@ -573,10 +556,8 @@ class _ProductPageState extends State<ProductPage> {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Product image with carousel thumbnails
                         Column(
                           children: [
-                            // Main large product image
                             Container(
                               height: 350,
                               width: double.infinity,
@@ -624,7 +605,6 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             ),
                             const SizedBox(height: 20),
-                            // Image carousel thumbnails
                             SizedBox(
                               height: 80,
                               child: ListView.builder(
@@ -690,7 +670,6 @@ class _ProductPageState extends State<ProductPage> {
                           ],
                         ),
                         const SizedBox(height: 32),
-                        // Product info (mobile)
                         Text(
                           product!.name,
                           style: const TextStyle(
@@ -719,7 +698,6 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                         const SizedBox(height: 32),
-                        // Product options (mobile)
                         Column(
                           children: [
                             Row(
@@ -738,33 +716,7 @@ class _ProductPageState extends State<ProductPage> {
                                         ),
                                       ),
                                       const SizedBox(height: 4),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey[300]!),
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
-                                        child: DropdownButton<String>(
-                                          value: selectedColor,
-                                          isExpanded: true,
-                                          underline: const SizedBox(),
-                                          items: product!.colors
-                                              .map((String color) {
-                                            return DropdownMenuItem<String>(
-                                              value: color,
-                                              child: Text(color),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              selectedColor = newValue;
-                                            });
-                                          },
-                                        ),
-                                      ),
+                                      colorDropdown,
                                     ],
                                   ),
                                 ),
@@ -783,33 +735,7 @@ class _ProductPageState extends State<ProductPage> {
                                         ),
                                       ),
                                       const SizedBox(height: 4),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey[300]!),
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
-                                        child: DropdownButton<String>(
-                                          value: selectedSize,
-                                          isExpanded: true,
-                                          underline: const SizedBox(),
-                                          items:
-                                              product!.sizes.map((String size) {
-                                            return DropdownMenuItem<String>(
-                                              value: size,
-                                              child: Text(size),
-                                            );
-                                          }).toList(),
-                                          onChanged: (String? newValue) {
-                                            setState(() {
-                                              selectedSize = newValue;
-                                            });
-                                          },
-                                        ),
-                                      ),
+                                      sizeDropdown,
                                     ],
                                   ),
                                 ),
@@ -870,7 +796,6 @@ class _ProductPageState extends State<ProductPage> {
                           ],
                         ),
                         const SizedBox(height: 32),
-                        // Add to Cart button (mobile)
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
@@ -895,7 +820,6 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        // Buy with Shop Pay button (mobile)
                         SizedBox(
                           width: double.infinity,
                           child: OutlinedButton(
@@ -955,7 +879,6 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                         const SizedBox(height: 32),
-                        // Social share buttons (mobile)
                         Row(
                           children: [
                             OutlinedButton.icon(
@@ -999,7 +922,6 @@ class _ProductPageState extends State<ProductPage> {
                 },
               ),
             ),
-            // Back to collection button
             Container(
               color: Colors.grey[50],
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
@@ -1022,7 +944,6 @@ class _ProductPageState extends State<ProductPage> {
                 ),
               ),
             ),
-            // Footer
             Container(
               width: double.infinity,
               color: Colors.grey[50],
