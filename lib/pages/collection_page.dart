@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/data/products_data.dart';
 import 'package:union_shop/models/product.dart';
+import 'package:union_shop/models/collection.dart';
 
 class CollectionPage extends StatefulWidget {
   final String collectionName;
-  final Map<String, dynamic>? collectionData;
+  final Collection? collectionData; // <-- Accept Collection? instead of Map
 
   const CollectionPage({
     super.key,
@@ -83,6 +84,8 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Accept Collection? from widget or from route arguments
+
     // Gather all unique sizes and colors for dropdowns
     final allSizes = <String>{};
     final allColors = <String>{};

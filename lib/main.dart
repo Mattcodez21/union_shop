@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/home_page.dart';
 import 'package:union_shop/pages/about_page.dart';
@@ -22,19 +23,15 @@ class UnionShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      // By default, the app starts at the '/' route, which is the HomeScreen
       initialRoute: '/',
-      // When navigating to '/product', build and return the ProductPage
-      // In your browser, try this link: http://localhost:49856/#/product
       routes: {
-        '/': (context) => const HomeScreen(), // Add this line
+        '/': (context) => const HomeScreen(),
         '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
-        '/auth': (context) => const AuthPage(), // Add this line
+        '/auth': (context) => const AuthPage(),
       },
-
       onGenerateRoute: (settings) {
         // Handle /collection/[collectionName] routes
         if (settings.name!.startsWith('/collection/')) {
@@ -42,16 +39,14 @@ class UnionShopApp extends StatelessWidget {
           return MaterialPageRoute(
             builder: (context) => CollectionPage(
               collectionName: collectionName,
-              collectionData: settings.arguments as Map<String, dynamic>?,
+              collectionData:
+                  settings.arguments as Collection?, // <-- fixed type
             ),
             settings: settings,
           );
         }
-
-        // Return null for unknown routes (will trigger onUnknownRoute if defined)
         return null;
       },
-      // Optional: Handle unknown routes
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
           builder: (context) => const HomeScreen(),
