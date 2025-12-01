@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/data/products_data.dart';
+import 'package:union_shop/models/product.dart';
 
-class CollectionPage extends StatelessWidget {
+class CollectionPage extends StatefulWidget {
   final String collectionName;
   final Map<String, dynamic>? collectionData;
 
@@ -10,6 +12,15 @@ class CollectionPage extends StatelessWidget {
     required this.collectionName,
     this.collectionData,
   });
+
+  @override
+  State<CollectionPage> createState() => _CollectionPageState();
+}
+
+class _CollectionPageState extends State<CollectionPage> {
+  String selectedSort = 'Featured';
+  String selectedSize = 'All';
+  String selectedColor = 'All';
 
   String getCollectionDescription(String collectionName) {
     switch (collectionName.toLowerCase()) {
@@ -31,48 +42,32 @@ class CollectionPage extends StatelessWidget {
     }
   }
 
-  // Hardcoded products list
-  List<Map<String, dynamic>> get products {
-    return [
-      {
-        'name': 'Signature T-Shirt',
-        'price': 14.99,
-        'imageUrl': 'assets/images/signature_tshirt.jpg',
-      },
-      {
-        'name': 'Signature Hoodie',
-        'price': 20.00,
-        'imageUrl': 'assets/images/signature_hoodie.jpg',
-      },
-      {
-        'name': 'Essential T-Shirt',
-        'price': 10.00,
-        'imageUrl': 'assets/images/essential_tshirt.jpg',
-      },
-      {
-        'name': '$collectionName Premium Item',
-        'price': 24.99,
-        'imageUrl': 'assets/images/signature_tshirt.jpg',
-      },
-      {
-        'name': '$collectionName Special Edition',
-        'price': 34.99,
-        'imageUrl': 'assets/images/signature_hoodie.jpg',
-      },
-      {
-        'name': '$collectionName Classic',
-        'price': 18.99,
-        'imageUrl': 'assets/images/essential_tshirt.jpg',
-      },
-    ];
-  }
-
   @override
   Widget build(BuildContext context) {
     // Extract collection data from route arguments if not provided directly
     final routeArgs =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    final collection = collectionData ?? routeArgs;
+    final collection = widget.collectionData ?? routeArgs;
+
+    // Filter products by category/collection name
+    final List<Product> filteredProducts = products
+        .where((product) =>
+            product.category.toLowerCase() ==
+                widget.collectionName.toLowerCase() &&
+            (selectedSize == 'All' || product.sizes.contains(selectedSize)) &&
+            (selectedColor == 'All' || product.colors.contains(selectedColor)))
+        .toList();
+
+    // Gather all unique sizes and colors for dropdowns
+    final allSizes = <String>{};
+    final allColors = <String>{};
+    for (final product in products.where((p) =>
+        p.category.toLowerCase() == widget.collectionName.toLowerCase())) {
+      allSizes.addAll(product.sizes);
+      allColors.addAll(product.colors);
+    }
+    final sizeOptions = ['All', ...allSizes.where((s) => s.isNotEmpty)];
+    final colorOptions = ['All', ...allColors.where((c) => c.isNotEmpty)];
 
     return Scaffold(
       appBar: const Navbar(),
@@ -85,7 +80,7 @@ class CollectionPage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  collectionName,
+                  widget.collectionName,
                   style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -93,7 +88,7 @@ class CollectionPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  getCollectionDescription(collectionName),
+                  getCollectionDescription(widget.collectionName),
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -105,7 +100,7 @@ class CollectionPage extends StatelessWidget {
                 Text(
                   collection != null
                       ? '${collection['itemCount']} products'
-                      : '${products.length} products',
+                      : '${filteredProducts.length} products',
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -129,27 +124,46 @@ class CollectionPage extends StatelessWidget {
             ),
             child: Row(
               children: [
-                // Filter By Dropdown
+                // Size Filter Dropdown
                 Expanded(
                   child: DropdownButtonFormField<String>(
                     decoration: const InputDecoration(
-                      labelText: 'FILTER BY',
+                      labelText: 'SIZE',
                       border: OutlineInputBorder(),
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    initialValue: 'All Items',
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'All Items', child: Text('All Items')),
-                      DropdownMenuItem(value: 'Size', child: Text('Size')),
-                      DropdownMenuItem(value: 'Color', child: Text('Color')),
-                      DropdownMenuItem(
-                          value: 'Price Range', child: Text('Price Range')),
-                      DropdownMenuItem(value: 'Brand', child: Text('Brand')),
-                    ],
+                    value: selectedSize,
+                    items: sizeOptions
+                        .map((size) =>
+                            DropdownMenuItem(value: size, child: Text(size)))
+                        .toList(),
                     onChanged: (value) {
-                      // Non-functional dropdown for now
+                      setState(() {
+                        selectedSize = value ?? 'All';
+                      });
+                    },
+                  ),
+                ),
+                const SizedBox(width: 16),
+                // Color Filter Dropdown
+                Expanded(
+                  child: DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(
+                      labelText: 'COLOR',
+                      border: OutlineInputBorder(),
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    ),
+                    value: selectedColor,
+                    items: colorOptions
+                        .map((color) =>
+                            DropdownMenuItem(value: color, child: Text(color)))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedColor = value ?? 'All';
+                      });
                     },
                   ),
                 ),
@@ -163,7 +177,7 @@ class CollectionPage extends StatelessWidget {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    initialValue: 'Featured',
+                    value: selectedSort,
                     items: const [
                       DropdownMenuItem(
                           value: 'Featured', child: Text('Featured')),
@@ -180,7 +194,9 @@ class CollectionPage extends StatelessWidget {
                       DropdownMenuItem(value: 'Newest', child: Text('Newest')),
                     ],
                     onChanged: (value) {
-                      // Non-functional dropdown for now
+                      setState(() {
+                        selectedSort = value ?? 'Featured';
+                      });
                     },
                   ),
                 ),
@@ -214,6 +230,8 @@ class CollectionPage extends StatelessWidget {
                           crossAxisCount = 3; // Desktop: 3 columns
                         }
 
+                        // Optionally sort filteredProducts here based on selectedSort
+
                         return GridView.builder(
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
@@ -222,13 +240,15 @@ class CollectionPage extends StatelessWidget {
                             mainAxisSpacing: 16,
                             childAspectRatio: 0.75,
                           ),
-                          itemCount: products.length,
+                          itemCount: filteredProducts.length,
                           itemBuilder: (context, index) {
-                            final product = products[index];
+                            final product = filteredProducts[index];
                             return ProductCard(
-                              name: product['name'],
-                              price: product['price'],
-                              imageUrl: product['imageUrl'],
+                              name: product.name,
+                              price: product.price,
+                              imageUrl: product.imageUrls.isNotEmpty
+                                  ? product.imageUrls.first
+                                  : '',
                             );
                           },
                         );
@@ -278,18 +298,29 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius:
-                      const BorderRadius.vertical(top: Radius.circular(8)),
-                ),
-                child: const Icon(
-                  Icons.shopping_bag,
-                  size: 50,
-                  color: Colors.grey,
-                ),
-              ),
+              child: imageUrl.isNotEmpty
+                  ? Image.asset(
+                      imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: Colors.grey[200],
+                          child: const Icon(
+                            Icons.shopping_bag,
+                            size: 50,
+                            color: Colors.grey,
+                          ),
+                        );
+                      },
+                    )
+                  : Container(
+                      color: Colors.grey[200],
+                      child: const Icon(
+                        Icons.shopping_bag,
+                        size: 50,
+                        color: Colors.grey,
+                      ),
+                    ),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
