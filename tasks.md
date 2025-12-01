@@ -268,8 +268,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ### 3.2. Dynamic Collection Page (6%)
 
 **Implementation Tasks:**
-- [ ] Create models/product.dart with Product class
-- [ ] Add properties: id, name, description, price, category, sizes[], colors[], imageUrls[]
+- [x] Create models/product.dart with Product class
+- [x] Add properties: id, name, description, price, category, sizes[], colors[], imageUrls[]
 - [ ] Create data/products_data.dart with 15-20 products (use AI to generate)
 - [ ] Ensure products have varied categories, sizes, colors for filtering
 - [ ] Convert CollectionPage to StatefulWidget
