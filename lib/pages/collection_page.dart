@@ -42,21 +42,30 @@ class _CollectionPageState extends State<CollectionPage> {
     }
   }
 
+  List<Product> sortProducts(List<Product> products) {
+    switch (selectedSort) {
+      case 'Price: Low to High':
+        products.sort((a, b) => a.price.compareTo(b.price));
+        break;
+      case 'Price: High to Low':
+        products.sort((a, b) => b.price.compareTo(a.price));
+        break;
+      case 'Name: A to Z':
+        products.sort((a, b) => a.name.compareTo(b.name));
+        break;
+      case 'Name: Z to A':
+        products.sort((a, b) => b.name.compareTo(a.name));
+        break;
+      // 'Featured' and 'Newest' can just use the default order for now
+    }
+    return products;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Extract collection data from route arguments if not provided directly
     final routeArgs =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
     final collection = widget.collectionData ?? routeArgs;
-
-    // Filter products by category/collection name
-    final List<Product> filteredProducts = products
-        .where((product) =>
-            product.category.toLowerCase() ==
-                widget.collectionName.toLowerCase() &&
-            (selectedSize == 'All' || product.sizes.contains(selectedSize)) &&
-            (selectedColor == 'All' || product.colors.contains(selectedColor)))
-        .toList();
 
     // Gather all unique sizes and colors for dropdowns
     final allSizes = <String>{};
@@ -68,6 +77,18 @@ class _CollectionPageState extends State<CollectionPage> {
     }
     final sizeOptions = ['All', ...allSizes.where((s) => s.isNotEmpty)];
     final colorOptions = ['All', ...allColors.where((c) => c.isNotEmpty)];
+
+    // Filter products by category/collection name and selected filters
+    List<Product> filteredProducts = products
+        .where((product) =>
+            product.category.toLowerCase() ==
+                widget.collectionName.toLowerCase() &&
+            (selectedSize == 'All' || product.sizes.contains(selectedSize)) &&
+            (selectedColor == 'All' || product.colors.contains(selectedColor)))
+        .toList();
+
+    // Sort products using the sorting logic method
+    filteredProducts = sortProducts(filteredProducts);
 
     return Scaffold(
       appBar: const Navbar(),
@@ -222,15 +243,12 @@ class _CollectionPageState extends State<CollectionPage> {
                   Expanded(
                     child: LayoutBuilder(
                       builder: (context, constraints) {
-                        // Determine number of columns based on screen width
                         int crossAxisCount;
                         if (constraints.maxWidth < 600) {
-                          crossAxisCount = 2; // Mobile: 2 columns
+                          crossAxisCount = 2;
                         } else {
-                          crossAxisCount = 3; // Desktop: 3 columns
+                          crossAxisCount = 3;
                         }
-
-                        // Optionally sort filteredProducts here based on selectedSort
 
                         return GridView.builder(
                           gridDelegate:
@@ -281,7 +299,6 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        // Navigate to product page
         Navigator.pushNamed(
           context,
           '/product',
