@@ -84,8 +84,6 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Accept Collection? from widget or from route arguments
-
     // Gather all unique sizes and colors for dropdowns
     final allSizes = <String>{};
     final allColors = <String>{};
@@ -282,6 +280,7 @@ class _CollectionPageState extends State<CollectionPage> {
                           itemBuilder: (context, index) {
                             final product = filteredProducts[index];
                             return ProductCard(
+                              id: product.id, // Pass the id here
                               name: product.name,
                               price: product.price,
                               imageUrl: product.imageUrls.isNotEmpty
@@ -304,12 +303,14 @@ class _CollectionPageState extends State<CollectionPage> {
 }
 
 class ProductCard extends StatelessWidget {
+  final String id;
   final String name;
   final double price;
   final String imageUrl;
 
   const ProductCard({
     super.key,
+    required this.id,
     required this.name,
     required this.price,
     required this.imageUrl,
@@ -323,9 +324,7 @@ class ProductCard extends StatelessWidget {
           context,
           '/product',
           arguments: {
-            'name': name,
-            'price': price,
-            'imageUrl': imageUrl,
+            'productId': id, // Pass the id as productId
           },
         );
       },

@@ -26,9 +26,7 @@ class UnionShopApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
-        '/product': (context) => const ProductPage(
-              productId: '',
-            ),
+        // '/product': (context) => const ProductPage(productId: ''), // <-- REMOVE THIS LINE
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
@@ -44,6 +42,15 @@ class UnionShopApp extends StatelessWidget {
               collectionData:
                   settings.arguments as Collection?, // <-- fixed type
             ),
+            settings: settings,
+          );
+        }
+        // Handle /product route with arguments
+        if (settings.name == '/product') {
+          final args = settings.arguments as Map<String, dynamic>;
+          final productId = args['productId'] as String;
+          return MaterialPageRoute(
+            builder: (context) => ProductPage(productId: productId),
             settings: settings,
           );
         }

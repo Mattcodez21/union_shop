@@ -10,7 +10,7 @@ final List<Product> products = [
     category: 'UPSU Merch',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Navy', 'Black', 'Grey'],
-    imageUrls: ['assets/images/products/hoodie1.jpg'],
+    imageUrls: ['assets/images/signature_hoodie.png'],
   ),
   Product(
     id: 'p2',
@@ -50,7 +50,7 @@ final List<Product> products = [
     category: 'Stationery',
     sizes: [],
     colors: ['Blue', 'Yellow', 'Pink'],
-    imageUrls: ['assets/images/products/notebook1.jpg'],
+    imageUrls: ['assets/images/a5_notebook.png'],
   ),
   Product(
     id: 'p6',
