@@ -134,6 +134,41 @@ class _ProductPageState extends State<ProductPage> {
       ),
     );
 
+    Widget quantityCounter = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey[300]!),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          IconButton(
+            icon: const Icon(Icons.remove),
+            onPressed: quantity > 1
+                ? () {
+                    setState(() {
+                      quantity--;
+                    });
+                  }
+                : null,
+          ),
+          Text(
+            '$quantity',
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              setState(() {
+                quantity++;
+              });
+            },
+          ),
+        ],
+      ),
+    );
+
     return Scaffold(
       appBar: const Navbar(),
       endDrawer: const MobileNavDrawer(),
@@ -380,34 +415,7 @@ class _ProductPageState extends State<ProductPage> {
                                           ),
                                         ),
                                         const SizedBox(height: 4),
-                                        Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 12),
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.grey[300]!),
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                          ),
-                                          child: DropdownButton<int>(
-                                            value: quantity,
-                                            isExpanded: true,
-                                            underline: const SizedBox(),
-                                            items: List<
-                                                DropdownMenuItem<int>>.generate(
-                                              10,
-                                              (index) => DropdownMenuItem<int>(
-                                                value: index + 1,
-                                                child: Text('${index + 1}'),
-                                              ),
-                                            ),
-                                            onChanged: (int? newValue) {
-                                              setState(() {
-                                                quantity = newValue ?? 1;
-                                              });
-                                            },
-                                          ),
-                                        ),
+                                        quantityCounter,
                                       ],
                                     ),
                                   ),
@@ -757,34 +765,7 @@ class _ProductPageState extends State<ProductPage> {
                                         ),
                                       ),
                                       const SizedBox(height: 4),
-                                      Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 12),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.grey[300]!),
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
-                                        child: DropdownButton<int>(
-                                          value: quantity,
-                                          isExpanded: true,
-                                          underline: const SizedBox(),
-                                          items: List<
-                                              DropdownMenuItem<int>>.generate(
-                                            10,
-                                            (index) => DropdownMenuItem<int>(
-                                              value: index + 1,
-                                              child: Text('${index + 1}'),
-                                            ),
-                                          ),
-                                          onChanged: (int? newValue) {
-                                            setState(() {
-                                              quantity = newValue ?? 1;
-                                            });
-                                          },
-                                        ),
-                                      ),
+                                      quantityCounter,
                                     ],
                                   ),
                                 ),
