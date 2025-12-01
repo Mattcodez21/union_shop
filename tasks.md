@@ -270,8 +270,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Implementation Tasks:**
 - [x] Create models/product.dart with Product class
 - [x] Add properties: id, name, description, price, category, sizes[], colors[], imageUrls[]
-- [ ] Create data/products_data.dart with 15-20 products (use AI to generate)
-- [ ] Ensure products have varied categories, sizes, colors for filtering
+- [x] Create data/products_data.dart with 15-20 products (use AI to generate)
+- [x] Ensure products have varied categories, sizes, colors for filtering
 - [ ] Convert CollectionPage to StatefulWidget
 - [ ] Add state variables: selectedSort, selectedSize, selectedColor
 - [ ] Create method to get products by collection from data
