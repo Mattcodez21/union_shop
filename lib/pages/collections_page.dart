@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/data/collections_data.dart';
+import 'package:union_shop/models/collection.dart';
 
 class CollectionCard extends StatelessWidget {
   final String name;
@@ -69,39 +71,6 @@ class CollectionCard extends StatelessWidget {
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
-  static const List<Map<String, dynamic>> collections = [
-    {
-      'name': 'Clothing',
-      'imageUrl': 'assets/images/clothing_banner.png',
-      'itemCount': 24,
-    },
-    {
-      'name': 'Accessories',
-      'imageUrl': 'assets/images/accessories_banner.png',
-      'itemCount': 18,
-    },
-    {
-      'name': 'Home & Living',
-      'imageUrl': 'assets/images/home_living.png',
-      'itemCount': 32,
-    },
-    {
-      'name': 'Stationery',
-      'imageUrl': 'assets/images/stationary_banner.png',
-      'itemCount': 45,
-    },
-    {
-      'name': 'Gifts',
-      'imageUrl': 'assets/images/gifts_banner2.png',
-      'itemCount': 16,
-    },
-    {
-      'name': 'University Branded',
-      'imageUrl': 'assets/images/university_branded.png',
-      'itemCount': 28,
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -111,14 +80,13 @@ class CollectionsPage extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            // Determine number of columns based on screen width
             int crossAxisCount;
             if (constraints.maxWidth < 600) {
-              crossAxisCount = 2; // Mobile: 2 columns
+              crossAxisCount = 2;
             } else if (constraints.maxWidth < 900) {
-              crossAxisCount = 3; // Small desktop: 3 columns
+              crossAxisCount = 3;
             } else {
-              crossAxisCount = 4; // Large desktop: 4 columns
+              crossAxisCount = 4;
             }
 
             return GridView.builder(
@@ -130,20 +98,19 @@ class CollectionsPage extends StatelessWidget {
               ),
               itemCount: collections.length,
               itemBuilder: (context, index) {
-                final collection = collections[index];
+                final Collection collection = collections[index];
                 return GestureDetector(
                   onTap: () {
-                    // Navigate to individual collection page
                     Navigator.pushNamed(
                       context,
-                      '/collection/${Uri.encodeComponent(collection['name'])}',
+                      '/collection/${Uri.encodeComponent(collection.name)}',
                       arguments: collection,
                     );
                   },
                   child: CollectionCard(
-                    name: collection['name'],
-                    imageUrl: collection['imageUrl'],
-                    itemCount: collection['itemCount'],
+                    name: collection.name,
+                    imageUrl: collection.imageUrl,
+                    itemCount: collection.productCount,
                   ),
                 );
               },
