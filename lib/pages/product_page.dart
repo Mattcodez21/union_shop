@@ -160,6 +160,7 @@ class _ProductPageState extends State<ProductPage> {
           IconButton(
             icon: const Icon(Icons.remove),
             onPressed: quantity > 1 ? decrementQuantity : null,
+            color: quantity > 1 ? Colors.black : Colors.grey,
           ),
           Text(
             '$quantity',

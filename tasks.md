@@ -319,9 +319,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Create quantity counter UI (Row with -, number, +)
 - [x] Implement increment quantity method
 - [x] Implement decrement quantity method (min 1)
-- [ ] Connect + button to increment method
-- [ ] Connect - button to decrement method
-- [ ] Disable - button when quantity is 1
+- [x] Connect + button to increment method
+- [x] Connect - button to decrement method
+- [x] Disable - button when quantity is 1
 - [ ] Update "Add to Cart" button with temporary snackbar
 - [ ] Test navigation with different product IDs
 - [ ] Test dropdown updates
