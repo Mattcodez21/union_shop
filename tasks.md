@@ -310,7 +310,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Convert ProductPage to StatefulWidget
 - [x] Add state variables: selectedSize, selectedColor, quantity
 - [x] Initialize state with default values (first size/color, quantity: 1)
-- [ ] Create size dropdown using DropdownButton
+- [x] Create size dropdown using DropdownButton
 - [ ] Populate size dropdown from product.sizes
 - [ ] Add onChanged handler for size dropdown
 - [ ] Create color dropdown using DropdownButton

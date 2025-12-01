@@ -17,6 +17,7 @@ class _ProductPageState extends State<ProductPage> {
   String? selectedColor;
   int quantity = 1;
   Product? product;
+  bool _redirectScheduled = false;
 
   @override
   void initState() {
@@ -26,6 +27,25 @@ class _ProductPageState extends State<ProductPage> {
       selectedColor = product!.colors.isNotEmpty ? product!.colors.first : null;
       selectedSize = product!.sizes.isNotEmpty ? product!.sizes.first : null;
       quantity = 1;
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Schedule redirect if product is null and not already scheduled
+    if (product == null && !_redirectScheduled) {
+      _redirectScheduled = true;
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Future.delayed(const Duration(seconds: 2), () {
+          if (!mounted) return;
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          }
+        });
+      });
     }
   }
 
@@ -41,17 +61,6 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     // Use the product loaded in initState
     if (product == null) {
-      // Show error message and redirect after a short delay
-      Future.delayed(const Duration(seconds: 2), () {
-        if (mounted) {
-          if (Navigator.canPop(context)) {
-            Navigator.pop(context);
-          } else {
-            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-          }
-        }
-      });
-
       return Scaffold(
         appBar: const Navbar(),
         endDrawer: const MobileNavDrawer(),
@@ -63,9 +72,9 @@ class _ProductPageState extends State<ProductPage> {
               children: [
                 const Icon(Icons.error_outline, color: Colors.red, size: 64),
                 const SizedBox(height: 16),
-                Text(
+                const Text(
                   'Sorry, this product could not be found.\nYou will be redirected shortly.',
-                  style: const TextStyle(fontSize: 20, color: Colors.red),
+                  style: TextStyle(fontSize: 20, color: Colors.red),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
