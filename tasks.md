@@ -318,7 +318,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add onChanged handler for color dropdown
 - [x] Create quantity counter UI (Row with -, number, +)
 - [x] Implement increment quantity method
-- [ ] Implement decrement quantity method (min 1)
+- [x] Implement decrement quantity method (min 1)
 - [ ] Connect + button to increment method
 - [ ] Connect - button to decrement method
 - [ ] Disable - button when quantity is 1

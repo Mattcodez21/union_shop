@@ -60,6 +60,14 @@ class _ProductPageState extends State<ProductPage> {
     });
   }
 
+  void decrementQuantity() {
+    if (quantity > 1) {
+      setState(() {
+        quantity--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     if (product == null) {
@@ -151,13 +159,7 @@ class _ProductPageState extends State<ProductPage> {
         children: [
           IconButton(
             icon: const Icon(Icons.remove),
-            onPressed: quantity > 1
-                ? () {
-                    setState(() {
-                      quantity--;
-                    });
-                  }
-                : null,
+            onPressed: quantity > 1 ? decrementQuantity : null,
           ),
           Text(
             '$quantity',
