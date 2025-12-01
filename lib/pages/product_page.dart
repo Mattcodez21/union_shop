@@ -16,6 +16,18 @@ class _ProductPageState extends State<ProductPage> {
   String? selectedSize;
   String? selectedColor;
   int quantity = 1;
+  Product? product;
+
+  @override
+  void initState() {
+    super.initState();
+    product = getProductById(widget.productId);
+    if (product != null) {
+      selectedColor = product!.colors.isNotEmpty ? product!.colors.first : null;
+      selectedSize = product!.sizes.isNotEmpty ? product!.sizes.first : null;
+      quantity = 1;
+    }
+  }
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -27,9 +39,7 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    // Fetch the product by ID
-    final Product? product = getProductById(widget.productId);
-
+    // Use the product loaded in initState
     if (product == null) {
       // Show error message and redirect after a short delay
       Future.delayed(const Duration(seconds: 2), () {
@@ -71,10 +81,6 @@ class _ProductPageState extends State<ProductPage> {
       );
     }
 
-    // Initialize state variables if not set
-    selectedColor ??= product.colors.isNotEmpty ? product.colors.first : null;
-    selectedSize ??= product.sizes.isNotEmpty ? product.sizes.first : null;
-
     return Scaffold(
       appBar: const Navbar(),
       endDrawer: const MobileNavDrawer(),
@@ -87,7 +93,7 @@ class _ProductPageState extends State<ProductPage> {
               padding: const EdgeInsets.symmetric(vertical: 8),
               color: const Color(0xFF4d2963),
               child: Text(
-                product.name,
+                product!.name,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
@@ -102,11 +108,11 @@ class _ProductPageState extends State<ProductPage> {
                   bool isDesktop = constraints.maxWidth > 600;
 
                   // Use product fields instead of hardcoded values
-                  final mainImage = product.imageUrls.isNotEmpty
-                      ? product.imageUrls.first
+                  final mainImage = product!.imageUrls.isNotEmpty
+                      ? product!.imageUrls.first
                       : '';
-                  final thumbnails = product.imageUrls.isNotEmpty
-                      ? product.imageUrls
+                  final thumbnails = product!.imageUrls.isNotEmpty
+                      ? product!.imageUrls
                       : [
                           'assets/images/signature_hoodie.png',
                           'assets/images/signature_hoodie.png',
@@ -249,7 +255,7 @@ class _ProductPageState extends State<ProductPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                product.name,
+                                product!.name,
                                 style: const TextStyle(
                                   fontSize: 32,
                                   fontWeight: FontWeight.bold,
@@ -259,7 +265,7 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                               const SizedBox(height: 16),
                               Text(
-                                '£${product.price.toStringAsFixed(2)}',
+                                '£${product!.price.toStringAsFixed(2)}',
                                 style: const TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.bold,
@@ -306,7 +312,7 @@ class _ProductPageState extends State<ProductPage> {
                                             value: selectedColor,
                                             isExpanded: true,
                                             underline: const SizedBox(),
-                                            items: product.colors
+                                            items: product!.colors
                                                 .map((String color) {
                                               return DropdownMenuItem<String>(
                                                 value: color,
@@ -351,7 +357,7 @@ class _ProductPageState extends State<ProductPage> {
                                             value: selectedSize,
                                             isExpanded: true,
                                             underline: const SizedBox(),
-                                            items: product.sizes
+                                            items: product!.sizes
                                                 .map((String size) {
                                               return DropdownMenuItem<String>(
                                                 value: size,
@@ -478,7 +484,7 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                               const SizedBox(height: 12),
                               Text(
-                                product.description,
+                                product!.description,
                                 style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black54,
@@ -497,7 +503,7 @@ class _ProductPageState extends State<ProductPage> {
                               const SizedBox(height: 12),
                               // You can add more product details here if available
                               Text(
-                                'Category: ${product.category}',
+                                'Category: ${product!.category}',
                                 style: const TextStyle(
                                   fontSize: 16,
                                   color: Colors.black54,
@@ -682,7 +688,7 @@ class _ProductPageState extends State<ProductPage> {
                         const SizedBox(height: 32),
                         // Product info (mobile)
                         Text(
-                          product.name,
+                          product!.name,
                           style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
@@ -692,7 +698,7 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          '£${product.price.toStringAsFixed(2)}',
+                          '£${product!.price.toStringAsFixed(2)}',
                           style: const TextStyle(
                             fontSize: 26,
                             fontWeight: FontWeight.bold,
@@ -741,7 +747,7 @@ class _ProductPageState extends State<ProductPage> {
                                           value: selectedColor,
                                           isExpanded: true,
                                           underline: const SizedBox(),
-                                          items: product.colors
+                                          items: product!.colors
                                               .map((String color) {
                                             return DropdownMenuItem<String>(
                                               value: color,
@@ -787,7 +793,7 @@ class _ProductPageState extends State<ProductPage> {
                                           isExpanded: true,
                                           underline: const SizedBox(),
                                           items:
-                                              product.sizes.map((String size) {
+                                              product!.sizes.map((String size) {
                                             return DropdownMenuItem<String>(
                                               value: size,
                                               child: Text(size),
@@ -919,7 +925,7 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          product.description,
+                          product!.description,
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black54,
@@ -937,7 +943,7 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          'Category: ${product.category}',
+                          'Category: ${product!.category}',
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.black54,

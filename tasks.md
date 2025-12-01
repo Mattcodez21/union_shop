@@ -309,7 +309,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Handle product not found error (redirect or error message)
 - [x] Convert ProductPage to StatefulWidget
 - [x] Add state variables: selectedSize, selectedColor, quantity
-- [ ] Initialize state with default values (first size/color, quantity: 1)
+- [x] Initialize state with default values (first size/color, quantity: 1)
 - [ ] Create size dropdown using DropdownButton
 - [ ] Populate size dropdown from product.sizes
 - [ ] Add onChanged handler for size dropdown
