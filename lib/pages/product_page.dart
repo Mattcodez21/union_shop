@@ -430,7 +430,15 @@ class _ProductPageState extends State<ProductPage> {
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  onPressed: placeholderCallbackForButtons,
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                            'Added $quantity item(s) to cart!'),
+                                        duration: const Duration(seconds: 2),
+                                      ),
+                                    );
+                                  },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFF4d2963),
                                     padding: const EdgeInsets.symmetric(
@@ -784,7 +792,15 @@ class _ProductPageState extends State<ProductPage> {
                         SizedBox(
                           width: double.infinity,
                           child: ElevatedButton(
-                            onPressed: placeholderCallbackForButtons,
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content:
+                                      Text('Added $quantity item(s) to cart!'),
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4d2963),
                               padding: const EdgeInsets.symmetric(vertical: 18),

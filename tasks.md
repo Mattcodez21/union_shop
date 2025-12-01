@@ -322,7 +322,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Connect + button to increment method
 - [x] Connect - button to decrement method
 - [x] Disable - button when quantity is 1
-- [ ] Update "Add to Cart" button with temporary snackbar
+- [x] Update "Add to Cart" button with temporary snackbar
 - [ ] Test navigation with different product IDs
 - [ ] Test dropdown updates
 - [ ] Test quantity controls
