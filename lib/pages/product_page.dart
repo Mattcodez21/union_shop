@@ -21,6 +21,45 @@ class ProductPage extends StatelessWidget {
     // Fetch the product by ID
     final Product? product = getProductById(productId);
 
+    if (product == null) {
+      // Show error message and redirect after a short delay
+      Future.delayed(const Duration(seconds: 2), () {
+        if (Navigator.canPop(context)) {
+          Navigator.pop(context);
+        } else {
+          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        }
+      });
+
+      return Scaffold(
+        appBar: const Navbar(),
+        endDrawer: const MobileNavDrawer(),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline, color: Colors.red, size: 64),
+                const SizedBox(height: 16),
+                Text(
+                  'Sorry, this product could not be found.\nYou will be redirected shortly.',
+                  style: const TextStyle(fontSize: 20, color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton.icon(
+                  onPressed: () => navigateToHome(context),
+                  icon: const Icon(Icons.home),
+                  label: const Text('Go to Home'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: const Navbar(),
       endDrawer: const MobileNavDrawer(),
@@ -33,32 +72,19 @@ class ProductPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 8),
               color: const Color(0xFF4d2963),
               child: Text(
-                product != null
-                    ? product.name
-                    : 'Product not found (ID: $productId)',
+                product.name,
                 textAlign: TextAlign.center,
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
-            // Product details
+            // ...rest of your product details code...
+            // (unchanged from previous version)
             Container(
               color: Colors.white,
               padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
               child: LayoutBuilder(
                 builder: (context, constraints) {
                   bool isDesktop = constraints.maxWidth > 600;
-
-                  if (product == null) {
-                    return const Center(
-                      child: Padding(
-                        padding: EdgeInsets.all(32.0),
-                        child: Text(
-                          'Sorry, this product could not be found.',
-                          style: TextStyle(fontSize: 20, color: Colors.red),
-                        ),
-                      ),
-                    );
-                  }
 
                   // Use product fields instead of hardcoded values
                   final mainImage = product.imageUrls.isNotEmpty
