@@ -281,8 +281,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Implement color filter dropdown
 - [x] Create filtering logic method combining all active filters
 - [x] Update product count text dynamically
-- [ ] Connect GridView to display filtered and sorted products
-- [ ] Add "Clear Filters" button (optional)
+- [x] Connect GridView to display filtered and sorted products
+- [x] Add "Clear Filters" button (optional)
 - [ ] Test all sort options
 - [ ] Test each filter individually
 - [ ] Test multiple filters combined

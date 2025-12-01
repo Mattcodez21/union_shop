@@ -73,6 +73,14 @@ class _CollectionPageState extends State<CollectionPage> {
     return products;
   }
 
+  void clearFilters() {
+    setState(() {
+      selectedSize = 'All';
+      selectedColor = 'All';
+      selectedSort = 'Featured';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // Gather all unique sizes and colors for dropdowns
@@ -218,6 +226,17 @@ class _CollectionPageState extends State<CollectionPage> {
                       });
                     },
                   ),
+                ),
+                const SizedBox(width: 16),
+                // Clear Filters Button
+                ElevatedButton(
+                  onPressed: clearFilters,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[200],
+                    foregroundColor: Colors.black87,
+                    elevation: 0,
+                  ),
+                  child: const Text('Clear Filters'),
                 ),
               ],
             ),
