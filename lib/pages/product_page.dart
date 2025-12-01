@@ -107,8 +107,6 @@ class _ProductPageState extends State<ProductPage> {
                 style: const TextStyle(color: Colors.white, fontSize: 16),
               ),
             ),
-            // ...rest of your product details code...
-            // (unchanged from previous version)
             Container(
               color: Colors.white,
               padding: const EdgeInsets.fromLTRB(24, 32, 24, 32),
@@ -116,7 +114,6 @@ class _ProductPageState extends State<ProductPage> {
                 builder: (context, constraints) {
                   bool isDesktop = constraints.maxWidth > 600;
 
-                  // Use product fields instead of hardcoded values
                   final mainImage = product!.imageUrls.isNotEmpty
                       ? product!.imageUrls.first
                       : '';
@@ -510,7 +507,6 @@ class _ProductPageState extends State<ProductPage> {
                                 ),
                               ),
                               const SizedBox(height: 12),
-                              // You can add more product details here if available
                               Text(
                                 'Category: ${product!.category}',
                                 style: const TextStyle(
@@ -520,7 +516,6 @@ class _ProductPageState extends State<ProductPage> {
                                 ),
                               ),
                               const SizedBox(height: 32),
-                              // Social share buttons
                               Wrap(
                                 spacing: 12,
                                 children: [

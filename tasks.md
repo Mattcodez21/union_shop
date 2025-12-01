@@ -311,7 +311,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add state variables: selectedSize, selectedColor, quantity
 - [x] Initialize state with default values (first size/color, quantity: 1)
 - [x] Create size dropdown using DropdownButton
-- [ ] Populate size dropdown from product.sizes
+- [x] Populate size dropdown from product.sizes
 - [ ] Add onChanged handler for size dropdown
 - [ ] Create color dropdown using DropdownButton
 - [ ] Populate color dropdown from product.colors
