@@ -244,8 +244,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ### 3.1. Dynamic Collections Page (6%)
 
 **Implementation Tasks:**
-- [ ] Create lib/models/ folder
-- [ ] Create models/collection.dart with Collection class (id, name, description, imageUrl, productCount)
+- [x] Create lib/models/ folder
+- [x] Create models/collection.dart with Collection class (id, name, description, imageUrl, productCount)
 - [ ] Create lib/data/ folder
 - [ ] Create data/collections_data.dart with list of 6-8 collections (use AI to generate)
 - [ ] Update CollectionsPage to use Collection model
