@@ -3,11 +3,16 @@ import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/data/products_data.dart';
 import 'package:union_shop/models/product.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   final String productId;
 
   const ProductPage({super.key, required this.productId});
 
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -19,15 +24,17 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Fetch the product by ID
-    final Product? product = getProductById(productId);
+    final Product? product = getProductById(widget.productId);
 
     if (product == null) {
       // Show error message and redirect after a short delay
       Future.delayed(const Duration(seconds: 2), () {
-        if (Navigator.canPop(context)) {
-          Navigator.pop(context);
-        } else {
-          Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+        if (mounted) {
+          if (Navigator.canPop(context)) {
+            Navigator.pop(context);
+          } else {
+            Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+          }
         }
       });
 
