@@ -238,3 +238,271 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 
 ---
+
+## 3. Intermediate Features (35% of Application Marks)
+
+### 3.1. Dynamic Collections Page (6%)
+
+**Implementation Tasks:**
+- [ ] Create lib/models/ folder
+- [ ] Create models/collection.dart with Collection class (id, name, description, imageUrl, productCount)
+- [ ] Create lib/data/ folder
+- [ ] Create data/collections_data.dart with list of 6-8 collections (use AI to generate)
+- [ ] Update CollectionsPage to use Collection model
+- [ ] Replace hardcoded collections with data from collections_data.dart
+- [ ] Update collection cards to display data from model
+- [ ] Ensure each collection shows: image, name, product count
+- [ ] Test collections display correctly from data source
+- [ ] Verify navigation to collection detail page works with collection parameter
+
+**Tests:**
+- [ ] Collections loaded from data model (not hardcoded)
+- [ ] All collection data displays correctly
+- [ ] Collection images load properly
+- [ ] Product counts display for each collection
+- [ ] Navigation to collection pages works
+- [ ] Grid layout remains responsive
+
+---
+
+### 3.2. Dynamic Collection Page (6%)
+
+**Implementation Tasks:**
+- [ ] Create models/product.dart with Product class
+- [ ] Add properties: id, name, description, price, category, sizes[], colors[], imageUrls[]
+- [ ] Create data/products_data.dart with 15-20 products (use AI to generate)
+- [ ] Ensure products have varied categories, sizes, colors for filtering
+- [ ] Convert CollectionPage to StatefulWidget
+- [ ] Add state variables: selectedSort, selectedSize, selectedColor
+- [ ] Create method to get products by collection from data
+- [ ] Implement sort dropdown with all sort options (Featured, Price Low-High, Price High-Low, A-Z)
+- [ ] Create sorting logic method handling price and name sorts
+- [ ] Implement size filter dropdown
+- [ ] Implement color filter dropdown
+- [ ] Create filtering logic method combining all active filters
+- [ ] Update product count text dynamically
+- [ ] Connect GridView to display filtered and sorted products
+- [ ] Add "Clear Filters" button (optional)
+- [ ] Test all sort options
+- [ ] Test each filter individually
+- [ ] Test multiple filters combined
+
+**Tests:**
+- [ ] Products loaded from data model using collection parameter
+- [ ] Sort dropdown changes product order correctly
+- [ ] Price sort (low-high, high-low) works
+- [ ] Name sort (A-Z) works
+- [ ] Size filter shows only matching products
+- [ ] Color filter works correctly
+- [ ] Multiple filters combine correctly (AND logic)
+- [ ] Product count updates with filters
+- [ ] Clear filters button resets view (if implemented)
+- [ ] No errors with empty filter results
+
+---
+
+### 3.3. Functional Product Pages (6%)
+
+**Implementation Tasks:**
+- [ ] Update ProductPage to accept product ID parameter
+- [ ] Create method to fetch product by ID from products_data.dart
+- [ ] Handle product not found error (redirect or error message)
+- [ ] Convert ProductPage to StatefulWidget
+- [ ] Add state variables: selectedSize, selectedColor, quantity
+- [ ] Initialize state with default values (first size/color, quantity: 1)
+- [ ] Create size dropdown using DropdownButton
+- [ ] Populate size dropdown from product.sizes
+- [ ] Add onChanged handler for size dropdown
+- [ ] Create color dropdown using DropdownButton
+- [ ] Populate color dropdown from product.colors
+- [ ] Add onChanged handler for color dropdown
+- [ ] Create quantity counter UI (Row with -, number, +)
+- [ ] Implement increment quantity method
+- [ ] Implement decrement quantity method (min 1)
+- [ ] Connect + button to increment method
+- [ ] Connect - button to decrement method
+- [ ] Disable - button when quantity is 1
+- [ ] Update "Add to Cart" button with temporary snackbar
+- [ ] Test navigation with different product IDs
+- [ ] Test dropdown updates
+- [ ] Test quantity controls
+
+**Tests:**
+- [ ] Product loads from data using ID parameter
+- [ ] Size dropdown displays available sizes
+- [ ] Size dropdown updates on selection
+- [ ] Color dropdown displays available colors
+- [ ] Color dropdown updates on selection
+- [ ] Quantity displays default value of 1
+- [ ] Plus button increments quantity
+- [ ] Minus button decrements quantity
+- [ ] Quantity cannot go below 1
+- [ ] UI updates immediately for all interactions
+- [ ] Add to Cart button shows feedback
+
+---
+
+### 3.4. Shopping Cart (6%)
+
+**Implementation Tasks:**
+- [ ] Create models/cart_item.dart
+- [ ] Add properties: product, selectedSize, selectedColor, quantity
+- [ ] Create services/cart_service.dart
+- [ ] Implement cart state (List<CartItem>)
+- [ ] Create addToCart method
+- [ ] Create getCartItems method
+- [ ] Create getTotalPrice method
+- [ ] Create clearCart method
+- [ ] Update ProductPage "Add to Cart" button functionality
+- [ ] Create CartItem from current product state
+- [ ] Call cartService.addToCart
+- [ ] Show snackbar confirmation
+- [ ] Update cart icon badge with item count
+- [ ] Create pages/cart_page.dart
+- [ ] Add cart route to main.dart
+- [ ] Connect cart icon navigation
+- [ ] Display list of cart items
+- [ ] Create cart item card widget
+- [ ] Calculate and display subtotals
+- [ ] Calculate and display total price
+- [ ] Add "Place Order" button
+- [ ] Implement checkout (show confirmation, clear cart)
+- [ ] Handle empty cart state
+- [ ] Test adding products to cart
+- [ ] Test cart icon badge updates
+- [ ] Test total calculations
+- [ ] Test checkout process
+
+**Tests:**
+- [ ] Add to Cart button adds item successfully
+- [ ] Cart icon shows correct item count
+- [ ] Cart page displays all items
+- [ ] Item details show correctly (size, color, quantity)
+- [ ] Subtotals calculate correctly
+- [ ] Total price calculates correctly
+- [ ] Checkout button places order
+- [ ] Cart clears after checkout
+- [ ] Confirmation displays after checkout
+- [ ] Empty cart shows appropriate message
+
+---
+
+### 3.5. Print Shack (3%)
+
+**Implementation Tasks:**
+- [ ] Create pages/print_shack_page.dart
+- [ ] Create StatefulWidget
+- [ ] Add state variables: customText, selectedFont, selectedColor
+- [ ] Add text input field
+- [ ] Add onChanged handler for text input
+- [ ] Add character counter (e.g., max 20 characters)
+- [ ] Create font dropdown with 3+ options (e.g., Arial, Roboto, Courier)
+- [ ] Add onChanged handler for font
+- [ ] Create color dropdown with 3+ options (e.g., Black, Red, Blue, Purple)
+- [ ] Add onChanged handler for color
+- [ ] Create preview widget (Container with styled Text)
+- [ ] Bind preview to customText state
+- [ ] Apply selectedFont to preview text style
+- [ ] Apply selectedColor to preview text color
+- [ ] Add default placeholder text for empty state
+- [ ] Create pages/print_shack_about_page.dart
+- [ ] Add service information and guidelines
+- [ ] Add navigation between Print Shack pages
+- [ ] Add routes to main.dart
+- [ ] Add Print Shack link to navbar
+- [ ] Test preview updates as text typed
+- [ ] Test preview updates with font changes
+- [ ] Test preview updates with color changes
+
+**Tests:**
+- [ ] Print Shack page accessible via route
+- [ ] Text input accepts characters
+- [ ] Preview updates in real-time as user types
+- [ ] Font dropdown changes preview font
+- [ ] Color dropdown changes preview color
+- [ ] Character limit enforced
+- [ ] About page accessible
+- [ ] Navigation between Print Shack pages works
+
+---
+
+### 3.6. Navigation (3%)
+
+**Implementation Tasks:**
+- [ ] Audit all navbar links on all pages
+- [ ] Test Home link from every page
+- [ ] Test Collections link from every page
+- [ ] Test Sale link from every page
+- [ ] Test About link from every page
+- [ ] Test Print Shack link from every page
+- [ ] Test logo navigation to home
+- [ ] Test account icon navigation
+- [ ] Test cart icon navigation
+- [ ] Test product card navigation
+- [ ] Test collection card navigation
+- [ ] Test all "Back" buttons
+- [ ] Verify all routes defined in main.dart
+- [ ] Test direct URL entry for all routes
+- [ ] Test parameterized routes (collection/:name, product/:id)
+- [ ] Test browser back button
+- [ ] Test browser forward button
+- [ ] Create 404 handler or redirect
+- [ ] Test invalid URLs
+- [ ] Document all routes in README
+- [ ] Test complete user journeys (home → collections → product → cart)
+
+**Tests:**
+- [ ] All navbar links work on all pages
+- [ ] Logo returns to home from anywhere
+- [ ] Button navigation works throughout app
+- [ ] Direct URL entry works for all routes
+- [ ] Browser back/forward buttons work correctly
+- [ ] Parameterized routes pass data correctly
+- [ ] No navigation dead-ends exist
+- [ ] Deep linking works correctly
+
+---
+
+### 3.7. Responsiveness (5%)
+
+**Implementation Tasks:**
+- [ ] Test homepage on mobile (< 600px)
+- [ ] Verify mobile hero section displays correctly
+- [ ] Verify mobile product grid shows 2 columns
+- [ ] Test homepage on tablet (600-900px)
+- [ ] Test homepage on desktop (> 900px)
+- [ ] Verify navbar expands on desktop
+- [ ] Verify navbar collapses on mobile
+- [ ] Test collections page at all breakpoints
+- [ ] Adjust collection grid columns (2 mobile, 3-4 desktop)
+- [ ] Test collection page at all breakpoints
+- [ ] Adjust product grid for different sizes (2 mobile, 3 desktop)
+- [ ] Test product page on mobile (stacked layout)
+- [ ] Test product page on desktop (two-column: image | details)
+- [ ] Test cart page at all sizes
+- [ ] Test auth page centering at all sizes
+- [ ] Test Print Shack at all sizes
+- [ ] Verify text readability at all sizes (min 14px)
+- [ ] Check touch targets on mobile (min 44x44px)
+- [ ] Verify no horizontal scrolling on any page
+- [ ] Test navbar collapse/expand at 600px breakpoint
+- [ ] Test drawer menu on mobile
+- [ ] Verify image scaling on all pages
+- [ ] Test footer at all sizes
+- [ ] Test sale page at all breakpoints
+- [ ] Document responsive behavior in README
+- [ ] Take screenshots of key pages at mobile/tablet/desktop for demo
+
+**Tests:**
+- [ ] All pages tested at mobile width (< 600px)
+- [ ] All pages tested at tablet width (600-900px)
+- [ ] All pages tested at desktop width (> 900px)
+- [ ] Images scale appropriately
+- [ ] Text remains readable at all sizes
+- [ ] Buttons/links remain clickable and accessible
+- [ ] No horizontal scrolling occurs
+- [ ] Grid layouts adjust column count appropriately
+- [ ] Touch targets adequate on mobile (44x44px minimum)
+- [ ] Navbar responsive behavior works correctly
+
+---
