@@ -246,8 +246,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Implementation Tasks:**
 - [x] Create lib/models/ folder
 - [x] Create models/collection.dart with Collection class (id, name, description, imageUrl, productCount)
-- [ ] Create lib/data/ folder
-- [ ] Create data/collections_data.dart with list of 6-8 collections (use AI to generate)
+- [x] Create lib/data/ folder
+- [x] Create data/collections_data.dart with list of 6-8 collections (use AI to generate)
 - [ ] Update CollectionsPage to use Collection model
 - [ ] Replace hardcoded collections with data from collections_data.dart
 - [ ] Update collection cards to display data from model
