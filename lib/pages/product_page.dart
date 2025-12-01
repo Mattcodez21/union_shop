@@ -54,6 +54,12 @@ class _ProductPageState extends State<ProductPage> {
 
   void placeholderCallbackForButtons() {}
 
+  void incrementQuantity() {
+    setState(() {
+      quantity++;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (product == null) {
@@ -159,11 +165,7 @@ class _ProductPageState extends State<ProductPage> {
           ),
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {
-              setState(() {
-                quantity++;
-              });
-            },
+            onPressed: incrementQuantity,
           ),
         ],
       ),
