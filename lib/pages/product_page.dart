@@ -13,6 +13,10 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  String? selectedSize;
+  String? selectedColor;
+  int quantity = 1;
+
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -66,6 +70,10 @@ class _ProductPageState extends State<ProductPage> {
         ),
       );
     }
+
+    // Initialize state variables if not set
+    selectedColor ??= product.colors.isNotEmpty ? product.colors.first : null;
+    selectedSize ??= product.sizes.isNotEmpty ? product.sizes.first : null;
 
     return Scaffold(
       appBar: const Navbar(),
@@ -295,9 +303,7 @@ class _ProductPageState extends State<ProductPage> {
                                                 BorderRadius.circular(4),
                                           ),
                                           child: DropdownButton<String>(
-                                            value: product.colors.isNotEmpty
-                                                ? product.colors.first
-                                                : null,
+                                            value: selectedColor,
                                             isExpanded: true,
                                             underline: const SizedBox(),
                                             items: product.colors
@@ -308,7 +314,9 @@ class _ProductPageState extends State<ProductPage> {
                                               );
                                             }).toList(),
                                             onChanged: (String? newValue) {
-                                              placeholderCallbackForButtons();
+                                              setState(() {
+                                                selectedColor = newValue;
+                                              });
                                             },
                                           ),
                                         ),
@@ -340,9 +348,7 @@ class _ProductPageState extends State<ProductPage> {
                                                 BorderRadius.circular(4),
                                           ),
                                           child: DropdownButton<String>(
-                                            value: product.sizes.isNotEmpty
-                                                ? product.sizes.first
-                                                : null,
+                                            value: selectedSize,
                                             isExpanded: true,
                                             underline: const SizedBox(),
                                             items: product.sizes
@@ -353,7 +359,9 @@ class _ProductPageState extends State<ProductPage> {
                                               );
                                             }).toList(),
                                             onChanged: (String? newValue) {
-                                              placeholderCallbackForButtons();
+                                              setState(() {
+                                                selectedSize = newValue;
+                                              });
                                             },
                                           ),
                                         ),
@@ -385,7 +393,7 @@ class _ProductPageState extends State<ProductPage> {
                                                 BorderRadius.circular(4),
                                           ),
                                           child: DropdownButton<int>(
-                                            value: 1,
+                                            value: quantity,
                                             isExpanded: true,
                                             underline: const SizedBox(),
                                             items: List<
@@ -397,7 +405,9 @@ class _ProductPageState extends State<ProductPage> {
                                               ),
                                             ),
                                             onChanged: (int? newValue) {
-                                              placeholderCallbackForButtons();
+                                              setState(() {
+                                                quantity = newValue ?? 1;
+                                              });
                                             },
                                           ),
                                         ),
@@ -728,9 +738,7 @@ class _ProductPageState extends State<ProductPage> {
                                               BorderRadius.circular(4),
                                         ),
                                         child: DropdownButton<String>(
-                                          value: product.colors.isNotEmpty
-                                              ? product.colors.first
-                                              : null,
+                                          value: selectedColor,
                                           isExpanded: true,
                                           underline: const SizedBox(),
                                           items: product.colors
@@ -741,7 +749,9 @@ class _ProductPageState extends State<ProductPage> {
                                             );
                                           }).toList(),
                                           onChanged: (String? newValue) {
-                                            placeholderCallbackForButtons();
+                                            setState(() {
+                                              selectedColor = newValue;
+                                            });
                                           },
                                         ),
                                       ),
@@ -773,9 +783,7 @@ class _ProductPageState extends State<ProductPage> {
                                               BorderRadius.circular(4),
                                         ),
                                         child: DropdownButton<String>(
-                                          value: product.sizes.isNotEmpty
-                                              ? product.sizes.first
-                                              : null,
+                                          value: selectedSize,
                                           isExpanded: true,
                                           underline: const SizedBox(),
                                           items:
@@ -786,7 +794,9 @@ class _ProductPageState extends State<ProductPage> {
                                             );
                                           }).toList(),
                                           onChanged: (String? newValue) {
-                                            placeholderCallbackForButtons();
+                                            setState(() {
+                                              selectedSize = newValue;
+                                            });
                                           },
                                         ),
                                       ),
@@ -822,7 +832,7 @@ class _ProductPageState extends State<ProductPage> {
                                               BorderRadius.circular(4),
                                         ),
                                         child: DropdownButton<int>(
-                                          value: 1,
+                                          value: quantity,
                                           isExpanded: true,
                                           underline: const SizedBox(),
                                           items: List<
@@ -834,7 +844,9 @@ class _ProductPageState extends State<ProductPage> {
                                             ),
                                           ),
                                           onChanged: (int? newValue) {
-                                            placeholderCallbackForButtons();
+                                            setState(() {
+                                              quantity = newValue ?? 1;
+                                            });
                                           },
                                         ),
                                       ),
