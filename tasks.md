@@ -314,8 +314,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Populate size dropdown from product.sizes
 - [x] Add onChanged handler for size dropdown
 - [x] Create color dropdown using DropdownButton
-- [ ] Populate color dropdown from product.colors
-- [ ] Add onChanged handler for color dropdown
+- [x] Populate color dropdown from product.colors
+- [x] Add onChanged handler for color dropdown
 - [ ] Create quantity counter UI (Row with -, number, +)
 - [ ] Implement increment quantity method
 - [ ] Implement decrement quantity method (min 1)

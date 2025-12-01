@@ -86,6 +86,54 @@ class _ProductPageState extends State<ProductPage> {
       );
     }
 
+    Widget colorDropdown = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey[300]!),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: DropdownButton<String>(
+        value: selectedColor,
+        isExpanded: true,
+        underline: const SizedBox(),
+        items: product!.colors.map((String color) {
+          return DropdownMenuItem<String>(
+            value: color,
+            child: Text(color),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {
+          setState(() {
+            selectedColor = newValue;
+          });
+        },
+      ),
+    );
+
+    Widget sizeDropdown = Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.grey[300]!),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: DropdownButton<String>(
+        value: selectedSize,
+        isExpanded: true,
+        underline: const SizedBox(),
+        items: product!.sizes.map((String size) {
+          return DropdownMenuItem<String>(
+            value: size,
+            child: Text(size),
+          );
+        }).toList(),
+        onChanged: (String? newValue) {
+          setState(() {
+            selectedSize = newValue;
+          });
+        },
+      ),
+    );
+
     return Scaffold(
       appBar: const Navbar(),
       endDrawer: const MobileNavDrawer(),
@@ -120,54 +168,6 @@ class _ProductPageState extends State<ProductPage> {
                           'assets/images/signature_hoodie.png',
                           'assets/images/signature_hoodie.png',
                         ];
-
-                  Widget colorDropdown = Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey[300]!),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: DropdownButton<String>(
-                      value: selectedColor,
-                      isExpanded: true,
-                      underline: const SizedBox(),
-                      items: product!.colors.map((String color) {
-                        return DropdownMenuItem<String>(
-                          value: color,
-                          child: Text(color),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedColor = newValue;
-                        });
-                      },
-                    ),
-                  );
-
-                  Widget sizeDropdown = Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey[300]!),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: DropdownButton<String>(
-                      value: selectedSize,
-                      isExpanded: true,
-                      underline: const SizedBox(),
-                      items: product!.sizes.map((String size) {
-                        return DropdownMenuItem<String>(
-                          value: size,
-                          child: Text(size),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedSize = newValue;
-                        });
-                      },
-                    ),
-                  );
 
                   if (isDesktop) {
                     return Row(
@@ -552,7 +552,6 @@ class _ProductPageState extends State<ProductPage> {
                       ],
                     );
                   } else {
-                    // Mobile: Keep existing column layout
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
