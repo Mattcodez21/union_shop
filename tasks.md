@@ -505,4 +505,69 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [ ] Touch targets adequate on mobile (44x44px minimum)
 - [ ] Navbar responsive behavior works correctly
 
+
+# Advanced Features (25%)
+
+## 1. Authentication System (8%)
+
+### Implementation Tasks
+- [ ] Add `firebase_core` and `firebase_auth` to `pubspec.yaml`
+- [ ] Configure Firebase and add your app credentials
+- [ ] Initialize Firebase in `main.dart`
+- [ ] Implement user registration (sign up) and login (sign in) with email/password
+- [ ] Add Google (and/or Facebook) sign-in option
+- [ ] Create account management page (view/update profile, sign out)
+- [ ] Display user info (e.g., email) in the navbar/account dashboard
+- [ ] Restrict access to account/cart pages for unauthenticated users
+- [ ] Show error messages and loading indicators during authentication
+- [ ] Test registration, login, logout, and account management flows
+
+### Testing
+- [ ] User can register and log in with email/password
+- [ ] User can log in with Google (and/or Facebook)
+- [ ] User can view and update account info
+- [ ] User can log out and is redirected appropriately
+- [ ] Unauthenticated users are redirected from protected pages
+- [ ] Error messages and loading indicators display correctly
+
+---
+
+## 2. Cart Management (6%)
+
+### Implementation Tasks
+- [ ] Implement full cart functionality: add, edit quantity, and remove items
+- [ ] Display cart contents with product info, quantities, and prices
+- [ ] Allow quantity editing/removal directly in the cart
+- [ ] Calculate and display total price dynamically
+- [ ] Persist cart data for logged-in users (e.g., using Firestore or local storage)
+- [ ] Sync cart with user account/dashboard
+- [ ] Clear cart after successful checkout
+- [ ] Test cart operations, price calculations, and persistence
+
+### Testing
+- [ ] User can add, edit, and remove items in the cart
+- [ ] Cart displays correct product info and total price
+- [ ] Cart persists for logged-in users across sessions
+- [ ] Cart clears after checkout
+- [ ] Cart updates are reflected in the account dashboard
+
+---
+
+## 3. Search System (4%)
+
+### Implementation Tasks
+- [ ] Add search bar/button to the navbar and footer
+- [ ] Implement product search functionality (by name, description, etc.)
+- [ ] Display search results in a dedicated page or section
+- [ ] Allow users to click results to view product details
+- [ ] Handle empty/no results gracefully
+- [ ] Ensure search works across all products/collections
+- [ ] Test search from both navbar and footer
+
+### Testing
+- [ ] User can search for products from navbar and footer
+- [ ] Search returns correct results for queries
+- [ ] Clicking a result opens the product details page
+- [ ] No results message displays for unmatched queries
+- [ ] Search works for all products and collections
 ---
