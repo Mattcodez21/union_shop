@@ -405,8 +405,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Apply selectedFont to preview text style
 - [x] Apply selectedColor to preview text color
 - [x] Add default placeholder text for empty state
-- [ ] Create pages/print_shack_about_page.dart
-- [ ] Add service information and guidelines
+- [x] Create pages/print_shack_about_page.dart
+- [x] Add service information and guidelines
 - [ ] Add navigation between Print Shack pages
 - [ ] Add routes to main.dart
 - [ ] Add Print Shack link to navbar
