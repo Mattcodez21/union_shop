@@ -363,8 +363,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Connect cart icon navigation
 - [x] Display list of cart items
 - [x] Create cart item card widget
-- [ ] Calculate and display subtotals
-- [ ] Calculate and display total price
+- [x] Calculate and display subtotals
+- [x] Calculate and display total price
 - [ ] Add "Place Order" button
 - [ ] Implement checkout (show confirmation, clear cart)
 - [ ] Handle empty cart state

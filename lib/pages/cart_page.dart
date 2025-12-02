@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/navbar.dart';
-import 'package:union_shop/widgets/cart_item_card.dart'; // Import the card
+import 'package:union_shop/widgets/cart_item_card.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -36,7 +36,7 @@ class CartPage extends StatelessWidget {
                   itemCount: items.length,
                   separatorBuilder: (_, __) => const Divider(),
                   itemBuilder: (context, index) {
-                    return CartItemCard(item: items[index]); // Use the card
+                    return CartItemCard(item: items[index]);
                   },
                 ),
               ),

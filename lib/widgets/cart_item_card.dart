@@ -10,6 +10,7 @@ class CartItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cartService = CartService();
+    final subtotal = item.product.price * item.quantity;
 
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 4),
@@ -31,6 +32,13 @@ class CartItemCard extends StatelessWidget {
             if (item.selectedSize.isNotEmpty)
               Text('Size: ${item.selectedSize}'),
             Text('Price: £${item.product.price.toStringAsFixed(2)}'),
+            Text(
+              'Subtotal: £${subtotal.toStringAsFixed(2)}',
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4d2963),
+              ),
+            ),
           ],
         ),
         trailing: Column(
