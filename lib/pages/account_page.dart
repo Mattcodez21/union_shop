@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/widgets/cart_item_card.dart';
 
 class AccountManager extends StatefulWidget {
   const AccountManager({Key? key}) : super(key: key);
@@ -54,6 +56,7 @@ class _AccountManagerState extends State<AccountManager> {
   @override
   Widget build(BuildContext context) {
     final user = FirebaseAuth.instance.currentUser;
+    final cartService = CartService();
 
     if (user == null) {
       // Not signed in, redirect to auth page
@@ -71,72 +74,107 @@ class _AccountManagerState extends State<AccountManager> {
       appBar: const Navbar(title: "Account Manager"),
       endDrawer: const MobileNavDrawer(),
       body: Center(
-        child: Card(
-          margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
-          elevation: 6,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  "Account Management",
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    const Text("Email:",
-                        style: TextStyle(fontWeight: FontWeight.bold)),
-                    const SizedBox(width: 8),
-                    Text(user.email ?? "No email",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Colors.black87,
-                        )),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                TextFormField(
-                  controller: _displayNameController,
-                  decoration: const InputDecoration(
-                    labelText: "Display Name",
-                    border: OutlineInputBorder(),
+        child: SingleChildScrollView(
+          child: Card(
+            margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+            elevation: 6,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    "Account Management",
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
-                ),
-                const SizedBox(height: 16),
-                if (_statusMessage != null)
-                  Text(
-                    _statusMessage!,
-                    style: TextStyle(
-                      color: _statusMessage == "Profile updated!"
-                          ? Colors.green
-                          : Colors.red,
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      const Text("Email:",
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      const SizedBox(width: 8),
+                      Text(user.email ?? "No email",
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black87,
+                          )),
+                    ],
+                  ),
+                  const SizedBox(height: 24),
+                  TextFormField(
+                    controller: _displayNameController,
+                    decoration: const InputDecoration(
+                      labelText: "Display Name",
+                      border: OutlineInputBorder(),
                     ),
                   ),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: _isUpdating ? null : _updateProfile,
-                  child: _isUpdating
-                      ? const SizedBox(
-                          width: 18,
-                          height: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text("Update Profile"),
-                ),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: _signOut,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red,
-                    foregroundColor: Colors.white,
+                  const SizedBox(height: 16),
+                  if (_statusMessage != null)
+                    Text(
+                      _statusMessage!,
+                      style: TextStyle(
+                        color: _statusMessage == "Profile updated!"
+                            ? Colors.green
+                            : Colors.red,
+                      ),
+                    ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: _isUpdating ? null : _updateProfile,
+                    child: _isUpdating
+                        ? const SizedBox(
+                            width: 18,
+                            height: 18,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Text("Update Profile"),
                   ),
-                  child: const Text("Sign Out"),
-                ),
-              ],
+                  const SizedBox(height: 32),
+                  ElevatedButton(
+                    onPressed: _signOut,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.red,
+                      foregroundColor: Colors.white,
+                    ),
+                    child: const Text("Sign Out"),
+                  ),
+                  const SizedBox(height: 40),
+                  const Divider(),
+                  const SizedBox(height: 16),
+                  const Text(
+                    "Your Cart",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  AnimatedBuilder(
+                    animation: cartService,
+                    builder: (context, _) {
+                      final items = cartService.items;
+                      if (items.isEmpty) {
+                        return const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12.0),
+                          child: Text('Your cart is empty'),
+                        );
+                      }
+                      return Column(
+                        children: [
+                          ...items.map((item) => CartItemCard(item: item)),
+                          const SizedBox(height: 12),
+                          Text(
+                            'Total: £${cartService.totalPrice.toStringAsFixed(2)}',
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
