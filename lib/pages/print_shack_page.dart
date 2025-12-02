@@ -49,6 +49,33 @@ class _PrintShackPageState extends State<PrintShackPage> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 32),
+              // Preview widget
+              Container(
+                width: 320,
+                height: 120,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Text(
+                  customText.isEmpty ? 'Preview' : customText,
+                  style: TextStyle(
+                    fontSize: 28,
+                    color: selectedColor,
+                    fontFamily: selectedFont == 'Arial'
+                        ? 'Arial'
+                        : selectedFont == 'Roboto'
+                            ? 'Roboto'
+                            : selectedFont == 'Courier'
+                                ? 'Courier'
+                                : null,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 32),
               // Text input field for custom text
               TextField(
                 maxLength: 20,

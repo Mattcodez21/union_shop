@@ -400,8 +400,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add onChanged handler for font
 - [x] Create color dropdown with 3+ options (e.g., Black, Red, Blue, Purple)
 - [x] Add onChanged handler for color
-- [ ] Create preview widget (Container with styled Text)
-- [ ] Bind preview to customText state
+- [x] Create preview widget (Container with styled Text)
+- [x] Bind preview to customText state
 - [ ] Apply selectedFont to preview text style
 - [ ] Apply selectedColor to preview text color
 - [ ] Add default placeholder text for empty state
