@@ -3,7 +3,7 @@ import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/models/product.dart';
 import 'package:union_shop/models/cart_item.dart';
-import 'package:union_shop/data/products_data.dart';
+import 'package:union_shop/data/products_data.dart' as products_data;
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -22,7 +22,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   void initState() {
     super.initState();
-    product = getProductById(widget.productId);
+    product = products_data.getProductById(widget.productId);
     // Set default selections, even if empty
     if (product != null) {
       selectedSize = product!.sizes.isNotEmpty ? product!.sizes.first : '';
