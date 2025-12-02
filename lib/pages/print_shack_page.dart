@@ -48,6 +48,20 @@ class _PrintShackPageState extends State<PrintShackPage> {
                 style: TextStyle(fontSize: 18, color: Colors.black87),
                 textAlign: TextAlign.center,
               ),
+              const SizedBox(height: 16),
+              ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/print-shack-about');
+                },
+                icon: const Icon(Icons.info_outline),
+                label: const Text('About Print Shack'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Color(0xFF4d2963),
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                ),
+              ),
               const SizedBox(height: 32),
               // Preview widget
               Container(

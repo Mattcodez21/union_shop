@@ -407,7 +407,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add default placeholder text for empty state
 - [x] Create pages/print_shack_about_page.dart
 - [x] Add service information and guidelines
-- [ ] Add navigation between Print Shack pages
+- [x] Add navigation between Print Shack pages
 - [ ] Add routes to main.dart
 - [ ] Add Print Shack link to navbar
 - [ ] Test preview updates as text typed
