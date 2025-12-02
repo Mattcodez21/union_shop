@@ -360,9 +360,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Update cart icon badge with item count
 - [X] Create pages/cart_page.dart
 - [X] Add cart route to main.dart
-- [ ] Connect cart icon navigation
-- [ ] Display list of cart items
-- [ ] Create cart item card widget
+- [x] Connect cart icon navigation
+- [x] Display list of cart items
+- [x] Create cart item card widget
 - [ ] Calculate and display subtotals
 - [ ] Calculate and display total price
 - [ ] Add "Place Order" button

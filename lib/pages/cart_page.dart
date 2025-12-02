@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
-import 'package:union_shop/models/cart_item.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/widgets/cart_item_card.dart'; // Import the card
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -36,41 +36,7 @@ class CartPage extends StatelessWidget {
                   itemCount: items.length,
                   separatorBuilder: (_, __) => const Divider(),
                   itemBuilder: (context, index) {
-                    final CartItem item = items[index];
-                    return ListTile(
-                      leading: item.product.imageUrls.isNotEmpty
-                          ? Image.asset(
-                              item.product.imageUrls.first,
-                              width: 56,
-                              height: 56,
-                              fit: BoxFit.cover,
-                            )
-                          : const Icon(Icons.shopping_bag, size: 40),
-                      title: Text(item.product.name),
-                      subtitle: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          if (item.selectedColor.isNotEmpty)
-                            Text('Color: ${item.selectedColor}'),
-                          if (item.selectedSize.isNotEmpty)
-                            Text('Size: ${item.selectedSize}'),
-                          Text(
-                              'Price: £${item.product.price.toStringAsFixed(2)}'),
-                        ],
-                      ),
-                      trailing: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('x${item.quantity}'),
-                          IconButton(
-                            icon: const Icon(Icons.delete, color: Colors.red),
-                            onPressed: () {
-                              cartService.removeFromCart(item);
-                            },
-                          ),
-                        ],
-                      ),
-                    );
+                    return CartItemCard(item: items[index]); // Use the card
                   },
                 ),
               ),
@@ -112,7 +78,6 @@ class CartPage extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      // Implement checkout logic here
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Checkout is not implemented.'),

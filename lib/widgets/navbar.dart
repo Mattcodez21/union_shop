@@ -126,7 +126,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                               onPressed: () {},
                               tooltip: 'Account',
                             ),
-                            // Cart Icon with Badge
+                            // Cart Icon with Badge and navigation
                             AnimatedBuilder(
                               animation: cartService,
                               builder: (context, _) {
@@ -137,12 +137,14 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                                     IconButton(
                                       icon: const Icon(Icons.shopping_bag,
                                           color: Colors.black54),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, '/cart');
+                                      },
                                       tooltip: 'Cart',
                                     ),
                                     if (count > 0)
                                       Positioned(
-                                        right: 0, // <-- Move badge further left
+                                        right: 0,
                                         top: 4,
                                         child: Container(
                                           padding: const EdgeInsets.all(4),
@@ -172,8 +174,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                            width: 36), // Increased space to avoid overlap
+                        const SizedBox(width: 36),
                       ],
                     ),
                   ),
@@ -205,7 +206,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ],
                     const Spacer(),
-                    // Cart Icon with Badge (move before menu)
+                    // Cart Icon with Badge and navigation (move before menu)
                     AnimatedBuilder(
                       animation: cartService,
                       builder: (context, _) {
@@ -216,12 +217,14 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             IconButton(
                               icon: const Icon(Icons.shopping_bag,
                                   color: Colors.black54),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/cart');
+                              },
                               tooltip: 'Cart',
                             ),
                             if (count > 0)
                               Positioned(
-                                right: 0, // <-- Move badge further left
+                                right: 0,
                                 top: 4,
                                 child: Container(
                                   padding: const EdgeInsets.all(4),
@@ -249,7 +252,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                     ),
-                    const SizedBox(width: 8), // Add space between bag and menu
+                    const SizedBox(width: 8),
                     Builder(
                       builder: (context) => IconButton(
                         icon: const Icon(Icons.menu,
@@ -388,7 +391,10 @@ class MobileNavDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.shopping_bag),
               title: const Text('Cart'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/cart');
+                Navigator.of(context).maybePop();
+              },
             ),
           ],
         ),
