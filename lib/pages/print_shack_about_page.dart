@@ -79,9 +79,10 @@ class PrintShackAboutPage extends StatelessWidget {
                   icon: const Icon(Icons.arrow_back),
                   label: const Text('Back to Print Shack'),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF4d2963),
+                    backgroundColor: const Color(0xFF4d2963),
                     foregroundColor: Colors.white,
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 24, vertical: 12),
                   ),
                 ),
               ],
