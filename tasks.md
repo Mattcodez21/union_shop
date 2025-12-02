@@ -7,7 +7,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ## Progress Summary
 **Overall Progress**:
 - Basic Features: 9/9 (40% of 40%)
-- Intermediate Features: 0/7 (0% of 35%)
+- Intermediate Features: 3/7 (15% of 35%)
 - Advanced Features: 0/3 (0% of 25%)
 
 ---
@@ -353,7 +353,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Create getCartItems method
 - [x] Create getTotalPrice method
 - [x] Create clearCart method
-- [ ] Update ProductPage "Add to Cart" button functionality
+- [x] Update ProductPage "Add to Cart" button functionality
 - [ ] Create CartItem from current product state
 - [ ] Call cartService.addToCart
 - [ ] Show snackbar confirmation

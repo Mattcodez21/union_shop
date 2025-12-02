@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/data/products_data.dart';
 import 'package:union_shop/models/product.dart';
+import 'package:union_shop/models/cart_item.dart';
+import 'package:union_shop/services/cart_service.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -431,13 +433,26 @@ class _ProductPageState extends State<ProductPage> {
                                 width: double.infinity,
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(
-                                            'Added $quantity item(s) to cart!'),
-                                        duration: const Duration(seconds: 2),
-                                      ),
-                                    );
+                                    if (product != null &&
+                                        selectedSize != null &&
+                                        selectedColor != null) {
+                                      CartService().addToCart(
+                                        CartItem(
+                                          product: product!,
+                                          selectedSize: selectedSize!,
+                                          selectedColor: selectedColor!,
+                                          quantity: quantity,
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        SnackBar(
+                                          content: Text(
+                                              'Added $quantity item(s) to cart!'),
+                                          duration: const Duration(seconds: 2),
+                                        ),
+                                      );
+                                    }
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFF4d2963),
@@ -793,13 +808,25 @@ class _ProductPageState extends State<ProductPage> {
                           width: double.infinity,
                           child: ElevatedButton(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content:
-                                      Text('Added $quantity item(s) to cart!'),
-                                  duration: const Duration(seconds: 2),
-                                ),
-                              );
+                              if (product != null &&
+                                  selectedSize != null &&
+                                  selectedColor != null) {
+                                CartService().addToCart(
+                                  CartItem(
+                                    product: product!,
+                                    selectedSize: selectedSize!,
+                                    selectedColor: selectedColor!,
+                                    quantity: quantity,
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                        'Added $quantity item(s) to cart!'),
+                                    duration: const Duration(seconds: 2),
+                                  ),
+                                );
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4d2963),
