@@ -397,9 +397,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Add onChanged handler for text input
 - [x] Add character counter (e.g., max 20 characters)
 - [x] Create font dropdown with 3+ options (e.g., Arial, Roboto, Courier)
-- [ ] Add onChanged handler for font
-- [ ] Create color dropdown with 3+ options (e.g., Black, Red, Blue, Purple)
-- [ ] Add onChanged handler for color
+- [x] Add onChanged handler for font
+- [x] Create color dropdown with 3+ options (e.g., Black, Red, Blue, Purple)
+- [x] Add onChanged handler for color
 - [ ] Create preview widget (Container with styled Text)
 - [ ] Bind preview to customText state
 - [ ] Apply selectedFont to preview text style

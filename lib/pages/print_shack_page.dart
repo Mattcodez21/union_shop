@@ -14,6 +14,12 @@ class _PrintShackPageState extends State<PrintShackPage> {
   Color selectedColor = Colors.black;
 
   final List<String> fontOptions = ['Arial', 'Roboto', 'Courier'];
+  final Map<String, Color> colorOptions = {
+    'Black': Colors.black,
+    'Red': Colors.red,
+    'Blue': Colors.blue,
+    'Purple': Colors.purple,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -85,6 +91,46 @@ class _PrintShackPageState extends State<PrintShackPage> {
                     onChanged: (value) {
                       setState(() {
                         selectedFont = value!;
+                      });
+                    },
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              // Color dropdown
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Color:',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(width: 16),
+                  DropdownButton<Color>(
+                    value: selectedColor,
+                    items: colorOptions.entries
+                        .map((entry) => DropdownMenuItem<Color>(
+                              value: entry.value,
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 16,
+                                    height: 16,
+                                    margin: const EdgeInsets.only(right: 8),
+                                    decoration: BoxDecoration(
+                                      color: entry.value,
+                                      shape: BoxShape.circle,
+                                      border: Border.all(color: Colors.grey),
+                                    ),
+                                  ),
+                                  Text(entry.key),
+                                ],
+                              ),
+                            ))
+                        .toList(),
+                    onChanged: (color) {
+                      setState(() {
+                        selectedColor = color!;
                       });
                     },
                   ),
