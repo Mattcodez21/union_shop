@@ -126,55 +126,55 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                               onPressed: () {},
                               tooltip: 'Account',
                             ),
-                            // Cart Icon with Badge and navigation
-                            AnimatedBuilder(
-                              animation: cartService,
-                              builder: (context, _) {
-                                final count = cartService.itemCount;
-                                return Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(Icons.shopping_bag,
-                                          color: Colors.black54),
-                                      onPressed: () {
-                                        Navigator.pushNamed(context, '/cart');
-                                      },
-                                      tooltip: 'Cart',
-                                    ),
-                                    if (count > 0)
-                                      Positioned(
-                                        right: 0,
-                                        top: 4,
-                                        child: Container(
-                                          padding: const EdgeInsets.all(4),
-                                          decoration: const BoxDecoration(
-                                            color: Colors.red,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          constraints: const BoxConstraints(
-                                            minWidth: 20,
-                                            minHeight: 20,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '$count',
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
+                          ],
+                        ),
+                        // Move Cart Icon further left, before the menu icon
+                        AnimatedBuilder(
+                          animation: cartService,
+                          builder: (context, _) {
+                            final count = cartService.itemCount;
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.shopping_bag,
+                                      color: Colors.black54),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/cart');
+                                  },
+                                  tooltip: 'Cart',
+                                ),
+                                if (count > 0)
+                                  Positioned(
+                                    right: 0,
+                                    top: 4,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      constraints: const BoxConstraints(
+                                        minWidth: 20,
+                                        minHeight: 20,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '$count',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ],
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
                         ),
-                        const SizedBox(width: 36),
+                        const SizedBox(width: 16), // More space before menu
                       ],
                     ),
                   ),
@@ -206,7 +206,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ],
                     const Spacer(),
-                    // Cart Icon with Badge and navigation (move before menu)
+                    // Move Cart Icon before menu icon
                     AnimatedBuilder(
                       animation: cartService,
                       builder: (context, _) {
@@ -252,7 +252,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 8), // Space between bag and menu
                     Builder(
                       builder: (context) => IconButton(
                         icon: const Icon(Icons.menu,
