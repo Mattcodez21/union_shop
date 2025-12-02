@@ -511,8 +511,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ## 1. Authentication System (8%)
 
 ### Implementation Tasks
-- [ ] Add `firebase_core` and `firebase_auth` to `pubspec.yaml`
-- [ ] Configure Firebase and add your app credentials
+- [x] Add `firebase_core` and `firebase_auth` to `pubspec.yaml`
+- [x] Configure Firebase and add your app credentials
 - [ ] Initialize Firebase in `main.dart`
 - [ ] Implement user registration (sign up) and login (sign in) with email/password
 - [ ] Add Google (and/or Facebook) sign-in option

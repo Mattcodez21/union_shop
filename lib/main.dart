@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/auth_page.dart';
@@ -11,7 +13,23 @@ import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/print_shack_page.dart';
 import 'package:union_shop/pages/print_shack_about_page.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  if (kIsWeb) {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'AIzaSyCx5nUqCXXYNvFDCV7bGrpbNHwzhfLCt8', // <-- your config
+        authDomain: 'unionshop-aa727.firebaseapp.com',
+        projectId: 'unionshop-aa727',
+        storageBucket: 'unionshop-aa727.appspot.com',
+        messagingSenderId: '308183404754',
+        appId: '1:308183404754:web:45fae36d7be8eb1ad136b',
+        measurementId: 'G-DYTYXQLJET',
+      ),
+    );
+  } else {
+    await Firebase.initializeApp();
+  }
   runApp(const UnionShopApp());
 }
 
