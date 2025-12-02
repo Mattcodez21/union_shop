@@ -10,7 +10,7 @@ final List<Product> products = [
     category: 'UPSU Merch',
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Navy', 'Black', 'Grey'],
-    imageUrls: ['assets/images/signature_hoodie.png'],
+    imageUrls: ['assets/images/upsu_hoodie.png'],
   ),
   Product(
     id: 'p2',
@@ -20,7 +20,7 @@ final List<Product> products = [
     category: 'Eco-Friendly',
     sizes: [],
     colors: ['Green', 'Blue'],
-    imageUrls: ['assets/images/products/bottle1.jpg'],
+    imageUrls: ['assets/images/eco_bottle.png'],
   ),
   Product(
     id: 'p3',
@@ -30,7 +30,7 @@ final List<Product> products = [
     category: 'Union Essentials',
     sizes: [],
     colors: ['Black', 'Navy'],
-    imageUrls: ['assets/images/products/backpack1.jpg'],
+    imageUrls: ['assets/images/upsu_bag.png'],
   ),
   Product(
     id: 'p4',
@@ -40,7 +40,7 @@ final List<Product> products = [
     category: 'UPSU Merch',
     sizes: [],
     colors: ['White'],
-    imageUrls: ['assets/images/products/mug1.jpg'],
+    imageUrls: ['assets/images/upsu_mug.png'],
   ),
   Product(
     id: 'p5',
@@ -110,7 +110,7 @@ final List<Product> products = [
     category: 'Eco-Friendly',
     sizes: [],
     colors: ['Green'],
-    imageUrls: ['assets/images/products/lunchbox1.jpg'],
+    imageUrls: ['assets/images/eco_lunch_box.png'],
   ),
   Product(
     id: 'p12',
@@ -120,7 +120,7 @@ final List<Product> products = [
     category: 'UPSU Merch',
     sizes: ['One Size'],
     colors: ['Navy', 'White'],
-    imageUrls: ['assets/images/products/cap1.jpg'],
+    imageUrls: ['assets/images/upsu_cap.png'],
   ),
   Product(
     id: 'p13',
@@ -160,7 +160,7 @@ final List<Product> products = [
     category: 'Union Essentials',
     sizes: [],
     colors: ['Black', 'Silver'],
-    imageUrls: ['assets/images/products/flask1.jpg'],
+    imageUrls: ['assets/images/upsu_flask.png'],
   ),
   Product(
     id: 'p17',
@@ -180,7 +180,7 @@ final List<Product> products = [
     category: 'Eco-Friendly',
     sizes: [],
     colors: ['Natural'],
-    imageUrls: ['assets/images/products/cutlery1.jpg'],
+    imageUrls: ['assets/images/upsu_cutlery.png'],
   ),
   Product(
     id: 'p19',
@@ -190,7 +190,7 @@ final List<Product> products = [
     category: 'UPSU Merch',
     sizes: [],
     colors: ['Blue', 'Black'],
-    imageUrls: ['assets/images/products/lanyard1.jpg'],
+    imageUrls: ['assets/images/upsu_lanyard.png'],
   ),
   Product(
     id: 'p20',
@@ -200,7 +200,7 @@ final List<Product> products = [
     category: 'Stationery',
     sizes: [],
     colors: ['Assorted'],
-    imageUrls: ['assets/images/products/highlighters1.jpg'],
+    imageUrls: ['assets/images/highlighters.png'],
   ),
 ];
 
