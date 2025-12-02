@@ -538,8 +538,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Implement full cart functionality: add, edit quantity, and remove items
 - [x] Display cart contents with product info, quantities, and prices
 - [x] Allow quantity editing/removal directly in the cart
-- [ ] Calculate and display total price dynamically
-- [ ] Persist cart data for logged-in users (e.g., using Firestore or local storage)
+- [x] Calculate and display total price dynamically
+- [x] Persist cart data for logged-in users (e.g., using Firestore or local storage)
 - [ ] Sync cart with user account/dashboard
 - [ ] Clear cart after successful checkout
 - [ ] Test cart operations, price calculations, and persistence
