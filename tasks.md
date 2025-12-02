@@ -541,7 +541,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Calculate and display total price dynamically
 - [x] Persist cart data for logged-in users (e.g., using Firestore or local storage)
 - [x] Sync cart with user account/dashboard
-- [ ] Clear cart after successful checkout
+- [x] Clear cart after successful checkout
 - [ ] Test cart operations, price calculations, and persistence
 
 ### Testing

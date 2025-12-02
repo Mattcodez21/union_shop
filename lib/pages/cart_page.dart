@@ -43,8 +43,14 @@ class _CartPageState extends State<CartPage> {
               ),
               const SizedBox(height: 16),
               ElevatedButton(
-                onPressed: () {
-                  // Proceed to checkout logic here
+                onPressed: () async {
+                  // TODO: Add your checkout logic here (e.g., payment, order creation)
+                  // If checkout is successful:
+                  cartService.clearCart();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                        content: Text('Checkout complete! Cart cleared.')),
+                  );
                 },
                 child: const Text('Checkout'),
               ),
