@@ -100,7 +100,7 @@ final List<Product> products = [
     category: 'Stationery',
     sizes: [],
     colors: ['Blue', 'Black'],
-    imageUrls: ['assets/images/products/pens1.jpg'],
+    imageUrls: ['assets/images/pen_pack.png'],
   ),
   Product(
     id: 'p11',

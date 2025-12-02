@@ -6,7 +6,7 @@ import 'package:union_shop/models/collection.dart';
 
 class CollectionPage extends StatefulWidget {
   final String collectionName;
-  final Collection? collectionData; // <-- Accept Collection? instead of Map
+  final Collection? collectionData;
 
   const CollectionPage({
     super.key,
@@ -84,19 +84,30 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Decode the collection name to handle URL encoding (e.g., %20 for spaces)
+    final decodedCollectionName = Uri.decodeComponent(widget.collectionName);
+
     // Gather all unique sizes and colors for dropdowns
     final allSizes = <String>{};
     final allColors = <String>{};
     for (final product in products.where((p) =>
-        p.category.toLowerCase() == widget.collectionName.toLowerCase())) {
+        p.category.toLowerCase() == decodedCollectionName.toLowerCase())) {
       allSizes.addAll(product.sizes);
       allColors.addAll(product.colors);
     }
     final sizeOptions = ['All', ...allSizes.where((s) => s.isNotEmpty)];
     final colorOptions = ['All', ...allColors.where((c) => c.isNotEmpty)];
 
-    // Filter and sort products
-    List<Product> filteredProducts = filterProducts(products);
+    // Filter and sort products using the decoded collection name
+    List<Product> filteredProducts = products.where((product) {
+      final matchesCategory =
+          product.category.toLowerCase() == decodedCollectionName.toLowerCase();
+      final matchesSize =
+          selectedSize == 'All' || product.sizes.contains(selectedSize);
+      final matchesColor =
+          selectedColor == 'All' || product.colors.contains(selectedColor);
+      return matchesCategory && matchesSize && matchesColor;
+    }).toList();
     filteredProducts = sortProducts(filteredProducts);
 
     return Scaffold(
@@ -110,7 +121,7 @@ class _CollectionPageState extends State<CollectionPage> {
             child: Column(
               children: [
                 Text(
-                  widget.collectionName,
+                  decodedCollectionName,
                   style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
@@ -118,7 +129,7 @@ class _CollectionPageState extends State<CollectionPage> {
                 ),
                 const SizedBox(height: 16),
                 Text(
-                  getCollectionDescription(widget.collectionName),
+                  getCollectionDescription(decodedCollectionName),
                   style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
@@ -161,7 +172,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    initialValue: selectedSize,
+                    value: selectedSize,
                     items: sizeOptions
                         .map((size) =>
                             DropdownMenuItem(value: size, child: Text(size)))
@@ -183,7 +194,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    initialValue: selectedColor,
+                    value: selectedColor,
                     items: colorOptions
                         .map((color) =>
                             DropdownMenuItem(value: color, child: Text(color)))
@@ -205,7 +216,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    initialValue: selectedSort,
+                    value: selectedSort,
                     items: const [
                       DropdownMenuItem(
                           value: 'Featured', child: Text('Featured')),
@@ -280,7 +291,7 @@ class _CollectionPageState extends State<CollectionPage> {
                           itemBuilder: (context, index) {
                             final product = filteredProducts[index];
                             return ProductCard(
-                              id: product.id, // Pass the id here
+                              id: product.id,
                               name: product.name,
                               price: product.price,
                               imageUrl: product.imageUrls.isNotEmpty
@@ -324,7 +335,7 @@ class ProductCard extends StatelessWidget {
           context,
           '/product',
           arguments: {
-            'productId': id, // Pass the id as productId
+            'productId': id,
           },
         );
       },
