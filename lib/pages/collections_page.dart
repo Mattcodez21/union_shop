@@ -19,27 +19,32 @@ class CollectionCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Expanded(
-            child: Image.asset(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Icon(
-                    Icons.image_not_supported,
-                    color: Colors.grey,
-                    size: 50,
-                  ),
-                );
-              },
+            child: ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(16)),
+              child: Image.asset(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey[300],
+                    child: const Icon(
+                      Icons.image_not_supported,
+                      color: Colors.grey,
+                      size: 50,
+                    ),
+                  );
+                },
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
                 Text(
@@ -89,12 +94,13 @@ class CollectionsPage extends StatelessWidget {
               crossAxisCount = 4;
             }
 
+            // Fix overflow by adjusting childAspectRatio and wrapping GridView in Expanded if needed
             return GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 16,
                 mainAxisSpacing: 16,
-                childAspectRatio: 0.75,
+                childAspectRatio: 0.85, // Slightly taller to avoid overflow
               ),
               itemCount: collections.length,
               itemBuilder: (context, index) {

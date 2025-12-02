@@ -27,39 +27,61 @@ class _CartPageState extends State<CartPage> {
               child: Text('Your cart is empty'),
             );
           }
-          return ListView(
-            padding: const EdgeInsets.all(16),
+          return Column(
             children: [
-              ...items.map((item) => CartItemCard(item: item)),
-              const SizedBox(height: 24),
-              Text(
-                'Total: £${cartService.totalPrice.toStringAsFixed(2)}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF4d2963),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.all(16),
+                  children: [
+                    ...items.map((item) => Padding(
+                          padding: const EdgeInsets.only(bottom: 16.0),
+                          child: CartItemCard(item: item),
+                        )),
+                  ],
                 ),
-                textAlign: TextAlign.right,
               ),
-              const SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () async {
-                  // TODO: Add your checkout logic here (e.g., payment, order creation)
-                  // If checkout is successful:
-                  cartService.clearCart();
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Checkout complete! Cart cleared.')),
-                  );
-                },
-                child: const Text('Checkout'),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Text(
+                    'Total: £${cartService.totalPrice.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4d2963),
+                    ),
+                  ),
+                ),
               ),
-              const SizedBox(height: 8),
-              TextButton(
-                onPressed: () {
-                  cartService.clearCart();
-                },
-                child: const Text('Clear Cart'),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      // TODO: Add your checkout logic here
+                      cartService.clearCart();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                            content: Text('Checkout complete! Cart cleared.')),
+                      );
+                    },
+                    child: const Text('Checkout'),
+                  ),
+                ),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                child: TextButton(
+                  onPressed: () {
+                    cartService.clearCart();
+                  },
+                  child: const Text('Clear Cart'),
+                ),
               ),
             ],
           );

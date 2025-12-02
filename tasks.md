@@ -557,11 +557,11 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 
 ### Implementation Tasks
 - [x] Add search bar/button to the navbar and footer
-- [ ] Implement product search functionality (by name, description, etc.)
-- [ ] Display search results in a dedicated page or section
-- [ ] Allow users to click results to view product details
-- [ ] Handle empty/no results gracefully
-- [ ] Ensure search works across all products/collections
+- [x] Implement product search functionality (by name, description, etc.)
+- [x] Display search results in a dedicated page or section
+- [x] Allow users to click results to view product details
+- [x] Handle empty/no results gracefully
+- [x] Ensure search works across all products/collections
 - [ ] Test search from both navbar and footer
 
 ### Testing
