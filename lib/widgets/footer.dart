@@ -1,5 +1,36 @@
 import 'package:flutter/material.dart';
 
+// Simple search delegate for demonstration
+class ProductSearchDelegate extends SearchDelegate<String> {
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () => query = '',
+      ),
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => close(context, ''),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Center(child: Text('Search results for "$query"'));
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    return Center(child: Text('Suggestions for "$query"'));
+  }
+}
+
 class Footer extends StatelessWidget {
   const Footer({super.key});
 
@@ -54,6 +85,24 @@ class Footer extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          hintText: 'Search products...',
+                          prefixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(),
+                          contentPadding:
+                              EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                        ),
+                        onSubmitted: (query) {
+                          showSearch(
+                              context: context,
+                              delegate: ProductSearchDelegate(),
+                              query: query);
+                        },
+                      ),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -71,7 +120,7 @@ class Footer extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          'Search\nTerms & Conditions',
+                          'Terms & Conditions',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[600],

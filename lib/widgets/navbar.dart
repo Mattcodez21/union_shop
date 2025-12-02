@@ -2,6 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+// Simple search delegate for demonstration
+class ProductSearchDelegate extends SearchDelegate<String> {
+  @override
+  List<Widget>? buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear),
+        onPressed: () => query = '',
+      ),
+    ];
+  }
+
+  @override
+  Widget? buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back),
+      onPressed: () => close(context, ''),
+    );
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    // Replace with your actual search results UI
+    return Center(child: Text('Search results for "$query"'));
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    // Replace with your actual suggestions UI
+    return Center(child: Text('Suggestions for "$query"'));
+  }
+}
+
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   const Navbar({Key? key, this.title}) : super(key: key);
@@ -134,7 +167,11 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             IconButton(
                               icon: const Icon(Icons.search,
                                   color: Colors.black54),
-                              onPressed: () {},
+                              onPressed: () {
+                                showSearch(
+                                    context: context,
+                                    delegate: ProductSearchDelegate());
+                              },
                               tooltip: 'Search',
                             ),
                             IconButton(
@@ -421,7 +458,9 @@ class MobileNavDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.search),
               title: const Text('Search'),
-              onTap: () {},
+              onTap: () {
+                showSearch(context: context, delegate: ProductSearchDelegate());
+              },
             ),
             ListTile(
               leading: const Icon(Icons.shopping_bag),
