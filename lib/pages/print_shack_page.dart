@@ -60,7 +60,9 @@ class _PrintShackPageState extends State<PrintShackPage> {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Text(
-                  customText.isEmpty ? 'Preview' : customText,
+                  customText.isEmpty
+                      ? 'Your custom text will appear here'
+                      : customText,
                   style: TextStyle(
                     fontSize: 28,
                     color: selectedColor,

@@ -403,8 +403,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Create preview widget (Container with styled Text)
 - [x] Bind preview to customText state
 - [x] Apply selectedFont to preview text style
-- [ ] Apply selectedColor to preview text color
-- [ ] Add default placeholder text for empty state
+- [x] Apply selectedColor to preview text color
+- [x] Add default placeholder text for empty state
 - [ ] Create pages/print_shack_about_page.dart
 - [ ] Add service information and guidelines
 - [ ] Add navigation between Print Shack pages
