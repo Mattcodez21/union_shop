@@ -392,8 +392,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 **Implementation Tasks:**
 - [x] Create pages/print_shack_page.dart
 - [x] Create StatefulWidget
-- [ ] Add state variables: customText, selectedFont, selectedColor
-- [ ] Add text input field
+- [x] Add state variables: customText, selectedFont, selectedColor
+- [x] Add text input field
 - [ ] Add onChanged handler for text input
 - [ ] Add character counter (e.g., max 20 characters)
 - [ ] Create font dropdown with 3+ options (e.g., Arial, Roboto, Courier)

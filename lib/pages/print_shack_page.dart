@@ -9,20 +9,24 @@ class PrintShackPage extends StatefulWidget {
 }
 
 class _PrintShackPageState extends State<PrintShackPage> {
+  String customText = '';
+  String selectedFont = 'Arial';
+  Color selectedColor = Colors.black;
+
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: Navbar(title: 'The Print Shack'),
-      endDrawer: MobileNavDrawer(),
+    return Scaffold(
+      appBar: const Navbar(title: 'The Print Shack'),
+      endDrawer: const MobileNavDrawer(),
       body: Center(
         child: Padding(
-          padding: EdgeInsets.all(32.0),
+          padding: const EdgeInsets.all(32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.print, size: 64, color: Color(0xFF4d2963)),
-              SizedBox(height: 24),
-              Text(
+              const Icon(Icons.print, size: 64, color: Color(0xFF4d2963)),
+              const SizedBox(height: 24),
+              const Text(
                 'The Print Shack',
                 style: TextStyle(
                   fontSize: 32,
@@ -30,11 +34,24 @@ class _PrintShackPageState extends State<PrintShackPage> {
                   color: Color(0xFF4d2963),
                 ),
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Coming soon: Custom printing services for your society, club, or event!',
                 style: TextStyle(fontSize: 18, color: Colors.black87),
                 textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 32),
+              // Text input field for custom text
+              TextField(
+                decoration: const InputDecoration(
+                  labelText: 'Enter your custom text',
+                  border: OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    customText = value;
+                  });
+                },
               ),
             ],
           ),
