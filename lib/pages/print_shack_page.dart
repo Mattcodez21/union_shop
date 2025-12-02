@@ -64,13 +64,11 @@ class _PrintShackPageState extends State<PrintShackPage> {
                   style: TextStyle(
                     fontSize: 28,
                     color: selectedColor,
-                    fontFamily: selectedFont == 'Arial'
-                        ? 'Arial'
-                        : selectedFont == 'Roboto'
-                            ? 'Roboto'
-                            : selectedFont == 'Courier'
-                                ? 'Courier'
-                                : null,
+                    fontFamily: selectedFont == 'Roboto'
+                        ? 'Roboto'
+                        : selectedFont == 'Courier'
+                            ? 'monospace'
+                            : null, // Default for Arial
                   ),
                   textAlign: TextAlign.center,
                 ),
