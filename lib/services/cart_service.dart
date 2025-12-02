@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import '../models/cart_item.dart';
 
 class CartService extends ChangeNotifier {
+  static final CartService _instance = CartService._internal();
+  factory CartService() => _instance;
+  CartService._internal();
+
   final List<CartItem> _items = [];
 
   List<CartItem> get items => List.unmodifiable(_items);

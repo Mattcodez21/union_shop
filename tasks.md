@@ -535,9 +535,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ## 2. Cart Management (6%)
 
 ### Implementation Tasks
-- [ ] Implement full cart functionality: add, edit quantity, and remove items
-- [ ] Display cart contents with product info, quantities, and prices
-- [ ] Allow quantity editing/removal directly in the cart
+- [x] Implement full cart functionality: add, edit quantity, and remove items
+- [x] Display cart contents with product info, quantities, and prices
+- [x] Allow quantity editing/removal directly in the cart
 - [ ] Calculate and display total price dynamically
 - [ ] Persist cart data for logged-in users (e.g., using Firestore or local storage)
 - [ ] Sync cart with user account/dashboard
