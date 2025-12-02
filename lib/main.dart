@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/pages/about_page.dart';
+import 'package:union_shop/pages/account_page.dart';
 import 'package:union_shop/pages/auth_page.dart';
 import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/pages/collection_page.dart';
@@ -11,7 +12,7 @@ import 'package:union_shop/pages/home_page.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/print_shack_page.dart';
-import 'package:union_shop/pages/print_shack_about_page.dart';
+import 'package:union_shop/pages/print_shack_about_page.dart'; // <-- Add this import
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -54,6 +55,7 @@ class UnionShopApp extends StatelessWidget {
         '/cart': (context) => const CartPage(),
         '/print-shack': (context) => const PrintShackPage(),
         '/print-shack-about': (context) => const PrintShackAboutPage(),
+        '/account': (context) => const AccountManager(), // <-- Add this route
       },
       onGenerateRoute: (settings) {
         // Handle /collection/[collectionName] routes

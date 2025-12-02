@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:union_shop/widgets/navbar.dart';
 
-class AccountPage extends StatefulWidget {
-  const AccountPage({Key? key}) : super(key: key);
+class AccountManager extends StatefulWidget {
+  const AccountManager({Key? key}) : super(key: key);
 
   @override
-  State<AccountPage> createState() => _AccountPageState();
+  State<AccountManager> createState() => _AccountManagerState();
 }
 
-class _AccountPageState extends State<AccountPage> {
+class _AccountManagerState extends State<AccountManager> {
   final _displayNameController = TextEditingController();
   String? _statusMessage;
   bool _isUpdating = false;
@@ -68,7 +68,7 @@ class _AccountPageState extends State<AccountPage> {
     }
 
     return Scaffold(
-      appBar: const Navbar(title: "Account"),
+      appBar: const Navbar(title: "Account Manager"),
       endDrawer: const MobileNavDrawer(),
       body: Center(
         child: Card(

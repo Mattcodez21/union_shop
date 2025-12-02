@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -11,6 +12,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
       builder: (context, constraints) {
         final isDesktop = constraints.maxWidth > 900;
         final cartService = CartService();
+        final user = FirebaseAuth.instance.currentUser;
 
         return AppBar(
           backgroundColor: Colors.white,
@@ -71,7 +73,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           ],
                         ),
                         const SizedBox(width: 24),
-                        // Print Shack link
                         _NavBarButton(
                           label: 'The Print Shack',
                           onPressed: () =>
@@ -106,6 +107,15 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             decoration: TextDecoration.underline,
                           ),
                         ),
+                        const SizedBox(width: 24),
+                        // Show Account Manager button only if signed in
+                        if (user != null)
+                          _NavBarButton(
+                            label: 'Account Manager',
+                            onPressed: () =>
+                                Navigator.pushNamed(context, '/account'),
+                          ),
+                        if (user != null) const SizedBox(width: 24),
                         const Spacer(),
                         // Cart, Account, Search icons
                         Row(
@@ -119,7 +129,9 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             IconButton(
                               icon: const Icon(Icons.person_outline,
                                   color: Colors.black54),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/account');
+                              },
                               tooltip: 'Account',
                             ),
                           ],
@@ -301,6 +313,7 @@ class MobileNavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
     return Drawer(
       child: SafeArea(
         child: ListView(
@@ -374,15 +387,20 @@ class MobileNavDrawer extends StatelessWidget {
               ),
               onTap: () {}, // External link, not functional here
             ),
+            // Show Account Manager only if signed in
+            if (user != null)
+              ListTile(
+                leading: const Icon(Icons.person_outline),
+                title: const Text('Account Manager'),
+                onTap: () {
+                  Navigator.pushNamed(context, '/account');
+                  Navigator.of(context).maybePop();
+                },
+              ),
             const Divider(),
             ListTile(
               leading: const Icon(Icons.search),
               title: const Text('Search'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: const Icon(Icons.person_outline),
-              title: const Text('Account'),
               onTap: () {},
             ),
             ListTile(
