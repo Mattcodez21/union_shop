@@ -15,6 +15,18 @@ class _AuthPageState extends State<AuthPage> {
   String errorMessage = '';
   bool isLoading = false;
 
+  @override
+  void initState() {
+    super.initState();
+    if (FirebaseAuth.instance.currentUser != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) {
+          Navigator.pushReplacementNamed(context, '/');
+        }
+      });
+    }
+  }
+
   Future<void> signInWithEmail() async {
     setState(() {
       isLoading = true;
@@ -25,16 +37,18 @@ class _AuthPageState extends State<AuthPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
-      // Optionally navigate or show success
+      if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/');
     } on FirebaseAuthException catch (e) {
       setState(() {
-        errorMessage = e.message ?? 'Sign in failed';
+        errorMessage = e.message ?? e.code;
       });
     } finally {
-      setState(() {
-        isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -48,15 +62,40 @@ class _AuthPageState extends State<AuthPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
+      if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/');
     } on FirebaseAuthException catch (e) {
       setState(() {
-        errorMessage = e.message ?? 'Registration failed';
+        errorMessage = e.message ?? e.code;
       });
     } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
+    }
+  }
+
+  Future<void> signInWithGoogle() async {
+    setState(() {
+      isLoading = true;
+      errorMessage = '';
+    });
+    try {
+      await FirebaseAuth.instance.signInWithPopup(GoogleAuthProvider());
+      if (!mounted) return;
+      Navigator.pushReplacementNamed(context, '/');
+    } on FirebaseAuthException catch (e) {
       setState(() {
-        isLoading = false;
+        errorMessage = e.message ?? e.code;
       });
+    } finally {
+      if (mounted) {
+        setState(() {
+          isLoading = false;
+        });
+      }
     }
   }
 
@@ -201,6 +240,33 @@ class _AuthPageState extends State<AuthPage> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 24),
+                  // Google Sign-In Button
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton.icon(
+                      icon: Image.asset(
+                        'assets/images/google_logo.png',
+                        height: 20,
+                        width: 20,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.login, color: Colors.red),
+                      ),
+                      label: const Text('Sign in with Google'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.black87,
+                        minimumSize: const Size(double.infinity, 48),
+                        side: const BorderSide(color: Colors.grey),
+                        textStyle: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                      ),
+                      onPressed: isLoading ? null : signInWithGoogle,
+                    ),
                   ),
                 ],
               ),
