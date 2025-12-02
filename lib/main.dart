@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/models/collection.dart';
 import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/account_page.dart';
@@ -12,7 +14,7 @@ import 'package:union_shop/pages/home_page.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/print_shack_page.dart';
-import 'package:union_shop/pages/print_shack_about_page.dart'; // <-- Add this import
+import 'package:union_shop/pages/print_shack_about_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,6 +32,10 @@ void main() async {
     );
   } else {
     await Firebase.initializeApp();
+  }
+  // Load cart if user is already signed in
+  if (FirebaseAuth.instance.currentUser != null) {
+    await CartService().loadCart();
   }
   runApp(const UnionShopApp());
 }
@@ -55,7 +61,7 @@ class UnionShopApp extends StatelessWidget {
         '/cart': (context) => const CartPage(),
         '/print-shack': (context) => const PrintShackPage(),
         '/print-shack-about': (context) => const PrintShackAboutPage(),
-        '/account': (context) => const AccountManager(), // <-- Add this route
+        '/account': (context) => const AccountManager(),
       },
       onGenerateRoute: (settings) {
         // Handle /collection/[collectionName] routes
