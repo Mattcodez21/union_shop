@@ -390,8 +390,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ### 3.5. Print Shack (3%)
 
 **Implementation Tasks:**
-- [ ] Create pages/print_shack_page.dart
-- [ ] Create StatefulWidget
+- [x] Create pages/print_shack_page.dart
+- [x] Create StatefulWidget
 - [ ] Add state variables: customText, selectedFont, selectedColor
 - [ ] Add text input field
 - [ ] Add onChanged handler for text input
