@@ -394,9 +394,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Create StatefulWidget
 - [x] Add state variables: customText, selectedFont, selectedColor
 - [x] Add text input field
-- [ ] Add onChanged handler for text input
-- [ ] Add character counter (e.g., max 20 characters)
-- [ ] Create font dropdown with 3+ options (e.g., Arial, Roboto, Courier)
+- [x] Add onChanged handler for text input
+- [x] Add character counter (e.g., max 20 characters)
+- [x] Create font dropdown with 3+ options (e.g., Arial, Roboto, Courier)
 - [ ] Add onChanged handler for font
 - [ ] Create color dropdown with 3+ options (e.g., Black, Red, Blue, Purple)
 - [ ] Add onChanged handler for color

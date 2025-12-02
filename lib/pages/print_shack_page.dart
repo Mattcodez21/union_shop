@@ -13,6 +13,8 @@ class _PrintShackPageState extends State<PrintShackPage> {
   String selectedFont = 'Arial';
   Color selectedColor = Colors.black;
 
+  final List<String> fontOptions = ['Arial', 'Roboto', 'Courier'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,15 +45,50 @@ class _PrintShackPageState extends State<PrintShackPage> {
               const SizedBox(height: 32),
               // Text input field for custom text
               TextField(
+                maxLength: 20,
                 decoration: const InputDecoration(
                   labelText: 'Enter your custom text',
                   border: OutlineInputBorder(),
+                  counterText: '', // Hide default counter
                 ),
                 onChanged: (value) {
                   setState(() {
                     customText = value;
                   });
                 },
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text(
+                  '${customText.length}/20',
+                  style: const TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+              ),
+              const SizedBox(height: 24),
+              // Font dropdown
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Font:',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  const SizedBox(width: 16),
+                  DropdownButton<String>(
+                    value: selectedFont,
+                    items: fontOptions
+                        .map((font) => DropdownMenuItem(
+                              value: font,
+                              child: Text(font),
+                            ))
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedFont = value!;
+                      });
+                    },
+                  ),
+                ],
               ),
             ],
           ),
