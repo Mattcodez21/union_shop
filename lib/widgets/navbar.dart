@@ -71,19 +71,15 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           ],
                         ),
                         const SizedBox(width: 24),
-                        const Row(
-                          children: [
-                            _NavBarButton(
-                              label: 'The Print Shack',
-                              onPressed: null,
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            Icon(Icons.arrow_drop_down,
-                                color: Colors.black54, size: 20),
-                          ],
+                        // Print Shack link
+                        _NavBarButton(
+                          label: 'The Print Shack',
+                          onPressed: () =>
+                              Navigator.pushNamed(context, '/print-shack'),
+                          style: const TextStyle(
+                            color: Colors.black54,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         const SizedBox(width: 24),
                         _NavBarButton(
@@ -341,9 +337,10 @@ class MobileNavDrawer extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.print),
               title: const Text('The Print Shack'),
-              onTap: () {}, // Not functional
-              trailing:
-                  const Icon(Icons.arrow_drop_down, color: Colors.black54),
+              onTap: () {
+                Navigator.pushNamed(context, '/print-shack');
+                Navigator.of(context).maybePop();
+              },
             ),
             ListTile(
               leading: const Icon(Icons.local_offer, color: Colors.red),

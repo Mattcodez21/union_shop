@@ -10,16 +10,13 @@ class PrintShackPage extends StatefulWidget {
 
 class _PrintShackPageState extends State<PrintShackPage> {
   String customText = '';
-  String selectedFont = 'Arial';
-  Color selectedColor = Colors.black;
+  String perLine = 'One Line of Text';
+  int quantity = 1;
 
-  final List<String> fontOptions = ['Arial', 'Roboto', 'Courier'];
-  final Map<String, Color> colorOptions = {
-    'Black': Colors.black,
-    'Red': Colors.red,
-    'Blue': Colors.blue,
-    'Purple': Colors.purple,
-  };
+  final List<String> perLineOptions = [
+    'One Line of Text',
+    'Two Lines of Text',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -29,153 +26,187 @@ class _PrintShackPageState extends State<PrintShackPage> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(32.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Icon(Icons.print, size: 64, color: Color(0xFF4d2963)),
-              const SizedBox(height: 24),
-              const Text(
-                'The Print Shack',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF4d2963),
-                ),
-              ),
-              const SizedBox(height: 16),
-              const Text(
-                'Coming soon: Custom printing services for your society, club, or event!',
-                style: TextStyle(fontSize: 18, color: Colors.black87),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/print-shack-about');
-                },
-                icon: const Icon(Icons.info_outline),
-                label: const Text('About Print Shack'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF4d2963),
-                  foregroundColor: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                ),
-              ),
-              const SizedBox(height: 32),
-              // Preview widget
-              Container(
-                width: 320,
-                height: 120,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  border: Border.all(color: Colors.grey),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  customText.isEmpty
-                      ? 'Your custom text will appear here'
-                      : customText,
-                  style: TextStyle(
-                    fontSize: 28,
-                    color: selectedColor,
-                    fontFamily: selectedFont == 'Roboto'
-                        ? 'Roboto'
-                        : selectedFont == 'Courier'
-                            ? 'monospace'
-                            : null, // Default for Arial
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const SizedBox(height: 32),
-              // Text input field for custom text
-              TextField(
-                maxLength: 20,
-                decoration: const InputDecoration(
-                  labelText: 'Enter your custom text',
-                  border: OutlineInputBorder(),
-                  counterText: '', // Hide default counter
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    customText = value;
-                  });
-                },
-              ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  '${customText.length}/20',
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ),
-              const SizedBox(height: 24),
-              // Font dropdown
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+              // Images (left)
+              Column(
                 children: [
-                  const Text(
-                    'Font:',
-                    style: TextStyle(fontSize: 16),
+                  // Main image
+                  Container(
+                    width: 260,
+                    height: 260,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey[300]!),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Image.asset(
+                      'assets/images/print_shack_hoodie.png', // Replace with your asset
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  const SizedBox(width: 16),
-                  DropdownButton<String>(
-                    value: selectedFont,
-                    items: fontOptions
-                        .map((font) => DropdownMenuItem(
-                              value: font,
-                              child: Text(font),
-                            ))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedFont = value!;
-                      });
-                    },
+                  const SizedBox(height: 12),
+                  // Thumbnails
+                  Row(
+                    children: [
+                      Container(
+                        width: 60,
+                        height: 60,
+                        margin: const EdgeInsets.only(right: 8),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey[300]!),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Image.asset(
+                          'assets/images/print_shack_hoodie.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Container(
+                        width: 60,
+                        height: 60,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey[300]!),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Image.asset(
+                          'assets/images/print_shack_hoodie2.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
-              const SizedBox(height: 24),
-              // Color dropdown
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    'Color:',
-                    style: TextStyle(fontSize: 16),
-                  ),
-                  const SizedBox(width: 16),
-                  DropdownButton<Color>(
-                    value: selectedColor,
-                    items: colorOptions.entries
-                        .map((entry) => DropdownMenuItem<Color>(
-                              value: entry.value,
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 16,
-                                    height: 16,
-                                    margin: const EdgeInsets.only(right: 8),
-                                    decoration: BoxDecoration(
-                                      color: entry.value,
-                                      shape: BoxShape.circle,
-                                      border: Border.all(color: Colors.grey),
-                                    ),
-                                  ),
-                                  Text(entry.key),
-                                ],
-                              ),
-                            ))
-                        .toList(),
-                    onChanged: (color) {
-                      setState(() {
-                        selectedColor = color!;
-                      });
-                    },
-                  ),
-                ],
+              const SizedBox(width: 48),
+              // Form (right)
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Personalisation',
+                      style: TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    const Text(
+                      '£3.00',
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Colors.black87,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    const Text(
+                      'Tax included.',
+                      style: TextStyle(fontSize: 14, color: Colors.grey),
+                    ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      'Per Line:',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    DropdownButton<String>(
+                      value: perLine,
+                      items: perLineOptions
+                          .map((option) => DropdownMenuItem(
+                                value: option,
+                                child: Text(option),
+                              ))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          perLine = value!;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Personalisation Line 1:',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    TextField(
+                      maxLength: 10,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        counterText: '',
+                      ),
+                      onChanged: (value) {
+                        setState(() {
+                          customText = value;
+                        });
+                      },
+                    ),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        '${customText.length}/10',
+                        style:
+                            const TextStyle(fontSize: 12, color: Colors.grey),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      'Quantity',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 60,
+                          child: TextField(
+                            keyboardType: TextInputType.number,
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                            ),
+                            controller: TextEditingController(
+                                text: quantity.toString()),
+                            onChanged: (value) {
+                              setState(() {
+                                quantity = int.tryParse(value) ?? 1;
+                              });
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        ElevatedButton(
+                          onPressed: () {
+                            // Add to cart logic here
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Added to cart!')),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 32, vertical: 18),
+                          ),
+                          child: const Text(
+                            'ADD TO CART',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              letterSpacing: 0.5,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    const Text(
+                      '£3 for one line of text! £5 for two!\n\n'
+                      'One line of text is 10 characters.\n\n'
+                      'Please ensure all spellings are correct before submitting your purchase as we will print your item with the exact wording you provide. We will not be responsible for any incorrect spellings printed onto your garment. Personalised items do not qualify for refunds.',
+                      style: TextStyle(fontSize: 14, color: Colors.black87),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

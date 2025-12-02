@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/models/collection.dart';
-import 'package:union_shop/pages/product_page.dart';
-import 'package:union_shop/pages/home_page.dart';
 import 'package:union_shop/pages/about_page.dart';
-import 'package:union_shop/pages/collections_page.dart';
-import 'package:union_shop/pages/collection_page.dart';
-import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/auth_page.dart';
-import 'package:union_shop/pages/cart_page.dart'; // <-- Add this import
+import 'package:union_shop/pages/cart_page.dart';
+import 'package:union_shop/pages/collection_page.dart';
+import 'package:union_shop/pages/collections_page.dart';
+import 'package:union_shop/pages/home_page.dart';
+import 'package:union_shop/pages/product_page.dart';
+import 'package:union_shop/pages/sale_page.dart';
+import 'package:union_shop/pages/print_shack_page.dart';
+import 'package:union_shop/pages/print_shack_about_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -31,17 +33,19 @@ class UnionShopApp extends StatelessWidget {
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
         '/auth': (context) => const AuthPage(),
-        '/cart': (context) => const CartPage(), // <-- Add this line
+        '/cart': (context) => const CartPage(),
+        '/print-shack': (context) => const PrintShackPage(),
+        '/print-shack-about': (context) => const PrintShackAboutPage(),
       },
       onGenerateRoute: (settings) {
         // Handle /collection/[collectionName] routes
-        if (settings.name!.startsWith('/collection/')) {
+        if (settings.name != null &&
+            settings.name!.startsWith('/collection/')) {
           final collectionName = settings.name!.split('/')[2];
           return MaterialPageRoute(
             builder: (context) => CollectionPage(
               collectionName: collectionName,
-              collectionData:
-                  settings.arguments as Collection?, // <-- fixed type
+              collectionData: settings.arguments as Collection?,
             ),
             settings: settings,
           );

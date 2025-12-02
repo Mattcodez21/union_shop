@@ -408,8 +408,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Create pages/print_shack_about_page.dart
 - [x] Add service information and guidelines
 - [x] Add navigation between Print Shack pages
-- [ ] Add routes to main.dart
-- [ ] Add Print Shack link to navbar
+- [x] Add routes to main.dart
+- [x] Add Print Shack link to navbar
 - [ ] Test preview updates as text typed
 - [ ] Test preview updates with font changes
 - [ ] Test preview updates with color changes
