@@ -18,13 +18,13 @@ void main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: 'AIzaSyCx5nUqCXXYNvFDCV7bGrpbNHwzhfLCt8', // <-- your config
+        apiKey: 'AIzaSyCXh5UnCQKXYxNFVbC7VbGrpDHvWzhfLC8',
         authDomain: 'unionshop-aa727.firebaseapp.com',
         projectId: 'unionshop-aa727',
         storageBucket: 'unionshop-aa727.appspot.com',
-        messagingSenderId: '308183404754',
-        appId: '1:308183404754:web:45fae36d7be8eb1ad136b',
-        measurementId: 'G-DYTYXQLJET',
+        messagingSenderId: '380813408754',
+        appId: '1:380813408754:web:45fae36d7be8eb1ada136b',
+        measurementId: 'G-DYTXYQLJET',
       ),
     );
   } else {
