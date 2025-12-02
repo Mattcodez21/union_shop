@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/models/cart_item.dart';
-import 'package:union_shop/services/cart_service.dart';
+import '../models/cart_item.dart';
+import '../services/cart_service.dart';
 
 class CartItemCard extends StatelessWidget {
   final CartItem item;
@@ -44,7 +44,36 @@ class CartItemCard extends StatelessWidget {
         trailing: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text('x${item.quantity}'),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.remove_circle_outline),
+                  onPressed: () {
+                    if (item.quantity > 1) {
+                      cartService.updateQuantity(
+                        item.product.id,
+                        item.selectedSize,
+                        item.selectedColor,
+                        item.quantity - 1,
+                      );
+                    }
+                  },
+                ),
+                Text('${item.quantity}'),
+                IconButton(
+                  icon: const Icon(Icons.add_circle_outline),
+                  onPressed: () {
+                    cartService.updateQuantity(
+                      item.product.id,
+                      item.selectedSize,
+                      item.selectedColor,
+                      item.quantity + 1,
+                    );
+                  },
+                ),
+              ],
+            ),
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
               onPressed: () {

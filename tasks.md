@@ -7,8 +7,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ## Progress Summary
 **Overall Progress**:
 - Basic Features: 9/9 (40% of 40%)
-- Intermediate Features: 3/7 (18% of 35%)
-- Advanced Features: 0/3 (0% of 25%)
+- Intermediate Features: 7/7 (35% of 35%)
+- Advanced Features: 1/3 (8% of 25%)
 
 ---
 
@@ -517,7 +517,7 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Implement user registration (sign up) and login (sign in) with email/password
 - [x] Add Google (and/or Facebook) sign-in option
 - [x] Create account management page (view/update profile, sign out)
-- [ ] Display user info (e.g., email) in the navbar/account dashboard
+- [x] Display user info (e.g., email) in the navbar/account dashboard
 - [ ] Restrict access to account/cart pages for unauthenticated users
 - [x] Show error messages and loading indicators during authentication
 - [x] Test registration, login, logout, and account management flows

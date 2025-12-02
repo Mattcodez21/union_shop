@@ -1,141 +1,59 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/services/cart_service.dart';
-import 'package:union_shop/widgets/navbar.dart';
-import 'package:union_shop/widgets/cart_item_card.dart';
+import '../services/cart_service.dart';
+import '../widgets/cart_item_card.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final cartService = CartService();
+  State<CartPage> createState() => _CartPageState();
+}
 
+class _CartPageState extends State<CartPage> {
+  final cartService = CartService();
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Navbar(title: 'Your Cart'),
-      endDrawer: const MobileNavDrawer(),
+      appBar: AppBar(
+        title: const Text('Your Cart'),
+      ),
       body: AnimatedBuilder(
         animation: cartService,
         builder: (context, _) {
-          final items = cartService.getCartItems();
-          final total = cartService.getTotalPrice();
-
+          final items = cartService.items;
           if (items.isEmpty) {
             return const Center(
-              child: Text(
-                'Your cart is empty.',
-                style: TextStyle(fontSize: 20, color: Colors.grey),
-              ),
+              child: Text('Your cart is empty'),
             );
           }
-
-          return Column(
+          return ListView(
+            padding: const EdgeInsets.all(16),
             children: [
-              Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: items.length,
-                  separatorBuilder: (_, __) => const Divider(),
-                  itemBuilder: (context, index) {
-                    return CartItemCard(item: items[index]);
-                  },
+              ...items.map((item) => CartItemCard(item: item)),
+              const SizedBox(height: 24),
+              Text(
+                'Total: £${cartService.totalPrice.toStringAsFixed(2)}',
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF4d2963),
                 ),
+                textAlign: TextAlign.right,
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  border: const Border(
-                    top: BorderSide(color: Colors.grey),
-                  ),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Total:',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
-                      ),
-                    ),
-                    Text(
-                      '£${total.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF4d2963),
-                      ),
-                    ),
-                  ],
-                ),
+              const SizedBox(height: 16),
+              ElevatedButton(
+                onPressed: () {
+                  // Proceed to checkout logic here
+                },
+                child: const Text('Checkout'),
               ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Order placed! (Not implemented)'),
-                        ),
-                      );
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text(
-                      'PLACE ORDER',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              'Checkout successful! Thank you for your order.'),
-                        ),
-                      );
-                      cartService.clearCart();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4d2963),
-                      padding: const EdgeInsets.symmetric(vertical: 18),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: const Text(
-                      'CHECKOUT',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                  ),
-                ),
+              const SizedBox(height: 8),
+              TextButton(
+                onPressed: () {
+                  cartService.clearCart();
+                },
+                child: const Text('Clear Cart'),
               ),
             ],
           );
