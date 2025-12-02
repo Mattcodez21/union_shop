@@ -16,7 +16,7 @@ import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/print_shack_page.dart';
 import 'package:union_shop/pages/print_shack_about_page.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
@@ -33,8 +33,9 @@ void main() async {
   } else {
     await Firebase.initializeApp();
   }
-  // Load cart if user is already signed in
-  if (FirebaseAuth.instance.currentUser != null) {
+  // Always load cart if user is signed in, even after app restart
+  final user = FirebaseAuth.instance.currentUser;
+  if (user != null) {
     await CartService().loadCart();
   }
   runApp(const UnionShopApp());
