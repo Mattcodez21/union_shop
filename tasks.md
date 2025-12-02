@@ -355,9 +355,9 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Create clearCart method
 - [x] Update ProductPage "Add to Cart" button functionality
 - [x] Create CartItem from current product state
-- [ ] Call cartService.addToCart
-- [ ] Show snackbar confirmation
-- [ ] Update cart icon badge with item count
+- [x] Call cartService.addToCart
+- [x] Show snackbar confirmation
+- [x] Update cart icon badge with item count
 - [ ] Create pages/cart_page.dart
 - [ ] Add cart route to main.dart
 - [ ] Connect cart icon navigation

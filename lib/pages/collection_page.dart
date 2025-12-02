@@ -172,7 +172,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: selectedSize,
+                    initialValue: selectedSize,
                     items: sizeOptions
                         .map((size) =>
                             DropdownMenuItem(value: size, child: Text(size)))
@@ -194,7 +194,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: selectedColor,
+                    initialValue: selectedColor,
                     items: colorOptions
                         .map((color) =>
                             DropdownMenuItem(value: color, child: Text(color)))
@@ -216,7 +216,7 @@ class _CollectionPageState extends State<CollectionPage> {
                       contentPadding:
                           EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                     ),
-                    value: selectedSort,
+                    initialValue: selectedSort,
                     items: const [
                       DropdownMenuItem(
                           value: 'Featured', child: Text('Featured')),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/cart_service.dart';
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
@@ -9,6 +10,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesktop = constraints.maxWidth > 900;
+        final cartService = CartService();
 
         return AppBar(
           backgroundColor: Colors.white,
@@ -109,6 +111,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         ),
                         const Spacer(),
+                        // Cart, Account, Search icons
                         Row(
                           children: [
                             IconButton(
@@ -123,15 +126,54 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                               onPressed: () {},
                               tooltip: 'Account',
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.shopping_bag,
-                                  color: Colors.black54),
-                              onPressed: () {},
-                              tooltip: 'Cart',
+                            // Cart Icon with Badge
+                            AnimatedBuilder(
+                              animation: cartService,
+                              builder: (context, _) {
+                                final count = cartService.itemCount;
+                                return Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.shopping_bag,
+                                          color: Colors.black54),
+                                      onPressed: () {},
+                                      tooltip: 'Cart',
+                                    ),
+                                    if (count > 0)
+                                      Positioned(
+                                        right: 0, // <-- Move badge further left
+                                        top: 4,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          constraints: const BoxConstraints(
+                                            minWidth: 20,
+                                            minHeight: 20,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '$count',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                );
+                              },
                             ),
                           ],
                         ),
-                        const SizedBox(width: 24),
+                        const SizedBox(
+                            width: 36), // Increased space to avoid overlap
                       ],
                     ),
                   ),
@@ -163,6 +205,51 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ],
                     const Spacer(),
+                    // Cart Icon with Badge (move before menu)
+                    AnimatedBuilder(
+                      animation: cartService,
+                      builder: (context, _) {
+                        final count = cartService.itemCount;
+                        return Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.shopping_bag,
+                                  color: Colors.black54),
+                              onPressed: () {},
+                              tooltip: 'Cart',
+                            ),
+                            if (count > 0)
+                              Positioned(
+                                right: 0, // <-- Move badge further left
+                                top: 4,
+                                child: Container(
+                                  padding: const EdgeInsets.all(4),
+                                  decoration: const BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  constraints: const BoxConstraints(
+                                    minWidth: 20,
+                                    minHeight: 20,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      '$count',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        );
+                      },
+                    ),
+                    const SizedBox(width: 8), // Add space between bag and menu
                     Builder(
                       builder: (context) => IconButton(
                         icon: const Icon(Icons.menu,

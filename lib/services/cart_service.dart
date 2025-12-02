@@ -44,4 +44,6 @@ class CartService extends ChangeNotifier {
     return _items.fold(
         0, (sum, item) => sum + item.product.price * item.quantity);
   }
+
+  int get itemCount => _items.fold(0, (sum, item) => sum + item.quantity);
 }
