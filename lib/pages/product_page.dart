@@ -436,14 +436,14 @@ class _ProductPageState extends State<ProductPage> {
                                     if (product != null &&
                                         selectedSize != null &&
                                         selectedColor != null) {
-                                      CartService().addToCart(
-                                        CartItem(
-                                          product: product!,
-                                          selectedSize: selectedSize!,
-                                          selectedColor: selectedColor!,
-                                          quantity: quantity,
-                                        ),
+                                      final cartItem =
+                                          CartItem.fromProductState(
+                                        product: product!,
+                                        selectedSize: selectedSize!,
+                                        selectedColor: selectedColor!,
+                                        quantity: quantity,
                                       );
+                                      CartService().addToCart(cartItem);
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
@@ -811,14 +811,13 @@ class _ProductPageState extends State<ProductPage> {
                               if (product != null &&
                                   selectedSize != null &&
                                   selectedColor != null) {
-                                CartService().addToCart(
-                                  CartItem(
-                                    product: product!,
-                                    selectedSize: selectedSize!,
-                                    selectedColor: selectedColor!,
-                                    quantity: quantity,
-                                  ),
+                                final cartItem = CartItem.fromProductState(
+                                  product: product!,
+                                  selectedSize: selectedSize!,
+                                  selectedColor: selectedColor!,
+                                  quantity: quantity,
                                 );
+                                CartService().addToCart(cartItem);
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
