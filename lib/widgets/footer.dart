@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/data/products_data.dart';
 
-// Simple search delegate for demonstration
+// Product search delegate with product search logic
 class ProductSearchDelegate extends SearchDelegate<String> {
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -22,12 +23,57 @@ class ProductSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    return Center(child: Text('Search results for "$query"'));
+    final results = products
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()) ||
+            product.description.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    if (results.isEmpty) {
+      return const Center(child: Text('No products found.'));
+    }
+
+    return ListView.builder(
+      itemCount: results.length,
+      itemBuilder: (context, index) {
+        final product = results[index];
+        return ListTile(
+          leading: product.imageUrls.isNotEmpty
+              ? Image.asset(product.imageUrls.first,
+                  width: 48, height: 48, fit: BoxFit.cover)
+              : const Icon(Icons.shopping_bag),
+          title: Text(product.name),
+          subtitle: Text(product.description),
+          onTap: () {
+            close(context, product.name);
+            Navigator.pushNamed(context, '/product',
+                arguments: {'productId': product.id});
+          },
+        );
+      },
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Center(child: Text('Suggestions for "$query"'));
+    final suggestions = products
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final product = suggestions[index];
+        return ListTile(
+          title: Text(product.name),
+          onTap: () {
+            query = product.name;
+            showResults(context);
+          },
+        );
+      },
+    );
   }
 }
 
@@ -42,7 +88,6 @@ class Footer extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Column(
         children: [
-          // Three-column layout
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -70,8 +115,7 @@ class Footer extends StatelessWidget {
                   ],
                 ),
               ),
-
-              // Help and Information Column
+              // Help and Information Column with search bar
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -88,7 +132,7 @@ class Footer extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(bottom: 8.0),
                       child: TextField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: 'Search products...',
                           prefixIcon: Icon(Icons.search),
                           border: OutlineInputBorder(),
@@ -132,7 +176,6 @@ class Footer extends StatelessWidget {
                   ],
                 ),
               ),
-
               // Latest Offers Column
               Expanded(
                 child: Column(
@@ -166,10 +209,7 @@ class Footer extends StatelessWidget {
               ),
             ],
           ),
-
           const SizedBox(height: 24),
-
-          // Account navigation link
           Padding(
             padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
             child: GestureDetector(
@@ -193,17 +233,12 @@ class Footer extends StatelessWidget {
               ),
             ),
           ),
-
           const SizedBox(height: 16),
-
-          // Social Media Icons Row
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                onPressed: () {
-                  // Placeholder for Facebook link
-                },
+                onPressed: () {},
                 icon: Icon(
                   Icons.facebook,
                   color: Colors.grey[600],
@@ -212,21 +247,16 @@ class Footer extends StatelessWidget {
               ),
               const SizedBox(width: 16),
               IconButton(
-                onPressed: () {
-                  // Placeholder for Twitter link
-                },
+                onPressed: () {},
                 icon: Icon(
-                  Icons.alternate_email, // Twitter-like icon
+                  Icons.alternate_email,
                   color: Colors.grey[600],
                   size: 24,
                 ),
               ),
             ],
           ),
-
           const SizedBox(height: 24),
-
-          // Copyright text and Powered by Shopify
           Column(
             children: [
               Text(

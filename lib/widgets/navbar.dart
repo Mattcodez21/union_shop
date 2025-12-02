@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:union_shop/data/products_data.dart';
 
-// Simple search delegate for demonstration
+// Product search delegate with product search logic
 class ProductSearchDelegate extends SearchDelegate<String> {
   @override
   List<Widget>? buildActions(BuildContext context) {
@@ -24,14 +25,57 @@ class ProductSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    // Replace with your actual search results UI
-    return Center(child: Text('Search results for "$query"'));
+    final results = products
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()) ||
+            product.description.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    if (results.isEmpty) {
+      return const Center(child: Text('No products found.'));
+    }
+
+    return ListView.builder(
+      itemCount: results.length,
+      itemBuilder: (context, index) {
+        final product = results[index];
+        return ListTile(
+          leading: product.imageUrls.isNotEmpty
+              ? Image.asset(product.imageUrls.first,
+                  width: 48, height: 48, fit: BoxFit.cover)
+              : const Icon(Icons.shopping_bag),
+          title: Text(product.name),
+          subtitle: Text(product.description),
+          onTap: () {
+            close(context, product.name);
+            Navigator.pushNamed(context, '/product',
+                arguments: {'productId': product.id});
+          },
+        );
+      },
+    );
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // Replace with your actual suggestions UI
-    return Center(child: Text('Suggestions for "$query"'));
+    final suggestions = products
+        .where((product) =>
+            product.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    return ListView.builder(
+      itemCount: suggestions.length,
+      itemBuilder: (context, index) {
+        final product = suggestions[index];
+        return ListTile(
+          title: Text(product.name),
+          onTap: () {
+            query = product.name;
+            showResults(context);
+          },
+        );
+      },
+    );
   }
 }
 
@@ -141,7 +185,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         ),
                         const SizedBox(width: 24),
-                        // Show user email if signed in
                         if (user != null)
                           Padding(
                             padding:
@@ -152,7 +195,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                                   fontSize: 14, color: Colors.black54),
                             ),
                           ),
-                        // Show Account Manager button only if signed in
                         if (user != null)
                           _NavBarButton(
                             label: 'Account Manager',
@@ -161,7 +203,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         if (user != null) const SizedBox(width: 24),
                         const Spacer(),
-                        // Cart, Account, Search icons
                         Row(
                           children: [
                             IconButton(
@@ -184,7 +225,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             ),
                           ],
                         ),
-                        // Move Cart Icon further left, before the menu icon
                         AnimatedBuilder(
                           animation: cartService,
                           builder: (context, _) {
@@ -230,7 +270,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             );
                           },
                         ),
-                        const SizedBox(width: 16), // More space before menu
+                        const SizedBox(width: 16),
                       ],
                     ),
                   ),
@@ -262,7 +302,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ],
                     const Spacer(),
-                    // Move Cart Icon before menu icon
                     AnimatedBuilder(
                       animation: cartService,
                       builder: (context, _) {
@@ -308,7 +347,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                     ),
-                    const SizedBox(width: 8), // Space between bag and menu
+                    const SizedBox(width: 8),
                     Builder(
                       builder: (context) => IconButton(
                         icon: const Icon(Icons.menu,
@@ -433,9 +472,8 @@ class MobileNavDrawer extends StatelessWidget {
                   decoration: TextDecoration.underline,
                 ),
               ),
-              onTap: () {}, // External link, not functional here
+              onTap: () {},
             ),
-            // Show user email if signed in
             if (user != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -444,7 +482,6 @@ class MobileNavDrawer extends StatelessWidget {
                   style: const TextStyle(fontSize: 14, color: Colors.black54),
                 ),
               ),
-            // Show Account Manager only if signed in
             if (user != null)
               ListTile(
                 leading: const Icon(Icons.person_outline),
