@@ -516,11 +516,11 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 - [x] Initialize Firebase in `main.dart`
 - [x] Implement user registration (sign up) and login (sign in) with email/password
 - [x] Add Google (and/or Facebook) sign-in option
-- [ ] Create account management page (view/update profile, sign out)
+- [x] Create account management page (view/update profile, sign out)
 - [ ] Display user info (e.g., email) in the navbar/account dashboard
 - [ ] Restrict access to account/cart pages for unauthenticated users
-- [ ] Show error messages and loading indicators during authentication
-- [ ] Test registration, login, logout, and account management flows
+- [x] Show error messages and loading indicators during authentication
+- [x] Test registration, login, logout, and account management flows
 
 ### Testing
 - [ ] User can register and log in with email/password

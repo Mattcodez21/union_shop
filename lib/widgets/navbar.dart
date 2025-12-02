@@ -108,6 +108,17 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         ),
                         const SizedBox(width: 24),
+                        // Show user email if signed in
+                        if (user != null)
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
+                            child: Text(
+                              user.email ?? '',
+                              style: const TextStyle(
+                                  fontSize: 14, color: Colors.black54),
+                            ),
+                          ),
                         // Show Account Manager button only if signed in
                         if (user != null)
                           _NavBarButton(
@@ -387,6 +398,15 @@ class MobileNavDrawer extends StatelessWidget {
               ),
               onTap: () {}, // External link, not functional here
             ),
+            // Show user email if signed in
+            if (user != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Text(
+                  user.email ?? '',
+                  style: const TextStyle(fontSize: 14, color: Colors.black54),
+                ),
+              ),
             // Show Account Manager only if signed in
             if (user != null)
               ListTile(

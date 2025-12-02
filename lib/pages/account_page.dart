@@ -91,7 +91,11 @@ class _AccountManagerState extends State<AccountManager> {
                     const Text("Email:",
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     const SizedBox(width: 8),
-                    Text(user.email ?? "No email"),
+                    Text(user.email ?? "No email",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          color: Colors.black87,
+                        )),
                   ],
                 ),
                 const SizedBox(height: 24),
