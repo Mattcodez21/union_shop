@@ -345,8 +345,8 @@ This document outlines all implementation tasks for the Union Shop Flutter cours
 ### 3.4. Shopping Cart (6%)
 
 **Implementation Tasks:**
-- [ ] Create models/cart_item.dart
-- [ ] Add properties: product, selectedSize, selectedColor, quantity
+- [x] Create models/cart_item.dart
+- [x] Add properties: product, selectedSize, selectedColor, quantity
 - [ ] Create services/cart_service.dart
 - [ ] Implement cart state (List<CartItem>)
 - [ ] Create addToCart method
