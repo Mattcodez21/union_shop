@@ -168,7 +168,7 @@ class _ProductPageState extends State<ProductPage> {
                       child: ElevatedButton(
                         onPressed: () {
                           if (product != null) {
-                            final cartItem = CartItem.fromProductState(
+                            final cartItem = CartItem(
                               product: product!,
                               selectedSize: selectedSize ?? '',
                               selectedColor: selectedColor ?? '',
