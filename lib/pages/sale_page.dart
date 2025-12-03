@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/data/products_data.dart';
 
 class SalePage extends StatefulWidget {
@@ -111,7 +112,8 @@ class _SalePageState extends State<SalePage> {
             ),
           ),
           const SizedBox(height: 20),
-          Expanded(
+          Padding(
+            padding: const EdgeInsets.all(16.0),
             child: sortedProducts.isEmpty
                 ? const Center(
                     child: Text(
@@ -121,6 +123,8 @@ class _SalePageState extends State<SalePage> {
                   )
                 : GridView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: crossAxisCount,
                       crossAxisSpacing: 16.0,
@@ -277,6 +281,8 @@ class _SalePageState extends State<SalePage> {
                     },
                   ),
           ),
+          const SizedBox(height: 24),
+          const Footer(),
         ],
       ),
     );
