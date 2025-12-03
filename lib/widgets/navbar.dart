@@ -94,7 +94,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
         return AppBar(
           backgroundColor: Colors.white,
           elevation: 2,
-          automaticallyImplyLeading: Navigator.of(context).canPop(),
+          automaticallyImplyLeading: false,
           titleSpacing: 0,
           toolbarHeight: kToolbarHeight,
           title: isDesktop
@@ -194,83 +194,77 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                               child: Text(
                                 user.email ?? '',
                                 style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black54,
                                   overflow: TextOverflow.ellipsis,
+                                  fontSize: 14,
                                 ),
                                 maxLines: 1,
                               ),
                             ),
                           ),
                         const Spacer(),
-                        Row(
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.search,
-                                  color: Colors.black54),
-                              onPressed: () {
-                                showSearch(
-                                    context: context,
-                                    delegate: ProductSearchDelegate());
-                              },
-                              tooltip: 'Search',
-                            ),
-                            IconButton(
-                              icon: const Icon(Icons.person_outline,
-                                  color: Colors.black54),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/account');
-                              },
-                              tooltip: 'Account',
-                            ),
-                            AnimatedBuilder(
-                              animation: cartService,
-                              builder: (context, _) {
-                                final count = cartService.itemCount;
-                                return Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    IconButton(
-                                      icon: const Icon(Icons.shopping_bag,
-                                          color: Colors.black54),
-                                      onPressed: () {
-                                        Navigator.pushNamed(context, '/cart');
-                                      },
-                                      tooltip: 'Cart',
-                                    ),
-                                    if (count > 0)
-                                      Positioned(
-                                        right: 0,
-                                        top: 4,
-                                        child: Container(
-                                          padding: const EdgeInsets.all(4),
-                                          decoration: const BoxDecoration(
-                                            color: Colors.red,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          constraints: const BoxConstraints(
-                                            minWidth: 20,
-                                            minHeight: 20,
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              '$count',
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
+                        IconButton(
+                          icon: const Icon(Icons.search, color: Colors.black54),
+                          onPressed: () {
+                            showSearch(
+                                context: context,
+                                delegate: ProductSearchDelegate());
+                          },
+                          tooltip: 'Search',
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.person_outline,
+                              color: Colors.black54),
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/account');
+                          },
+                          tooltip: 'Account',
+                        ),
+                        AnimatedBuilder(
+                          animation: cartService,
+                          builder: (context, _) {
+                            final count = cartService.itemCount;
+                            return Stack(
+                              clipBehavior: Clip.none,
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.shopping_bag,
+                                      color: Colors.black54),
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, '/cart');
+                                  },
+                                  tooltip: 'Cart',
+                                ),
+                                if (count > 0)
+                                  Positioned(
+                                    right: 0,
+                                    top: 4,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(4),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.red,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      constraints: const BoxConstraints(
+                                        minWidth: 20,
+                                        minHeight: 20,
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          '$count',
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                  ],
-                                );
-                              },
-                            ),
-                          ],
+                                    ),
+                                  ),
+                              ],
+                            );
+                          },
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 60), // Increased from 8 to 60
                       ],
                     ),
                   ),
@@ -292,17 +286,19 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                     if (title != null) ...[
                       const SizedBox(width: 16),
-                      Text(
-                        title!,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black87,
+                      Expanded(
+                        child: Text(
+                          title!,
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                          ),
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
-                    ],
-                    const Spacer(),
-                    // Cart icon BEFORE menu icon
+                    ] else
+                      const Spacer(),
                     AnimatedBuilder(
                       animation: cartService,
                       builder: (context, _) {
@@ -348,19 +344,23 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                     ),
-                    const SizedBox(width: 8),
-                    Builder(
-                      builder: (context) => IconButton(
-                        icon: const Icon(Icons.menu,
-                            color: Colors.black54, size: 28),
-                        onPressed: () {
-                          Scaffold.of(context).openEndDrawer();
-                        },
-                        tooltip: 'Menu',
-                      ),
-                    ),
                   ],
                 ),
+          actions: !isDesktop
+              ? [
+                  Builder(
+                    builder: (context) => IconButton(
+                      icon: const Icon(Icons.menu,
+                          color: Colors.black54, size: 28),
+                      onPressed: () {
+                        Scaffold.of(context).openEndDrawer();
+                      },
+                      tooltip: 'Menu',
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                ]
+              : null,
         );
       },
     );
@@ -477,7 +477,8 @@ class MobileNavDrawer extends StatelessWidget {
             ),
             if (user != null)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
                   user.email ?? '',
                   style: const TextStyle(fontSize: 14, color: Colors.black54),
