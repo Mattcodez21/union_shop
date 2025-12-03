@@ -264,7 +264,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             );
                           },
                         ),
-                        const SizedBox(width: 60), // Increased from 8 to 60
+                        const SizedBox(width: 60),
                       ],
                     ),
                   ),
@@ -299,6 +299,26 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ] else
                       const Spacer(),
+                    // Add search icon for mobile
+                    IconButton(
+                      icon: const Icon(Icons.search, color: Colors.black54),
+                      onPressed: () {
+                        showSearch(
+                            context: context,
+                            delegate: ProductSearchDelegate());
+                      },
+                      tooltip: 'Search',
+                    ),
+                    // Add account icon for mobile
+                    IconButton(
+                      icon: const Icon(Icons.person_outline,
+                          color: Colors.black54),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/account');
+                      },
+                      tooltip: 'Account',
+                    ),
+                    // Cart icon with badge
                     AnimatedBuilder(
                       animation: cartService,
                       builder: (context, _) {
