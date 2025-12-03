@@ -29,6 +29,17 @@ class CartService extends ChangeNotifier {
               'quantity': item.quantity,
               'selectedSize': item.selectedSize,
               'selectedColor': item.selectedColor,
+              // Save full product data for custom items (like print shack)
+              'productData': {
+                'id': item.product.id,
+                'name': item.product.name,
+                'description': item.product.description,
+                'price': item.product.price,
+                'category': item.product.category,
+                'sizes': item.product.sizes,
+                'colors': item.product.colors,
+                'imageUrls': item.product.imageUrls,
+              },
             })
         .toList();
     await FirebaseFirestore.instance
@@ -50,7 +61,26 @@ class CartService extends ChangeNotifier {
       if (data != null && data['items'] is List) {
         _items.clear();
         for (var item in data['items']) {
-          final product = products_data.getProductById(item['productId']);
+          Product? product;
+
+          // Try to get product from products_data first
+          product = products_data.getProductById(item['productId']);
+
+          // If not found (e.g., custom print shack item), create from saved data
+          if (product == null && item['productData'] != null) {
+            final productData = item['productData'];
+            product = Product(
+              id: productData['id'],
+              name: productData['name'],
+              description: productData['description'],
+              price: (productData['price'] as num).toDouble(),
+              category: productData['category'],
+              sizes: List<String>.from(productData['sizes'] ?? []),
+              colors: List<String>.from(productData['colors'] ?? []),
+              imageUrls: List<String>.from(productData['imageUrls'] ?? []),
+            );
+          }
+
           if (product != null) {
             _items.add(CartItem(
               product: product,
