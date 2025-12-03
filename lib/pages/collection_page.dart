@@ -38,6 +38,8 @@ class _CollectionPageState extends State<CollectionPage> {
         return 'Perfect gifts for your loved ones, carefully selected for special occasions.';
       case 'university branded':
         return 'Show your university pride with our exclusive branded merchandise and apparel.';
+      case 'sale!':
+        return "Don't miss out! Get yours before they're all gone! All prices shown are discounted.";
       default:
         return 'Explore our ${collectionName.toLowerCase()} collection with high-quality products at great prices.';
     }
@@ -122,17 +124,22 @@ class _CollectionPageState extends State<CollectionPage> {
               children: [
                 Text(
                   decodedCollectionName,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.bold,
+                    color: decodedCollectionName.toLowerCase() == 'sale!'
+                        ? Colors.red
+                        : Colors.black,
                   ),
                 ),
                 const SizedBox(height: 16),
                 Text(
                   getCollectionDescription(decodedCollectionName),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
-                    color: Colors.grey,
+                    color: decodedCollectionName.toLowerCase() == 'sale!'
+                        ? Colors.red.shade700
+                        : Colors.grey,
                     height: 1.4,
                   ),
                   textAlign: TextAlign.center,
@@ -294,9 +301,12 @@ class _CollectionPageState extends State<CollectionPage> {
                               id: product.id,
                               name: product.name,
                               price: product.price,
+                              originalPrice: product.originalPrice,
                               imageUrl: product.imageUrls.isNotEmpty
                                   ? product.imageUrls.first
                                   : '',
+                              isSale: decodedCollectionName.toLowerCase() ==
+                                  'sale!',
                             );
                           },
                         );
@@ -317,14 +327,18 @@ class ProductCard extends StatelessWidget {
   final String id;
   final String name;
   final double price;
+  final double? originalPrice;
   final String imageUrl;
+  final bool isSale;
 
   const ProductCard({
     super.key,
     required this.id,
     required this.name,
     required this.price,
+    this.originalPrice,
     required this.imageUrl,
+    this.isSale = false,
   });
 
   @override
@@ -345,29 +359,57 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
-              child: imageUrl.isNotEmpty
-                  ? Image.asset(
-                      imageUrl,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
+              child: Stack(
+                children: [
+                  imageUrl.isNotEmpty
+                      ? Image.asset(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[200],
+                              child: const Icon(
+                                Icons.shopping_bag,
+                                size: 50,
+                                color: Colors.grey,
+                              ),
+                            );
+                          },
+                        )
+                      : Container(
                           color: Colors.grey[200],
                           child: const Icon(
                             Icons.shopping_bag,
                             size: 50,
                             color: Colors.grey,
                           ),
-                        );
-                      },
-                    )
-                  : Container(
-                      color: Colors.grey[200],
-                      child: const Icon(
-                        Icons.shopping_bag,
-                        size: 50,
-                        color: Colors.grey,
+                        ),
+                  if (isSale)
+                    Positioned(
+                      top: 8,
+                      left: 8,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: const Text(
+                          'SALE',
+                          style: TextStyle(
+                            fontSize: 10,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
@@ -384,12 +426,23 @@ class ProductCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
+                  if (originalPrice != null) ...[
+                    Text(
+                      '£${originalPrice!.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey,
+                        decoration: TextDecoration.lineThrough,
+                      ),
+                    ),
+                    const SizedBox(height: 2),
+                  ],
                   Text(
                     '£${price.toStringAsFixed(2)}',
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
-                      color: Colors.green,
+                      color: isSale ? Colors.red : Colors.green,
                     ),
                   ),
                 ],
