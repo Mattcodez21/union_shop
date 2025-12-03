@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/data/products_data.dart';
 import 'package:union_shop/models/product.dart';
 import 'package:union_shop/models/collection.dart';
@@ -115,155 +116,156 @@ class _CollectionPageState extends State<CollectionPage> {
     return Scaffold(
       appBar: const Navbar(),
       endDrawer: const MobileNavDrawer(),
-      body: Column(
-        children: [
-          // Collection Header Section
-          Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                Text(
-                  decodedCollectionName,
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: decodedCollectionName.toLowerCase() == 'sale!'
-                        ? Colors.red
-                        : Colors.black,
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Collection Header Section
+            Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                children: [
+                  Text(
+                    decodedCollectionName,
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: decodedCollectionName.toLowerCase() == 'sale!'
+                          ? Colors.red
+                          : Colors.black,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  getCollectionDescription(decodedCollectionName),
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: decodedCollectionName.toLowerCase() == 'sale!'
-                        ? Colors.red.shade700
-                        : Colors.grey,
-                    height: 1.4,
+                  const SizedBox(height: 16),
+                  Text(
+                    getCollectionDescription(decodedCollectionName),
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: decodedCollectionName.toLowerCase() == 'sale!'
+                          ? Colors.red.shade700
+                          : Colors.grey,
+                      height: 1.4,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  '${filteredProducts.length} product${filteredProducts.length == 1 ? '' : 's'}',
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black87,
+                  const SizedBox(height: 16),
+                  Text(
+                    '${filteredProducts.length} product${filteredProducts.length == 1 ? '' : 's'}',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ),
-
-          // Filter and Sort Dropdowns Row
-          Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
-            decoration: BoxDecoration(
-              color: Colors.grey[50],
-              border: Border(
-                top: BorderSide(color: Colors.grey[300]!),
-                bottom: BorderSide(color: Colors.grey[300]!),
+                ],
               ),
             ),
-            child: Row(
-              children: [
-                // Size Filter Dropdown
-                Expanded(
-                  child: DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      labelText: 'SIZE',
-                      border: OutlineInputBorder(),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    ),
-                    initialValue: selectedSize,
-                    items: sizeOptions
-                        .map((size) =>
-                            DropdownMenuItem(value: size, child: Text(size)))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedSize = value ?? 'All';
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                // Color Filter Dropdown
-                Expanded(
-                  child: DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      labelText: 'COLOR',
-                      border: OutlineInputBorder(),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    ),
-                    initialValue: selectedColor,
-                    items: colorOptions
-                        .map((color) =>
-                            DropdownMenuItem(value: color, child: Text(color)))
-                        .toList(),
-                    onChanged: (value) {
-                      setState(() {
-                        selectedColor = value ?? 'All';
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                // Sort By Dropdown
-                Expanded(
-                  child: DropdownButtonFormField<String>(
-                    decoration: const InputDecoration(
-                      labelText: 'SORT BY',
-                      border: OutlineInputBorder(),
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    ),
-                    initialValue: selectedSort,
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'Featured', child: Text('Featured')),
-                      DropdownMenuItem(
-                          value: 'Price: Low to High',
-                          child: Text('Price: Low to High')),
-                      DropdownMenuItem(
-                          value: 'Price: High to Low',
-                          child: Text('Price: High to Low')),
-                      DropdownMenuItem(
-                          value: 'Name: A to Z', child: Text('Name: A to Z')),
-                      DropdownMenuItem(
-                          value: 'Name: Z to A', child: Text('Name: Z to A')),
-                      DropdownMenuItem(value: 'Newest', child: Text('Newest')),
-                    ],
-                    onChanged: (value) {
-                      setState(() {
-                        selectedSort = value ?? 'Featured';
-                      });
-                    },
-                  ),
-                ),
-                const SizedBox(width: 16),
-                // Clear Filters Button
-                ElevatedButton(
-                  onPressed: clearFilters,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.grey[200],
-                    foregroundColor: Colors.black87,
-                    elevation: 0,
-                  ),
-                  child: const Text('Clear Filters'),
-                ),
-              ],
-            ),
-          ),
 
-          // Products Grid Section
-          Expanded(
-            child: Padding(
+            // Filter and Sort Dropdowns Row
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
+              decoration: BoxDecoration(
+                color: Colors.grey[50],
+                border: Border(
+                  top: BorderSide(color: Colors.grey[300]!),
+                  bottom: BorderSide(color: Colors.grey[300]!),
+                ),
+              ),
+              child: Row(
+                children: [
+                  // Size Filter Dropdown
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'SIZE',
+                        border: OutlineInputBorder(),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      ),
+                      value: selectedSize,
+                      items: sizeOptions
+                          .map((size) =>
+                              DropdownMenuItem(value: size, child: Text(size)))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedSize = value ?? 'All';
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  // Color Filter Dropdown
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'COLOR',
+                        border: OutlineInputBorder(),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      ),
+                      value: selectedColor,
+                      items: colorOptions
+                          .map((color) => DropdownMenuItem(
+                              value: color, child: Text(color)))
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          selectedColor = value ?? 'All';
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  // Sort By Dropdown
+                  Expanded(
+                    child: DropdownButtonFormField<String>(
+                      decoration: const InputDecoration(
+                        labelText: 'SORT BY',
+                        border: OutlineInputBorder(),
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      ),
+                      value: selectedSort,
+                      items: const [
+                        DropdownMenuItem(
+                            value: 'Featured', child: Text('Featured')),
+                        DropdownMenuItem(
+                            value: 'Price: Low to High',
+                            child: Text('Price: Low to High')),
+                        DropdownMenuItem(
+                            value: 'Price: High to Low',
+                            child: Text('Price: High to Low')),
+                        DropdownMenuItem(
+                            value: 'Name: A to Z', child: Text('Name: A to Z')),
+                        DropdownMenuItem(
+                            value: 'Name: Z to A', child: Text('Name: Z to A')),
+                        DropdownMenuItem(
+                            value: 'Newest', child: Text('Newest')),
+                      ],
+                      onChanged: (value) {
+                        setState(() {
+                          selectedSort = value ?? 'Featured';
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  // Clear Filters Button
+                  ElevatedButton(
+                    onPressed: clearFilters,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[200],
+                      foregroundColor: Colors.black87,
+                      elevation: 0,
+                    ),
+                    child: const Text('Clear Filters'),
+                  ),
+                ],
+              ),
+            ),
+
+            // Products Grid Section
+            Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -276,48 +278,48 @@ class _CollectionPageState extends State<CollectionPage> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  Expanded(
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        int crossAxisCount;
-                        if (constraints.maxWidth < 600) {
-                          crossAxisCount = 2;
-                        } else {
-                          crossAxisCount = 3;
-                        }
+                  LayoutBuilder(
+                    builder: (context, constraints) {
+                      int crossAxisCount;
+                      if (constraints.maxWidth < 600) {
+                        crossAxisCount = 2;
+                      } else {
+                        crossAxisCount = 3;
+                      }
 
-                        return GridView.builder(
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: crossAxisCount,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 0.75,
-                          ),
-                          itemCount: filteredProducts.length,
-                          itemBuilder: (context, index) {
-                            final product = filteredProducts[index];
-                            return ProductCard(
-                              id: product.id,
-                              name: product.name,
-                              price: product.price,
-                              originalPrice: product.originalPrice,
-                              imageUrl: product.imageUrls.isNotEmpty
-                                  ? product.imageUrls.first
-                                  : '',
-                              isSale: decodedCollectionName.toLowerCase() ==
-                                  'sale!',
-                            );
-                          },
-                        );
-                      },
-                    ),
+                      return GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: crossAxisCount,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 0.75,
+                        ),
+                        itemCount: filteredProducts.length,
+                        itemBuilder: (context, index) {
+                          final product = filteredProducts[index];
+                          return ProductCard(
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            originalPrice: product.originalPrice,
+                            imageUrl: product.imageUrls.isNotEmpty
+                                ? product.imageUrls.first
+                                : '',
+                            isSale:
+                                decodedCollectionName.toLowerCase() == 'sale!',
+                          );
+                        },
+                      );
+                    },
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+            const Footer(),
+          ],
+        ),
       ),
     );
   }
