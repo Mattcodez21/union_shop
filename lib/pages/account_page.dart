@@ -64,9 +64,10 @@ class _AccountManagerState extends State<AccountManager> {
   }
 
   Future<void> _signOut() async {
+    final navigator = Navigator.of(context);
     await FirebaseAuth.instance.signOut();
     if (mounted) {
-      Navigator.pushReplacementNamed(context, '/auth');
+      navigator.pushReplacementNamed('/auth');
     }
   }
 
@@ -116,9 +117,10 @@ class _AccountManagerState extends State<AccountManager> {
     final cartService = CartService();
 
     if (user == null) {
+      final navigator = Navigator.of(context);
       Future.microtask(() {
         if (mounted) {
-          Navigator.pushReplacementNamed(context, '/auth');
+          navigator.pushReplacementNamed('/auth');
         }
       });
       return const Scaffold(

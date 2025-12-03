@@ -55,13 +55,21 @@ class ProductCard extends StatelessWidget {
 }
 
 // Test wrapper that doesn't use Navbar to avoid Firebase
-class TestCollectionPage extends StatelessWidget {
+class TestCollectionPage extends StatefulWidget {
   final String collectionName;
 
   const TestCollectionPage({
     Key? key,
     required this.collectionName,
   }) : super(key: key);
+
+  @override
+  State<TestCollectionPage> createState() => _TestCollectionPageState();
+}
+
+class _TestCollectionPageState extends State<TestCollectionPage> {
+  String _filterValue = 'All Items';
+  String _sortValue = 'Featured';
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +89,8 @@ class TestCollectionPage extends StatelessWidget {
           'Show your university pride with our exclusive branded merchandise and apparel.',
     };
 
-    final description = collectionDescriptions[collectionName] ??
-        'Explore our ${collectionName.toLowerCase()} collection';
+    final description = collectionDescriptions[widget.collectionName] ??
+        'Explore our ${widget.collectionName.toLowerCase()} collection';
 
     // Mock products for testing
     final products = [
@@ -96,7 +104,7 @@ class TestCollectionPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(collectionName),
+        title: Text(widget.collectionName),
         elevation: 1,
       ),
       body: SingleChildScrollView(
@@ -108,7 +116,7 @@ class TestCollectionPage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    collectionName,
+                    widget.collectionName,
                     style: const TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
@@ -134,7 +142,7 @@ class TestCollectionPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: 'All Items',
+                      initialValue: _filterValue,
                       decoration: const InputDecoration(
                         labelText: 'FILTER BY',
                         border: OutlineInputBorder(),
@@ -148,13 +156,17 @@ class TestCollectionPage extends StatelessWidget {
                             value: 'Price Range', child: Text('Price Range')),
                         DropdownMenuItem(value: 'Brand', child: Text('Brand')),
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        setState(() {
+                          _filterValue = value!;
+                        });
+                      },
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: DropdownButtonFormField<String>(
-                      value: 'Featured',
+                      initialValue: _sortValue,
                       decoration: const InputDecoration(
                         labelText: 'SORT BY',
                         border: OutlineInputBorder(),
@@ -175,7 +187,11 @@ class TestCollectionPage extends StatelessWidget {
                         DropdownMenuItem(
                             value: 'Newest', child: Text('Newest')),
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        setState(() {
+                          _sortValue = value!;
+                        });
+                      },
                     ),
                   ),
                 ],
@@ -360,20 +376,14 @@ void main() {
 
       expect(find.byType(DropdownButtonFormField<String>), findsNWidgets(2));
 
-      final filterDropdown = find.ancestor(
-        of: find.text('FILTER BY'),
-        matching: find.byType(DropdownButtonFormField<String>),
-      );
-      expect(filterDropdown, findsOneWidget);
+      expect(find.text('FILTER BY'), findsOneWidget);
+      expect(find.text('All Items'), findsWidgets);
 
-      final filterDropdownWidget =
-          tester.widget<DropdownButtonFormField<String>>(filterDropdown);
-      expect(filterDropdownWidget.value, equals('All Items'));
+      final filterDropdown = find.byType(DropdownButtonFormField<String>).first;
 
       await tester.tap(filterDropdown);
       await tester.pumpAndSettle();
 
-      expect(find.text('All Items'), findsWidgets);
       expect(find.text('Size'), findsOneWidget);
       expect(find.text('Color'), findsOneWidget);
       expect(find.text('Price Range'), findsOneWidget);
@@ -393,20 +403,14 @@ void main() {
 
       expect(find.byType(DropdownButtonFormField<String>), findsNWidgets(2));
 
-      final sortDropdown = find.ancestor(
-        of: find.text('SORT BY'),
-        matching: find.byType(DropdownButtonFormField<String>),
-      );
-      expect(sortDropdown, findsOneWidget);
+      expect(find.text('SORT BY'), findsOneWidget);
+      expect(find.text('Featured'), findsWidgets);
 
-      final sortDropdownWidget =
-          tester.widget<DropdownButtonFormField<String>>(sortDropdown);
-      expect(sortDropdownWidget.value, equals('Featured'));
+      final sortDropdown = find.byType(DropdownButtonFormField<String>).last;
 
       await tester.tap(sortDropdown);
       await tester.pumpAndSettle();
 
-      expect(find.text('Featured'), findsWidgets);
       expect(find.text('Price: Low to High'), findsOneWidget);
       expect(find.text('Price: High to Low'), findsOneWidget);
       expect(find.text('Name: A to Z'), findsOneWidget);
