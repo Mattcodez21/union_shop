@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/models/product.dart';
+import 'package:union_shop/models/cart_item.dart';
 
 class PrintShackPage extends StatefulWidget {
   const PrintShackPage({Key? key}) : super(key: key);
@@ -12,11 +15,57 @@ class _PrintShackPageState extends State<PrintShackPage> {
   String customText = '';
   String perLine = 'One Line of Text';
   int quantity = 1;
+  final cartService = CartService();
 
   final List<String> perLineOptions = [
     'One Line of Text',
     'Two Lines of Text',
   ];
+
+  void _addToCart() {
+    if (customText.isEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Please enter personalisation text')),
+      );
+      return;
+    }
+
+    // Create a product for the personalisation
+    final price = perLine == 'One Line of Text' ? 3.00 : 5.00;
+    final product = Product(
+      id: 'print_shack_${DateTime.now().millisecondsSinceEpoch}',
+      name: 'Personalisation - $perLine',
+      description: 'Custom text: $customText',
+      price: price,
+      category: 'Print Shack',
+      sizes: [],
+      colors: [],
+      imageUrls: ['assets/images/print_shack_hoodie.png'],
+    );
+
+    final cartItem = CartItem(
+      product: product,
+      quantity: quantity,
+      selectedSize: '',
+      selectedColor: '',
+    );
+
+    cartService.addToCart(cartItem);
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Added $quantity x ${product.name} to cart!'),
+        backgroundColor: const Color(0xFF4d2963),
+      ),
+    );
+
+    // Clear form
+    setState(() {
+      customText = '';
+      perLine = 'One Line of Text';
+      quantity = 1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +90,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: Image.asset(
-                      'assets/images/print_shack_hoodie.png', // Replace with your asset
+                      'assets/images/print_shack_hoodie.png',
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -93,9 +142,9 @@ class _PrintShackPageState extends State<PrintShackPage> {
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text(
-                      '£3.00',
-                      style: TextStyle(
+                    Text(
+                      '£${perLine == 'One Line of Text' ? '3.00' : '5.00'}',
+                      style: const TextStyle(
                         fontSize: 22,
                         color: Colors.black87,
                         fontWeight: FontWeight.w600,
@@ -175,12 +224,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         ),
                         const SizedBox(width: 16),
                         ElevatedButton(
-                          onPressed: () {
-                            // Add to cart logic here
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Added to cart!')),
-                            );
-                          },
+                          onPressed: _addToCart,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4d2963),
                             foregroundColor: Colors.white,

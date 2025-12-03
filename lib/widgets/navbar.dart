@@ -176,10 +176,46 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           },
                         ),
                         const SizedBox(width: 24),
-                        _NavBarButton(
-                          label: 'The Print Shack',
-                          onPressed: () =>
-                              Navigator.pushNamed(context, '/print-shack'),
+                        PopupMenuButton<String>(
+                          offset: const Offset(0, 40),
+                          child: Row(
+                            children: [
+                              TextButton(
+                                onPressed: null,
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black87,
+                                  disabledForegroundColor: Colors.black87,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 0),
+                                  textStyle: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                child: const Text('The Print Shack'),
+                              ),
+                              const Icon(Icons.arrow_drop_down,
+                                  color: Colors.black87, size: 20),
+                            ],
+                          ),
+                          itemBuilder: (BuildContext context) =>
+                              <PopupMenuEntry<String>>[
+                            const PopupMenuItem<String>(
+                              value: 'about',
+                              child: Text('About'),
+                            ),
+                            const PopupMenuItem<String>(
+                              value: 'personalisation',
+                              child: Text('Personalisation'),
+                            ),
+                          ],
+                          onSelected: (String value) {
+                            if (value == 'about') {
+                              Navigator.pushNamed(
+                                  context, '/print-shack-about');
+                            } else if (value == 'personalisation') {
+                              Navigator.pushNamed(context, '/print-shack');
+                            }
+                          },
                         ),
                         const SizedBox(width: 24),
                         _NavBarButton(
