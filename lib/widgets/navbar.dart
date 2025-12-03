@@ -143,13 +143,21 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           offset: const Offset(0, 40),
                           child: Row(
                             children: [
-                              _NavBarButton(
-                                label: 'Shop',
-                                onPressed: () => Navigator.pushNamed(
-                                    context, '/collections'),
+                              TextButton(
+                                onPressed: null,
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black87,
+                                  disabledForegroundColor: Colors.black87,
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 0),
+                                  textStyle: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                child: const Text('Shop'),
                               ),
                               const Icon(Icons.arrow_drop_down,
-                                  color: Colors.black54, size: 20),
+                                  color: Colors.black87, size: 20),
                             ],
                           ),
                           itemBuilder: (BuildContext context) =>
@@ -172,10 +180,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           label: 'The Print Shack',
                           onPressed: () =>
                               Navigator.pushNamed(context, '/print-shack'),
-                          style: const TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.w500,
-                          ),
                         ),
                         const SizedBox(width: 24),
                         _NavBarButton(
@@ -198,9 +202,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         const _NavBarButton(
                           label: 'UPSU.net',
                           onPressed: null,
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                          ),
                         ),
                         const SizedBox(width: 24),
                         if (user != null)
