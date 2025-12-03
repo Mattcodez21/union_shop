@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:union_shop/data/products_data.dart';
+import 'package:union_shop/data/collections_data.dart';
 
 // Product search delegate with product search logic
 class ProductSearchDelegate extends SearchDelegate<String> {
@@ -138,16 +139,33 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           onPressed: () => Navigator.pushNamed(context, '/'),
                         ),
                         const SizedBox(width: 24),
-                        Row(
-                          children: [
-                            _NavBarButton(
-                              label: 'Shop',
-                              onPressed: () =>
-                                  Navigator.pushNamed(context, '/collections'),
-                            ),
-                            const Icon(Icons.arrow_drop_down,
-                                color: Colors.black54, size: 20),
-                          ],
+                        PopupMenuButton<String>(
+                          offset: const Offset(0, 40),
+                          child: Row(
+                            children: [
+                              _NavBarButton(
+                                label: 'Shop',
+                                onPressed: () => Navigator.pushNamed(
+                                    context, '/collections'),
+                              ),
+                              const Icon(Icons.arrow_drop_down,
+                                  color: Colors.black54, size: 20),
+                            ],
+                          ),
+                          itemBuilder: (BuildContext context) =>
+                              collections.map((collection) {
+                            return PopupMenuItem<String>(
+                              value: collection.id,
+                              child: Text(collection.name),
+                            );
+                          }).toList(),
+                          onSelected: (String collectionId) {
+                            Navigator.pushNamed(
+                              context,
+                              '/collection',
+                              arguments: {'collectionId': collectionId},
+                            );
+                          },
                         ),
                         const SizedBox(width: 24),
                         _NavBarButton(
@@ -299,7 +317,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ] else
                       const Spacer(),
-                    // Add search icon for mobile
                     IconButton(
                       icon: const Icon(Icons.search, color: Colors.black54),
                       onPressed: () {
@@ -309,7 +326,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       },
                       tooltip: 'Search',
                     ),
-                    // Add account icon for mobile
                     IconButton(
                       icon: const Icon(Icons.person_outline,
                           color: Colors.black54),
@@ -318,7 +334,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       },
                       tooltip: 'Account',
                     ),
-                    // Cart icon with badge
                     AnimatedBuilder(
                       animation: cartService,
                       builder: (context, _) {

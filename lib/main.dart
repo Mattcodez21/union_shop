@@ -15,6 +15,7 @@ import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/sale_page.dart';
 import 'package:union_shop/pages/print_shack_page.dart';
 import 'package:union_shop/pages/print_shack_about_page.dart';
+import 'package:union_shop/data/collections_data.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,6 +66,24 @@ class UnionShopApp extends StatelessWidget {
         '/account': (context) => const AccountManager(),
       },
       onGenerateRoute: (settings) {
+        // Handle /collection route with collectionId argument
+        if (settings.name == '/collection') {
+          final args = settings.arguments as Map<String, dynamic>?;
+          if (args != null && args['collectionId'] != null) {
+            final collectionId = args['collectionId'] as String;
+            final collection = collections.firstWhere(
+              (c) => c.id == collectionId,
+              orElse: () => collections.first,
+            );
+            return MaterialPageRoute(
+              builder: (context) => CollectionPage(
+                collectionName: collection.name,
+                collectionData: collection,
+              ),
+              settings: settings,
+            );
+          }
+        }
         // Handle /collection/[collectionName] routes
         if (settings.name != null &&
             settings.name!.startsWith('/collection/')) {
