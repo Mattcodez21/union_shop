@@ -70,7 +70,7 @@ final List<Product> products = [
     category: 'Gifts & Accessories',
     sizes: [],
     colors: ['Assorted'],
-    imageUrls: ['assets/images/products/giftset1.jpg'],
+    imageUrls: ['assets/images/gift_set.png'],
   ),
   Product(
     id: 'p8',
@@ -80,7 +80,7 @@ final List<Product> products = [
     category: 'SALE!',
     sizes: [],
     colors: ['Natural'],
-    imageUrls: ['assets/images/products/totebag1.jpg'],
+    imageUrls: ['assets/images/tote_bag.png'],
   ),
   Product(
     id: 'p9',
@@ -90,7 +90,7 @@ final List<Product> products = [
     category: 'Travel & Bags',
     sizes: [],
     colors: ['Black'],
-    imageUrls: ['assets/images/products/headphones1.jpg'],
+    imageUrls: ['assets/images/upsu_headphones.png'],
   ),
   Product(
     id: 'p10',
@@ -140,7 +140,7 @@ final List<Product> products = [
     category: 'Gifts & Accessories',
     sizes: [],
     colors: ['Silver', 'Black'],
-    imageUrls: ['assets/images/products/giftbottle1.jpg'],
+    imageUrls: ['assets/images/gift_accessories.png'],
   ),
   Product(
     id: 'p15',
@@ -150,7 +150,7 @@ final List<Product> products = [
     category: 'SALE!',
     sizes: [],
     colors: ['Blue'],
-    imageUrls: ['assets/images/products/salenotebook1.jpg'],
+    imageUrls: ['assets/images/a5_notebook.png'],
   ),
   Product(
     id: 'p16',
@@ -170,7 +170,7 @@ final List<Product> products = [
     category: 'Travel & Bags',
     sizes: [],
     colors: ['Grey', 'Black'],
-    imageUrls: ['assets/images/products/duffel1.jpg'],
+    imageUrls: ['assets/images/duffel_bag.png'],
   ),
   Product(
     id: 'p18',

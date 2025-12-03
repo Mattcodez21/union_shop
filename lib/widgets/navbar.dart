@@ -188,20 +188,20 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         if (user != null)
                           Padding(
                             padding:
-                                const EdgeInsets.symmetric(horizontal: 12.0),
-                            child: Text(
-                              user.email ?? '',
-                              style: const TextStyle(
-                                  fontSize: 14, color: Colors.black54),
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: SizedBox(
+                              width: 120,
+                              child: Text(
+                                user.email ?? '',
+                                style: const TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.black54,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                maxLines: 1,
+                              ),
                             ),
                           ),
-                        if (user != null)
-                          _NavBarButton(
-                            label: 'Account Manager',
-                            onPressed: () =>
-                                Navigator.pushNamed(context, '/account'),
-                          ),
-                        if (user != null) const SizedBox(width: 24),
                         const Spacer(),
                         Row(
                           children: [
@@ -223,52 +223,52 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                               },
                               tooltip: 'Account',
                             ),
-                          ],
-                        ),
-                        AnimatedBuilder(
-                          animation: cartService,
-                          builder: (context, _) {
-                            final count = cartService.itemCount;
-                            return Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.shopping_bag,
-                                      color: Colors.black54),
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, '/cart');
-                                  },
-                                  tooltip: 'Cart',
-                                ),
-                                if (count > 0)
-                                  Positioned(
-                                    right: 0,
-                                    top: 4,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(4),
-                                      decoration: const BoxDecoration(
-                                        color: Colors.red,
-                                        shape: BoxShape.circle,
-                                      ),
-                                      constraints: const BoxConstraints(
-                                        minWidth: 20,
-                                        minHeight: 20,
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          '$count',
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.bold,
+                            AnimatedBuilder(
+                              animation: cartService,
+                              builder: (context, _) {
+                                final count = cartService.itemCount;
+                                return Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    IconButton(
+                                      icon: const Icon(Icons.shopping_bag,
+                                          color: Colors.black54),
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, '/cart');
+                                      },
+                                      tooltip: 'Cart',
+                                    ),
+                                    if (count > 0)
+                                      Positioned(
+                                        right: 0,
+                                        top: 4,
+                                        child: Container(
+                                          padding: const EdgeInsets.all(4),
+                                          decoration: const BoxDecoration(
+                                            color: Colors.red,
+                                            shape: BoxShape.circle,
+                                          ),
+                                          constraints: const BoxConstraints(
+                                            minWidth: 20,
+                                            minHeight: 20,
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              '$count',
+                                              style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                              ],
-                            );
-                          },
+                                  ],
+                                );
+                              },
+                            ),
+                          ],
                         ),
                         const SizedBox(width: 16),
                       ],
@@ -302,6 +302,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ],
                     const Spacer(),
+                    // Cart icon BEFORE menu icon
                     AnimatedBuilder(
                       animation: cartService,
                       builder: (context, _) {
