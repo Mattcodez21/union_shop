@@ -246,6 +246,18 @@ class _SalePageState extends State<SalePage> {
                                         overflow: TextOverflow.ellipsis,
                                       ),
                                       const Spacer(),
+                                      if (product.originalPrice != null) ...[
+                                        Text(
+                                          '£${product.originalPrice!.toStringAsFixed(2)}',
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey,
+                                            decoration:
+                                                TextDecoration.lineThrough,
+                                          ),
+                                        ),
+                                        const SizedBox(height: 2),
+                                      ],
                                       Text(
                                         '£${product.price.toStringAsFixed(2)}',
                                         style: const TextStyle(
