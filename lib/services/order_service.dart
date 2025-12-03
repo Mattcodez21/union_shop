@@ -62,12 +62,16 @@ class OrderService {
       final querySnapshot = await _firestore
           .collection('orders')
           .where('userId', isEqualTo: user.uid)
-          .orderBy('orderDate', descending: true)
           .get();
 
-      return querySnapshot.docs
+      final orders = querySnapshot.docs
           .map((doc) => order_model.Order.fromMap(doc.data()))
           .toList();
+
+      // Sort by date in Dart instead of Firestore
+      orders.sort((a, b) => b.orderDate.compareTo(a.orderDate));
+
+      return orders;
     } catch (e) {
       // ignore: avoid_print
       print('Error fetching orders: $e');
