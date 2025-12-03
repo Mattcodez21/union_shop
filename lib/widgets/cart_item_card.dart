@@ -13,72 +13,101 @@ class CartItemCard extends StatelessWidget {
     final subtotal = item.product.price * item.quantity;
 
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4),
-      child: ListTile(
-        leading: item.product.imageUrls.isNotEmpty
-            ? Image.asset(
-                item.product.imageUrls.first,
-                width: 56,
-                height: 56,
-                fit: BoxFit.cover,
-              )
-            : const Icon(Icons.shopping_bag, size: 40),
-        title: Text(item.product.name),
-        subtitle: Column(
+      margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (item.selectedColor.isNotEmpty)
-              Text('Color: ${item.selectedColor}'),
-            if (item.selectedSize.isNotEmpty)
-              Text('Size: ${item.selectedSize}'),
-            Text('Price: £${item.product.price.toStringAsFixed(2)}'),
-            Text(
-              'Subtotal: £${subtotal.toStringAsFixed(2)}',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF4d2963),
+            // Product Image
+            item.product.imageUrls.isNotEmpty
+                ? Image.asset(
+                    item.product.imageUrls.first,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  )
+                : const Icon(Icons.shopping_bag, size: 80),
+            const SizedBox(width: 12),
+            // Product Details
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.product.name,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  if (item.selectedColor.isNotEmpty)
+                    Text('Color: ${item.selectedColor}',
+                        style: const TextStyle(fontSize: 14)),
+                  if (item.selectedSize.isNotEmpty)
+                    Text('Size: ${item.selectedSize}',
+                        style: const TextStyle(fontSize: 14)),
+                  const SizedBox(height: 4),
+                  Text('Price: £${item.product.price.toStringAsFixed(2)}',
+                      style: const TextStyle(fontSize: 14)),
+                  Text(
+                    'Subtotal: £${subtotal.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4d2963),
+                      fontSize: 15,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  // Quantity controls
+                  Row(
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove_circle_outline, size: 20),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () {
+                          if (item.quantity > 1) {
+                            cartService.updateQuantity(
+                              item.product.id,
+                              item.selectedSize,
+                              item.selectedColor,
+                              item.quantity - 1,
+                            );
+                          }
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text('${item.quantity}',
+                            style: const TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold)),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.add_circle_outline, size: 20),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                        onPressed: () {
+                          cartService.updateQuantity(
+                            item.product.id,
+                            item.selectedSize,
+                            item.selectedColor,
+                            item.quantity + 1,
+                          );
+                        },
+                      ),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.delete, color: Colors.red),
+                        onPressed: () {
+                          cartService.removeFromCart(item);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
-        trailing: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.remove_circle_outline),
-                  onPressed: () {
-                    if (item.quantity > 1) {
-                      cartService.updateQuantity(
-                        item.product.id,
-                        item.selectedSize,
-                        item.selectedColor,
-                        item.quantity - 1,
-                      );
-                    }
-                  },
-                ),
-                Text('${item.quantity}'),
-                IconButton(
-                  icon: const Icon(Icons.add_circle_outline),
-                  onPressed: () {
-                    cartService.updateQuantity(
-                      item.product.id,
-                      item.selectedSize,
-                      item.selectedColor,
-                      item.quantity + 1,
-                    );
-                  },
-                ),
-              ],
-            ),
-            IconButton(
-              icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () {
-                cartService.removeFromCart(item);
-              },
             ),
           ],
         ),
