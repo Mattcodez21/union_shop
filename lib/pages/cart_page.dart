@@ -155,9 +155,36 @@ class _CartPageState extends State<CartPage> {
               child: Column(
                 children: [
                   SizedBox(
-                    height: MediaQuery.of(context).size.height - 200,
-                    child: const Center(
-                      child: Text('Your cart is empty'),
+                    height: MediaQuery.of(context).size.height - 300,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            'Your cart is empty',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const SizedBox(height: 24),
+                          ElevatedButton.icon(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/collections');
+                            },
+                            icon: const Icon(Icons.shopping_bag),
+                            label: const Text('Continue Shopping'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF4d2963),
+                              foregroundColor: Colors.white,
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 32,
+                                vertical: 16,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                   const Footer(),
@@ -233,6 +260,25 @@ class _CartPageState extends State<CartPage> {
                       cartService.clearCart();
                     },
                     child: const Text('Clear Cart'),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  child: OutlinedButton.icon(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/collections');
+                    },
+                    icon: const Icon(Icons.shopping_bag),
+                    label: const Text('Continue Shopping'),
+                    style: OutlinedButton.styleFrom(
+                      foregroundColor: const Color(0xFF4d2963),
+                      side: const BorderSide(color: Color(0xFF4d2963)),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 12,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(height: 24),
