@@ -90,5 +90,107 @@ void main() {
       expect(product.colors.length, 4);
       expect(product.colors, containsAll(['Red', 'Blue', 'Green', 'Yellow']));
     });
+
+    test('Product can have multiple images', () {
+      final product = Product(
+        id: '300',
+        name: 'Gallery Item',
+        description: 'Multiple images',
+        price: 40.00,
+        category: 'Clothing',
+        sizes: ['L'],
+        colors: ['Black'],
+        imageUrls: ['img1.jpg', 'img2.jpg', 'img3.jpg', 'img4.jpg'],
+      );
+
+      expect(product.imageUrls.length, 4);
+      expect(product.imageUrls.first, 'img1.jpg');
+      expect(product.imageUrls.last, 'img4.jpg');
+    });
+
+    test('Product can have empty sizes list', () {
+      final product = Product(
+        id: '400',
+        name: 'One Size',
+        description: 'No size variations',
+        price: 15.00,
+        category: 'Accessories',
+        sizes: [],
+        colors: ['Silver'],
+        imageUrls: ['img.jpg'],
+      );
+
+      expect(product.sizes, isEmpty);
+    });
+
+    test('Product can have empty colors list', () {
+      final product = Product(
+        id: '500',
+        name: 'Single Color',
+        description: 'No color options',
+        price: 20.00,
+        category: 'Basic',
+        sizes: ['One Size'],
+        colors: [],
+        imageUrls: ['img.jpg'],
+      );
+
+      expect(product.colors, isEmpty);
+    });
+
+    test('Product price can be zero for free items', () {
+      final product = Product(
+        id: '600',
+        name: 'Free Item',
+        description: 'Promotional',
+        price: 0.00,
+        category: 'Promo',
+        sizes: ['S'],
+        colors: ['White'],
+        imageUrls: ['free.jpg'],
+      );
+
+      expect(product.price, 0.00);
+    });
+
+    test('Product with sale price is cheaper than original', () {
+      final product = Product(
+        id: '700',
+        name: 'On Sale',
+        description: 'Discounted',
+        price: 30.00,
+        originalPrice: 50.00,
+        category: 'Sale',
+        sizes: ['M'],
+        colors: ['Red'],
+        imageUrls: ['sale.jpg'],
+      );
+
+      expect(product.price, lessThan(product.originalPrice!));
+    });
+
+    test('Product fields are accessible', () {
+      final product = Product(
+        id: 'test-id',
+        name: 'Test Name',
+        description: 'Test Description',
+        price: 99.99,
+        category: 'Test Category',
+        sizes: ['Test Size'],
+        colors: ['Test Color'],
+        imageUrls: ['test-url.jpg'],
+      );
+
+      // Just verify all fields are accessible and have correct types
+      expect(product.id, isA<String>());
+      expect(product.name, isA<String>());
+      expect(product.description, isA<String>());
+      expect(product.price, isA<double>());
+      expect(product.originalPrice, anyOf(isNull, isA<double>()));
+      expect(product.category, isA<String>());
+      expect(product.sizes, isA<List<String>>());
+      expect(product.colors, isA<List<String>>());
+      expect(product.imageUrls, isA<List<String>>());
+    });
   });
 }
