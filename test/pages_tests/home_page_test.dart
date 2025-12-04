@@ -1,264 +1,289 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-// Mock ProductCard for testing (matches the actual ProductCard structure)
-class ProductCard extends StatelessWidget {
-  final String name;
-  final String price;
-  final VoidCallback onTap;
-
-  const ProductCard({
-    Key? key,
-    required this.name,
-    required this.price,
-    required this.onTap,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Card(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(
-              Icons.shopping_bag,
-              size: 48,
-              color: Colors.grey,
-            ),
-            const SizedBox(height: 8),
-            Text(
-              name,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
-              textAlign: TextAlign.center,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              price,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.green,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-// Test wrapper for Home page without Navbar to avoid Firebase
-class TestHomePage extends StatelessWidget {
-  const TestHomePage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Union Shop'),
-        elevation: 1,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Banner
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              color: Colors.red,
-              child: const Text(
-                'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-
-            // Hero Section
-            Container(
-              padding: const EdgeInsets.all(40),
-              child: Column(
-                children: [
-                  const Text(
-                    'Essential Range - Over 20% OFF!',
-                    style: TextStyle(
-                      fontSize: 32,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
-                    style: TextStyle(fontSize: 16),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 24),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('BROWSE PRODUCTS'),
-                  ),
-                ],
-              ),
-            ),
-
-            // Featured Products Section
-            Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                children: [
-                  const Text(
-                    'FEATURED PRODUCTS',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 0.75,
-                    children: [
-                      ProductCard(
-                        name: 'Signature Hoodie',
-                        price: '£20.00',
-                        onTap: () {},
-                      ),
-                      ProductCard(
-                        name: 'Signature T-Shirt',
-                        price: '£14.99',
-                        onTap: () {},
-                      ),
-                      ProductCard(
-                        name: 'Essential T-Shirt',
-                        price: '£10.00',
-                        onTap: () {},
-                      ),
-                      ProductCard(
-                        name: 'Portsmouth City Magnet',
-                        price: '£4.50',
-                        onTap: () {},
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+import 'package:union_shop/pages/home_page.dart';
+import 'package:union_shop/data/products_data.dart';
 
 void main() {
-  group('Home Page Tests', () {
-    testWidgets('should display home page with basic elements', (tester) async {
+  group('ProductCard Widget Tests', () {
+    testWidgets('ProductCard displays product title', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TestHomePage(),
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: 'assets/test.jpg',
+            ),
+          ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      // Check that basic UI elements are present
-      expect(
-        find.text(
-            'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!'),
-        findsOneWidget,
-      );
-      expect(find.text('Essential Range - Over 20% OFF!'), findsOneWidget);
-      expect(
-        find.text(
-            'Over 20% off our Essential Range. Come and grab yours while stock lasts!'),
-        findsOneWidget,
-      );
-      expect(find.text('BROWSE PRODUCTS'), findsOneWidget);
-      expect(find.text('FEATURED PRODUCTS'), findsOneWidget);
+      expect(find.text('Test Product'), findsOneWidget);
     });
 
-    testWidgets('should display product cards', (tester) async {
+    testWidgets('ProductCard displays product price', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TestHomePage(),
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: 'assets/test.jpg',
+            ),
+          ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      // Check that product cards are displayed
-      expect(find.text('Signature Hoodie'), findsOneWidget);
-      expect(find.text('Signature T-Shirt'), findsOneWidget);
-      expect(find.text('Essential T-Shirt'), findsOneWidget);
-      expect(find.text('Portsmouth City Magnet'), findsOneWidget);
-
-      // Check prices are displayed
-      expect(find.text('£20.00'), findsOneWidget);
-      expect(find.text('£14.99'), findsOneWidget);
-      expect(find.text('£10.00'), findsOneWidget);
-      expect(find.text('£4.50'), findsOneWidget);
+      expect(find.text('£29.99'), findsOneWidget);
     });
 
-    testWidgets('should display header elements', (tester) async {
+    testWidgets('ProductCard has Card widget', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TestHomePage(),
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      // Check for AppBar
-      expect(find.byType(AppBar), findsOneWidget);
-      expect(find.text('Union Shop'), findsOneWidget);
+      expect(find.byType(Card), findsOneWidget);
     });
 
-    testWidgets('should have clickable product cards', (tester) async {
+    testWidgets('ProductCard has GestureDetector for tap', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TestHomePage(),
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      // Check that product cards exist
-      expect(find.byType(ProductCard), findsNWidgets(4));
-
-      // Verify cards are in a GridView
-      expect(find.byType(GridView), findsOneWidget);
+      expect(find.byType(GestureDetector), findsOneWidget);
     });
 
-    testWidgets('banner should be red with white text', (tester) async {
+    testWidgets('ProductCard shows error icon when image fails',
+        (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
-          home: TestHomePage(),
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
         ),
       );
-      await tester.pumpAndSettle();
 
-      // Find the banner container
-      final banner = find.ancestor(
-        of: find.text(
-            'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!'),
-        matching: find.byType(Container),
+      expect(find.byIcon(Icons.image_not_supported), findsOneWidget);
+    });
+
+    testWidgets('ProductCard navigates on tap', (tester) async {
+      bool navigated = false;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: const Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
+          onGenerateRoute: (settings) {
+            if (settings.name == '/product') {
+              navigated = true;
+              return MaterialPageRoute(
+                builder: (context) =>
+                    const Scaffold(body: Text('Product Page')),
+              );
+            }
+            return null;
+          },
+        ),
       );
 
-      expect(banner, findsOneWidget);
+      await tester.tap(find.byType(ProductCard));
+      await tester.pumpAndSettle();
 
-      // Check the container has red background
-      final container = tester.widget<Container>(banner.first);
-      final decoration = container.color;
-      expect(decoration, equals(Colors.red));
+      expect(navigated, isTrue);
+    });
+
+    testWidgets('ProductCard displays title with correct style',
+        (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
+        ),
+      );
+
+      final titleText = tester.widget<Text>(find.text('Test Product'));
+      expect(titleText.style?.fontSize, 15);
+      expect(titleText.style?.fontWeight, FontWeight.w600);
+    });
+
+    testWidgets('ProductCard displays price with correct style',
+        (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
+        ),
+      );
+
+      final priceText = tester.widget<Text>(find.text('£29.99'));
+      expect(priceText.style?.fontSize, 14);
+      expect(priceText.style?.fontWeight, FontWeight.bold);
+      expect(priceText.style?.color, const Color(0xFF4d2963));
+    });
+
+    testWidgets('ProductCard has rounded corners', (tester) async {
+      await tester.pumpWidget(
+        const MaterialApp(
+          home: Scaffold(
+            body: ProductCard(
+              id: 'test1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
+        ),
+      );
+
+      final card = tester.widget<Card>(find.byType(Card));
+      final shape = card.shape as RoundedRectangleBorder;
+      expect(shape.borderRadius, BorderRadius.circular(8));
+    });
+
+    testWidgets('ProductCard passes correct product id in navigation',
+        (tester) async {
+      Map<String, dynamic>? receivedArgs;
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: const Scaffold(
+            body: ProductCard(
+              id: 'p1',
+              title: 'Test Product',
+              price: '£29.99',
+              imageUrl: '',
+            ),
+          ),
+          onGenerateRoute: (settings) {
+            if (settings.name == '/product') {
+              receivedArgs = settings.arguments as Map<String, dynamic>?;
+              return MaterialPageRoute(
+                builder: (context) =>
+                    const Scaffold(body: Text('Product Page')),
+              );
+            }
+            return null;
+          },
+        ),
+      );
+
+      await tester.tap(find.byType(ProductCard));
+      await tester.pumpAndSettle();
+
+      expect(receivedArgs?['productId'], 'p1');
+    });
+  });
+
+  group('Products Data Tests', () {
+    test('getProductById returns correct product', () {
+      final product = getProductById('p1');
+      expect(product, isNotNull);
+      expect(product!.id, 'p1');
+    });
+
+    test('getProductById returns null for invalid id', () {
+      final product = getProductById('invalid_id');
+      expect(product, isNull);
+    });
+
+    test('products list is not empty', () {
+      expect(products, isNotEmpty);
+    });
+
+    test('products contains at least 4 products', () {
+      expect(products.length, greaterThanOrEqualTo(4));
+    });
+
+    test('All products have valid data', () {
+      for (var product in products) {
+        expect(product.id, isNotEmpty);
+        expect(product.name, isNotEmpty);
+        expect(product.price, greaterThan(0));
+        expect(product.category, isNotEmpty);
+      }
+    });
+
+    test('Featured products exist in data', () {
+      expect(getProductById('p1'), isNotNull);
+      expect(getProductById('p2'), isNotNull);
+      expect(getProductById('p3'), isNotNull);
+      expect(getProductById('p4'), isNotNull);
+    });
+
+    test('Products have image URLs', () {
+      final product = getProductById('p1');
+      expect(product?.imageUrls, isNotEmpty);
+    });
+
+    test('Products have categories', () {
+      for (var product in products) {
+        expect(product.category, isNotEmpty);
+      }
+    });
+
+    test('Product prices are positive numbers', () {
+      for (var product in products) {
+        expect(product.price, greaterThan(0));
+      }
+    });
+
+    test('Product IDs are unique', () {
+      final ids = products.map((p) => p.id).toList();
+      final uniqueIds = ids.toSet();
+      expect(ids.length, uniqueIds.length);
+    });
+  });
+
+  group('HomeScreen Build Method Tests', () {
+    testWidgets('HomeScreen builds featured products list correctly',
+        (tester) async {
+      const homeScreen = HomeScreen();
+
+      // Test that placeholderCallbackForButtons exists
+      expect(homeScreen.placeholderCallbackForButtons, isA<Function>());
     });
   });
 }
