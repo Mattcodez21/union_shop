@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/data/products_data.dart';
@@ -8,6 +9,15 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   void placeholderCallbackForButtons() {}
+
+  // Add this helper function
+  Product? getProductById(String id) {
+    try {
+      return products.firstWhere((product) => product.id == id);
+    } catch (e) {
+      return null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +30,11 @@ class HomeScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: const Navbar(),
+      appBar: Navbar(
+        cartService: CartService(),
+      ),
       endDrawer: const MobileNavDrawer(),
+      // ...existing code...
       body: SingleChildScrollView(
         child: Column(
           children: [

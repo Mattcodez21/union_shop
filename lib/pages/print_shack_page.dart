@@ -71,7 +71,10 @@ class _PrintShackPageState extends State<PrintShackPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Navbar(title: 'The Print Shack'),
+      appBar: Navbar(
+        title: 'The Print Shack',
+        cartService: CartService(),
+      ),
       endDrawer: const MobileNavDrawer(),
       body: SingleChildScrollView(
         child: Center(

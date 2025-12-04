@@ -33,7 +33,9 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Navbar(),
+      appBar: Navbar(
+        cartService: CartService(),
+      ),
       endDrawer: const MobileNavDrawer(),
       body: product == null
           ? const Center(child: Text('Product not found'))

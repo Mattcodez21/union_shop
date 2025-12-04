@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/data/products_data.dart';
@@ -32,7 +33,10 @@ class _SalePageState extends State<SalePage> {
     }
 
     return Scaffold(
-      appBar: const Navbar(title: 'SALE!'),
+      appBar: Navbar(
+        title: 'SALE!',
+        cartService: CartService(),
+      ),
       endDrawer: const MobileNavDrawer(),
       body: Column(
         children: <Widget>[

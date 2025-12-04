@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/data/collections_data.dart';
 import 'package:union_shop/models/collection.dart';
@@ -79,7 +80,10 @@ class CollectionsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Navbar(title: 'Collections'),
+      appBar: Navbar(
+        title: 'Collections',
+        cartService: CartService(),
+      ),
       endDrawer: const MobileNavDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

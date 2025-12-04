@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
 
@@ -8,8 +9,9 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const Navbar(title: 'About Us'),
+      appBar: Navbar(title: 'About Us', cartService: CartService()),
       endDrawer: const MobileNavDrawer(),
+      // ...existing code...
       body: SingleChildScrollView(
         child: Column(
           children: [

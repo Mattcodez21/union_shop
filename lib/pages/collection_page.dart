@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/data/products_data.dart';
@@ -114,7 +115,9 @@ class _CollectionPageState extends State<CollectionPage> {
     filteredProducts = sortProducts(filteredProducts);
 
     return Scaffold(
-      appBar: const Navbar(),
+      appBar: Navbar(
+        cartService: CartService(),
+      ),
       endDrawer: const MobileNavDrawer(),
       body: SingleChildScrollView(
         child: Column(

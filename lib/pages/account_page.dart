@@ -129,7 +129,10 @@ class _AccountManagerState extends State<AccountManager> {
     }
 
     return Scaffold(
-      appBar: const Navbar(title: "Account Manager"),
+      appBar: Navbar(
+        title: "Account Manager",
+        cartService: CartService(),
+      ),
       endDrawer: const MobileNavDrawer(),
       body: Center(
         child: SingleChildScrollView(

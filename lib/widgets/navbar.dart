@@ -82,7 +82,8 @@ class ProductSearchDelegate extends SearchDelegate<String> {
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  const Navbar({Key? key, this.title}) : super(key: key);
+  const Navbar({Key? key, this.title, required CartService cartService})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
