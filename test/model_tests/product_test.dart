@@ -42,5 +42,53 @@ void main() {
       expect(product.price, 39.99);
       expect(product.originalPrice, 59.99);
     });
+
+    test('Product originalPrice can be null', () {
+      final product = Product(
+        id: '789',
+        name: 'Regular Item',
+        description: 'Not on sale',
+        price: 50.00,
+        category: 'Regular',
+        sizes: ['M'],
+        colors: ['White'],
+        imageUrls: ['image.jpg'],
+      );
+
+      expect(product.originalPrice, isNull);
+    });
+
+    test('Product can have multiple sizes', () {
+      final product = Product(
+        id: '100',
+        name: 'Multi-Size',
+        description: 'Many sizes',
+        price: 25.00,
+        category: 'Clothing',
+        sizes: ['XS', 'S', 'M', 'L', 'XL', 'XXL'],
+        colors: ['Black'],
+        imageUrls: ['img.jpg'],
+      );
+
+      expect(product.sizes.length, 6);
+      expect(product.sizes, contains('XS'));
+      expect(product.sizes, contains('XXL'));
+    });
+
+    test('Product can have multiple colors', () {
+      final product = Product(
+        id: '200',
+        name: 'Colorful Item',
+        description: 'Multiple colors',
+        price: 30.00,
+        category: 'Clothing',
+        sizes: ['M'],
+        colors: ['Red', 'Blue', 'Green', 'Yellow'],
+        imageUrls: ['img.jpg'],
+      );
+
+      expect(product.colors.length, 4);
+      expect(product.colors, containsAll(['Red', 'Blue', 'Green', 'Yellow']));
+    });
   });
 }
