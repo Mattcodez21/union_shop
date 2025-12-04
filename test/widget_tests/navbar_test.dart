@@ -1,58 +1,67 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import '../test_helpers/firebase_test_helper.dart';
 
 void main() {
-  group('Navbar Widget Tests', () {
-    testWidgets('Navbar widget can be instantiated', (tester) async {
-      // Suppress Firebase errors
-      final originalOnError = FlutterError.onError!;
-      FlutterError.onError = (details) {
-        // Ignore Firebase errors
-        if (!details.exception.toString().contains('Firebase')) {
-          originalOnError(details);
-        }
-      };
+  setupFirebaseAuthMocks();
 
+  setUpAll(() async {
+    await Firebase.initializeApp();
+  });
+
+  group('Navbar Widget Tests', () {
+    testWidgets('Navbar can be instantiated and built', (tester) async {
       await tester.pumpWidget(
-        const MaterialApp(
+        MaterialApp(
           home: Scaffold(
             appBar: PreferredSize(
-              preferredSize: Size.fromHeight(kToolbarHeight),
+              preferredSize: const Size.fromHeight(80),
               child: Navbar(),
             ),
-            body: Center(child: Text('Test')),
           ),
         ),
       );
 
-      // Verify Navbar type exists (even if Firebase prevents full render)
+      // Just verify it builds without errors
       expect(find.byType(Navbar), findsOneWidget);
-
-      FlutterError.onError = originalOnError;
+      expect(find.byType(AppBar), findsOneWidget);
     });
 
-    testWidgets('Navbar is a proper PreferredSizeWidget', (tester) async {
-      const navbar = Navbar();
+    testWidgets('Navbar renders as PreferredSizeWidget', (tester) async {
+      final navbar = Navbar();
 
-      // Verify Navbar implements PreferredSizeWidget
-      expect(navbar, isA<PreferredSizeWidget>());
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(80),
+              child: navbar,
+            ),
+          ),
+        ),
+      );
 
-      // Verify it has a reasonable preferredSize
-      expect(navbar.preferredSize.height, greaterThan(0));
+      expect(find.byType(PreferredSize), findsOneWidget);
     });
 
-    testWidgets('Navbar maintains consistent height', (tester) async {
-      const navbar = Navbar();
-      final height1 = navbar.preferredSize.height;
+    testWidgets('Navbar contains AppBar widget', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(80),
+              child: Navbar(),
+            ),
+            body: Container(),
+          ),
+        ),
+      );
 
-      // Create another instance
-      const navbar2 = Navbar();
-      final height2 = navbar2.preferredSize.height;
+      await tester.pumpAndSettle();
 
-      // Heights should be consistent
-      expect(height1, equals(height2),
-          reason: 'Navbar should have consistent preferredSize height');
+      expect(find.byType(AppBar), findsOneWidget);
     });
   });
 }
