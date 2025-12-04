@@ -1,59 +1,89 @@
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-
-class MockFirebasePlatform extends FirebasePlatform {
-  MockFirebasePlatform() : super();
-
-  static Map<String, FirebaseAppPlatform> _apps = {};
-
-  @override
-  FirebaseAppPlatform app([String name = defaultFirebaseAppName]) {
-    if (_apps.containsKey(name)) {
-      return _apps[name]!;
-    }
-    throw FirebaseException(
-      plugin: 'core',
-      code: 'no-app',
-      message: 'No Firebase App "$name" has been created.',
-    );
-  }
-
-  @override
-  List<FirebaseAppPlatform> get apps => _apps.values.toList();
-
-  @override
-  Future<FirebaseAppPlatform> initializeApp({
-    String? name,
-    FirebaseOptions? options,
-  }) async {
-    final appName = name ?? defaultFirebaseAppName;
-    if (_apps.containsKey(appName)) {
-      return _apps[appName]!;
-    }
-
-    final app = MockFirebaseAppPlatform(appName, options ?? _testOptions);
-    _apps[appName] = app;
-    return app;
-  }
-
-  static FirebaseOptions get _testOptions => const FirebaseOptions(
-        apiKey: 'fake-api-key',
-        appId: 'fake-app-id',
-        messagingSenderId: 'fake-sender-id',
-        projectId: 'fake-project-id',
-      );
-}
-
-class MockFirebaseAppPlatform extends FirebaseAppPlatform {
-  MockFirebaseAppPlatform(String name, FirebaseOptions options)
-      : super(name, options);
-}
 
 void setupFirebaseAuthMocks() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  FirebasePlatform.instance = MockFirebasePlatform();
+  final messenger =
+      TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger;
+
+  // Old style firebase_core channel
+  const coreChannel = MethodChannel('plugins.flutter.io/firebase_core');
+  messenger.setMockMethodCallHandler(coreChannel,
+      (MethodCall methodCall) async {
+    if (methodCall.method == 'Firebase#initializeCore' ||
+        methodCall.method == 'initializeCore') {
+      return [
+        {
+          'name': '[DEFAULT]',
+          'options': {
+            'apiKey': 'fake-api-key',
+            'appId': 'fake-app-id',
+            'messagingSenderId': 'fake-sender-id',
+            'projectId': 'fake-project-id',
+          },
+          'pluginConstants': {},
+        }
+      ];
+    }
+    if (methodCall.method == 'Firebase#initializeApp' ||
+        methodCall.method == 'initializeApp') {
+      return {
+        'name': methodCall.arguments?['appName'] ?? '[DEFAULT]',
+        'options': methodCall.arguments?['options'] ?? {},
+        'pluginConstants': {},
+      };
+    }
+    return null;
+  });
+
+  // Pigeon-based firebase_core host API (newer plugin versions)
+  const pigeonCore = MethodChannel(
+      'dev.flutter.pigeon.firebase_core_platform_interface.FirebaseCoreHostApi');
+  messenger.setMockMethodCallHandler(pigeonCore, (MethodCall methodCall) async {
+    if (methodCall.method == 'initializeCore' ||
+        methodCall.method == 'Firebase#initializeCore') {
+      return [
+        {
+          'name': '[DEFAULT]',
+          'options': {
+            'apiKey': 'fake-api-key',
+            'appId': 'fake-app-id',
+            'messagingSenderId': 'fake-sender-id',
+            'projectId': 'fake-project-id',
+          },
+          'pluginConstants': {},
+        }
+      ];
+    }
+    if (methodCall.method == 'initializeApp' ||
+        methodCall.method == 'Firebase#initializeApp') {
+      return {
+        'name': methodCall.arguments?['appName'] ?? '[DEFAULT]',
+        'options': methodCall.arguments?['options'] ?? {},
+        'pluginConstants': {},
+      };
+    }
+    return null;
+  });
+
+  // Sometimes an Impl channel exists
+  const pigeonCoreImpl = MethodChannel(
+      'dev.flutter.pigeon.firebase_core_platform_interface.FirebaseCoreHostApiImpl');
+  messenger.setMockMethodCallHandler(
+      pigeonCoreImpl, (MethodCall methodCall) async => null);
+
+  // Pigeon-based firebase_auth host APIs (register listeners etc.)
+  const authHostApi = MethodChannel(
+      'dev.flutter.pigeon.firebase_auth_platform_interface.FirebaseAuthHostApi');
+  messenger.setMockMethodCallHandler(authHostApi,
+      (MethodCall methodCall) async {
+    // return neutral values for any auth host calls used by the plugin
+    return null;
+  });
+
+  const authHostApiImpl = MethodChannel(
+      'dev.flutter.pigeon.firebase_auth_platform_interface.FirebaseAuthHostApiImpl');
+  messenger.setMockMethodCallHandler(
+      authHostApiImpl, (MethodCall methodCall) async => null);
 }
