@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:union_shop/widgets/header.dart';
 import '../services/cart_service.dart';
 import '../services/order_service.dart';
 import '../widgets/footer.dart';
@@ -154,6 +155,7 @@ class _CartPageState extends State<CartPage> {
             return SingleChildScrollView(
               child: Column(
                 children: [
+                  const HeaderBanner(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height - 300,
                     child: Center(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/navbar.dart';
 
 class PrintShackAboutPage extends StatelessWidget {
@@ -19,6 +20,7 @@ class PrintShackAboutPage extends StatelessWidget {
           padding: const EdgeInsets.all(32.0),
           child: Column(
             children: [
+              const HeaderBanner(),
               const Icon(Icons.info_outline,
                   size: 64, color: Color(0xFF4d2963)),
               const SizedBox(height: 24),

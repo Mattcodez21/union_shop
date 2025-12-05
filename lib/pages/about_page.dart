@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
 
@@ -15,6 +16,7 @@ class AboutPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const HeaderBanner(),
             // Main content area
             Container(
               constraints: const BoxConstraints(maxWidth: 1200),

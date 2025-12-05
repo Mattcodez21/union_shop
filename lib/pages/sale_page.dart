@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
+import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/data/products_data.dart';
@@ -38,148 +39,162 @@ class _SalePageState extends State<SalePage> {
         cartService: CartService(),
       ),
       endDrawer: const MobileNavDrawer(),
-      body: Column(
-        children: <Widget>[
-          const SizedBox(height: 20),
-          const Text(
-            'SALE!',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Colors.red,
-              letterSpacing: 1.5,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            const HeaderBanner(),
+            const SizedBox(height: 20),
+            const Text(
+              'SALE!',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Colors.red,
+                letterSpacing: 1.5,
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            "Don't miss out! Get yours before they're all gone!",
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.red,
+            const SizedBox(height: 20),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                "Don't miss out! Get yours before they're all gone!",
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.red,
+                ),
+                textAlign: TextAlign.center,
+              ),
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 10),
-          const Text(
-            "All prices shown are discounted",
-            style: TextStyle(
-              fontSize: 14,
-              fontStyle: FontStyle.italic,
-              color: Colors.grey,
+            const SizedBox(height: 10),
+            const Text(
+              "All prices shown are discounted",
+              style: TextStyle(
+                fontSize: 14,
+                fontStyle: FontStyle.italic,
+                color: Colors.grey,
+              ),
+              textAlign: TextAlign.center,
             ),
-            textAlign: TextAlign.center,
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  '${saleProducts.length} products',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey,
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${saleProducts.length} products',
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.grey,
+                    ),
                   ),
-                ),
-                Row(
-                  children: [
-                    const Text(
-                      'SORT BY:',
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(width: 8),
-                    DropdownButton<String>(
-                      value: selectedSort,
-                      onChanged: (String? newValue) {
-                        setState(() {
-                          selectedSort = newValue!;
-                        });
-                      },
-                      items: const <String>[
-                        'Featured',
-                        'Price: Low to High',
-                        'Price: High to Low',
-                        'Name A-Z'
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(height: 20),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: sortedProducts.isEmpty
-                ? const Center(
-                    child: Text(
-                      'No sale items available at the moment.',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
-                    ),
-                  )
-                : GridView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: crossAxisCount,
-                      crossAxisSpacing: 16.0,
-                      mainAxisSpacing: 16.0,
-                      childAspectRatio: 0.75,
-                    ),
-                    itemCount: sortedProducts.length,
-                    itemBuilder: (context, index) {
-                      final product = sortedProducts[index];
-
-                      return InkWell(
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/product',
-                            arguments: {'productId': product.id},
-                          );
-                        },
-                        child: Card(
-                          elevation: 2,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
+                  const SizedBox(height: 12),
+                  Row(
+                    children: [
+                      const Text(
+                        'SORT BY:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          value: selectedSort,
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                            border: OutlineInputBorder(),
+                            isDense: true,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(12.0),
+                          isExpanded: true,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              selectedSort = newValue!;
+                            });
+                          },
+                          items: const <String>[
+                            'Featured',
+                            'Price: Low to High',
+                            'Price: High to Low',
+                            'Name A-Z'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: 14),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: sortedProducts.isEmpty
+                  ? const Center(
+                      child: Text(
+                        'No sale items available at the moment.',
+                        style: TextStyle(fontSize: 16, color: Colors.grey),
+                      ),
+                    )
+                  : GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: crossAxisCount,
+                        crossAxisSpacing: 16.0,
+                        mainAxisSpacing: 16.0,
+                        childAspectRatio: 0.7,
+                      ),
+                      itemCount: sortedProducts.length,
+                      itemBuilder: (context, index) {
+                        final product = sortedProducts[index];
+
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/product',
+                              arguments: {'productId': product.id},
+                            );
+                          },
+                          child: Card(
+                            elevation: 2,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
                             child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Expanded(
-                                  flex: 3,
                                   child: Stack(
                                     children: [
-                                      Container(
-                                        width: double.infinity,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
+                                      ClipRRect(
+                                        borderRadius:
+                                            const BorderRadius.vertical(
+                                          top: Radius.circular(12),
                                         ),
                                         child: product.imageUrls.isNotEmpty
                                             ? Image.asset(
                                                 product.imageUrls.first,
                                                 fit: BoxFit.cover,
+                                                width: double.infinity,
                                                 errorBuilder: (context, error,
                                                     stackTrace) {
                                                   return Container(
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey[200],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              8),
-                                                    ),
+                                                    color: Colors.grey[200],
                                                     child: const Icon(
                                                       Icons.image,
                                                       color: Colors.grey,
@@ -189,11 +204,7 @@ class _SalePageState extends State<SalePage> {
                                                 },
                                               )
                                             : Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey[200],
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                ),
+                                                color: Colors.grey[200],
                                                 child: const Icon(
                                                   Icons.shopping_bag,
                                                   color: Colors.grey,
@@ -227,12 +238,12 @@ class _SalePageState extends State<SalePage> {
                                     ],
                                   ),
                                 ),
-                                const SizedBox(height: 8),
-                                Expanded(
-                                  flex: 2,
+                                Padding(
+                                  padding: const EdgeInsets.all(12.0),
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
                                       Text(
                                         product.name,
@@ -253,12 +264,12 @@ class _SalePageState extends State<SalePage> {
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
                                       ),
-                                      const Spacer(),
+                                      const SizedBox(height: 8),
                                       if (product.originalPrice != null) ...[
                                         Text(
                                           '£${product.originalPrice!.toStringAsFixed(2)}',
                                           style: const TextStyle(
-                                            fontSize: 14,
+                                            fontSize: 12,
                                             color: Colors.grey,
                                             decoration:
                                                 TextDecoration.lineThrough,
@@ -269,7 +280,7 @@ class _SalePageState extends State<SalePage> {
                                       Text(
                                         '£${product.price.toStringAsFixed(2)}',
                                         style: const TextStyle(
-                                          fontSize: 18,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.red,
                                         ),
@@ -280,14 +291,14 @@ class _SalePageState extends State<SalePage> {
                               ],
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
-          ),
-          const SizedBox(height: 24),
-          const Footer(),
-        ],
+                        );
+                      },
+                    ),
+            ),
+            const SizedBox(height: 24),
+            const Footer(),
+          ],
+        ),
       ),
     );
   }

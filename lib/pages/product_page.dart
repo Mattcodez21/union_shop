@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/navbar.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/models/product.dart';
@@ -45,6 +46,7 @@ class _ProductPageState extends State<ProductPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const HeaderBanner(),
                     // Product image
                     if (product!.imageUrls.isNotEmpty)
                       Center(
