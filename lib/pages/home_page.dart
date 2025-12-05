@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/services/cart_service.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/widgets/navbar.dart';
+import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/data/products_data.dart';
 import 'package:union_shop/models/product.dart';
 
@@ -10,7 +11,6 @@ class HomeScreen extends StatelessWidget {
 
   void placeholderCallbackForButtons() {}
 
-  // Add this helper function
   Product? getProductById(String id) {
     try {
       return products.firstWhere((product) => product.id == id);
@@ -21,7 +21,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Use the correct product IDs from products_data.dart
     final List<Product> featuredProducts = [
       getProductById('p1')!, // UPSU Hoodie
       getProductById('p2')!, // Eco Water Bottle
@@ -34,26 +33,10 @@ class HomeScreen extends StatelessWidget {
         cartService: CartService(),
       ),
       endDrawer: const MobileNavDrawer(),
-      // ...existing code...
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Example banner and hero section (keep your existing code here)
-            Container(
-              width: double.infinity,
-              color: const Color(0xFF4d2963),
-              padding: const EdgeInsets.symmetric(vertical: 12),
-              child: const Text(
-                'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.1,
-                  fontSize: 16,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            const HeaderBanner(),
             Container(
               width: double.infinity,
               color: const Color(0xFFede9f3),
@@ -75,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                     'Over 20% off our Essential Range. Come and grab yours while stock lasts!',
                     style: TextStyle(
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Colors.black87,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -106,7 +89,6 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            // Featured products section
             Container(
               color: Colors.white,
               child: Padding(
