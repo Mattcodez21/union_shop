@@ -325,6 +325,8 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                 )
+              // ...existing code up to line 345...
+
               : Row(
                   children: [
                     InkWell(
@@ -341,16 +343,17 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                     if (title != null) ...[
-                      const SizedBox(width: 16),
-                      Expanded(
+                      const SizedBox(width: 8),
+                      Flexible(
                         child: Text(
                           title!,
                           style: const TextStyle(
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
                           ),
                           overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
                         ),
                       ),
                     ] else
@@ -364,6 +367,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       },
                       tooltip: 'Search',
                     ),
+// ...rest of existing code...
                     IconButton(
                       icon: const Icon(Icons.person_outline,
                           color: Colors.black54),
