@@ -4,15 +4,16 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:union_shop/data/products_data.dart';
 import 'package:union_shop/data/collections_data.dart';
 
-// Product search delegate with product search logic
+/// Product search delegate with product search logic
 class ProductSearchDelegate extends SearchDelegate<String> {
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () => query = '',
-      ),
+      if (query.isNotEmpty)
+        IconButton(
+          icon: const Icon(Icons.clear),
+          onPressed: () => query = '',
+        ),
     ];
   }
 
@@ -59,10 +60,12 @@ class ProductSearchDelegate extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestions = products
-        .where((product) =>
-            product.name.toLowerCase().contains(query.toLowerCase()))
-        .toList();
+    final suggestions = query.isEmpty
+        ? products.take(6).toList()
+        : products
+            .where((product) =>
+                product.name.toLowerCase().contains(query.toLowerCase()))
+            .toList();
 
     return ListView.builder(
       itemCount: suggestions.length,
@@ -82,15 +85,20 @@ class ProductSearchDelegate extends SearchDelegate<String> {
 
 class Navbar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  const Navbar({Key? key, this.title, required CartService cartService})
-      : super(key: key);
+  final CartService cartService;
+
+  const Navbar({
+    Key? key,
+    this.title,
+    required this.cartService,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isDesktop = constraints.maxWidth > 900;
-        final cartService = CartService();
+        final cs = cartService;
         final user = FirebaseAuth.instance.currentUser;
 
         return AppBar(
@@ -125,12 +133,17 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         ),
                         if (title != null) ...[
                           const SizedBox(width: 24),
-                          Text(
-                            title!,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+                          Flexible(
+                            fit: FlexFit.loose,
+                            child: Text(
+                              title!,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black87,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
                           ),
                         ],
@@ -249,11 +262,9 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                               width: 120,
                               child: Text(
                                 user.email ?? '',
-                                style: const TextStyle(
-                                  overflow: TextOverflow.ellipsis,
-                                  fontSize: 14,
-                                ),
+                                overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
+                                style: const TextStyle(fontSize: 14),
                               ),
                             ),
                           ),
@@ -276,9 +287,9 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                           tooltip: 'Account',
                         ),
                         AnimatedBuilder(
-                          animation: cartService,
+                          animation: cs,
                           builder: (context, _) {
-                            final count = cartService.itemCount;
+                            final count = cs.itemCount;
                             return Stack(
                               clipBehavior: Clip.none,
                               children: [
@@ -320,13 +331,12 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                             );
                           },
                         ),
-                        const SizedBox(width: 60),
+                        // reduce right gap so cart sits left of the menu edge
+                        const SizedBox(width: 48),
                       ],
                     ),
                   ),
                 )
-              // ...existing code up to line 345...
-
               : Row(
                   children: [
                     InkWell(
@@ -345,6 +355,7 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                     if (title != null) ...[
                       const SizedBox(width: 8),
                       Flexible(
+                        fit: FlexFit.loose,
                         child: Text(
                           title!,
                           style: const TextStyle(
@@ -367,7 +378,6 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       },
                       tooltip: 'Search',
                     ),
-// ...rest of existing code...
                     IconButton(
                       icon: const Icon(Icons.person_outline,
                           color: Colors.black54),
@@ -377,9 +387,9 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                       tooltip: 'Account',
                     ),
                     AnimatedBuilder(
-                      animation: cartService,
+                      animation: cs,
                       builder: (context, _) {
-                        final count = cartService.itemCount;
+                        final count = cs.itemCount;
                         return Stack(
                           clipBehavior: Clip.none,
                           children: [
@@ -398,21 +408,17 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                                 child: Container(
                                   padding: const EdgeInsets.all(4),
                                   decoration: const BoxDecoration(
-                                    color: Colors.red,
-                                    shape: BoxShape.circle,
-                                  ),
+                                      color: Colors.red,
+                                      shape: BoxShape.circle),
                                   constraints: const BoxConstraints(
-                                    minWidth: 20,
-                                    minHeight: 20,
-                                  ),
+                                      minWidth: 20, minHeight: 20),
                                   child: Center(
                                     child: Text(
                                       '$count',
                                       style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                          color: Colors.white,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
@@ -421,6 +427,8 @@ class Navbar extends StatelessWidget implements PreferredSizeWidget {
                         );
                       },
                     ),
+                    // spacing so cart is left of the mobile menu
+                    const SizedBox(width: 48),
                   ],
                 ),
           actions: !isDesktop
