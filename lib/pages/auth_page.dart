@@ -25,7 +25,7 @@ class _AuthPageState extends State<AuthPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
-      await CartService().loadCart(); // <-- Ensure cart loads after login
+      await CartService().loadCart();
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/');
     } on FirebaseAuthException catch (e) {
@@ -51,8 +51,7 @@ class _AuthPageState extends State<AuthPage> {
         email: _emailController.text.trim(),
         password: _passwordController.text,
       );
-      await CartService()
-          .loadCart(); // <-- Ensure cart loads after registration
+      await CartService().loadCart();
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/');
     } on FirebaseAuthException catch (e) {
@@ -74,10 +73,8 @@ class _AuthPageState extends State<AuthPage> {
       errorMessage = '';
     });
     try {
-      // For web: signInWithPopup, for mobile: signInWithCredential
       await FirebaseAuth.instance.signInWithPopup(GoogleAuthProvider());
-      await CartService()
-          .loadCart(); // <-- Ensure cart loads after Google login
+      await CartService().loadCart();
       if (!mounted) return;
       Navigator.pushReplacementNamed(context, '/');
     } on FirebaseAuthException catch (e) {
@@ -96,6 +93,14 @@ class _AuthPageState extends State<AuthPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
       body: Center(
         child: Card(
           margin: const EdgeInsets.all(24),

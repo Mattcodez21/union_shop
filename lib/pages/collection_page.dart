@@ -162,7 +162,7 @@ class _CollectionPageState extends State<CollectionPage> {
               ),
             ),
 
-            // Filter and Sort Dropdowns Row
+            // Filter and Sort Dropdowns
             Container(
               padding:
                   const EdgeInsets.symmetric(horizontal: 24.0, vertical: 16.0),
@@ -173,97 +173,203 @@ class _CollectionPageState extends State<CollectionPage> {
                   bottom: BorderSide(color: Colors.grey[300]!),
                 ),
               ),
-              child: Row(
-                children: [
-                  // Size Filter Dropdown
-                  Expanded(
-                    child: DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(
-                        labelText: 'SIZE',
-                        border: OutlineInputBorder(),
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      ),
-                      initialValue: selectedSize,
-                      items: sizeOptions
-                          .map((size) =>
-                              DropdownMenuItem(value: size, child: Text(size)))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedSize = value ?? 'All';
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  // Color Filter Dropdown
-                  Expanded(
-                    child: DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(
-                        labelText: 'COLOR',
-                        border: OutlineInputBorder(),
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      ),
-                      initialValue: selectedColor,
-                      items: colorOptions
-                          .map((color) => DropdownMenuItem(
-                              value: color, child: Text(color)))
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          selectedColor = value ?? 'All';
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  // Sort By Dropdown
-                  Expanded(
-                    child: DropdownButtonFormField<String>(
-                      decoration: const InputDecoration(
-                        labelText: 'SORT BY',
-                        border: OutlineInputBorder(),
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      ),
-                      initialValue: selectedSort,
-                      items: const [
-                        DropdownMenuItem(
-                            value: 'Featured', child: Text('Featured')),
-                        DropdownMenuItem(
-                            value: 'Price: Low to High',
-                            child: Text('Price: Low to High')),
-                        DropdownMenuItem(
-                            value: 'Price: High to Low',
-                            child: Text('Price: High to Low')),
-                        DropdownMenuItem(
-                            value: 'Name: A to Z', child: Text('Name: A to Z')),
-                        DropdownMenuItem(
-                            value: 'Name: Z to A', child: Text('Name: Z to A')),
-                        DropdownMenuItem(
-                            value: 'Newest', child: Text('Newest')),
+              child: LayoutBuilder(
+                builder: (context, constraints) {
+                  // Mobile layout: Stack filters vertically
+                  if (constraints.maxWidth < 600) {
+                    return Column(
+                      children: [
+                        // Size Filter
+                        DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'SIZE',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                          isExpanded: true,
+                          value: selectedSize,
+                          items: sizeOptions
+                              .map((size) => DropdownMenuItem(
+                                  value: size, child: Text(size)))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedSize = value ?? 'All';
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 12),
+                        // Color Filter
+                        DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'COLOR',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                          isExpanded: true,
+                          value: selectedColor,
+                          items: colorOptions
+                              .map((color) => DropdownMenuItem(
+                                  value: color, child: Text(color)))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedColor = value ?? 'All';
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 12),
+                        // Sort By
+                        DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'SORT BY',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                          isExpanded: true,
+                          value: selectedSort,
+                          items: const [
+                            DropdownMenuItem(
+                                value: 'Featured', child: Text('Featured')),
+                            DropdownMenuItem(
+                                value: 'Price: Low to High',
+                                child: Text('Price: Low to High')),
+                            DropdownMenuItem(
+                                value: 'Price: High to Low',
+                                child: Text('Price: High to Low')),
+                            DropdownMenuItem(
+                                value: 'Name: A to Z',
+                                child: Text('Name: A to Z')),
+                            DropdownMenuItem(
+                                value: 'Name: Z to A',
+                                child: Text('Name: Z to A')),
+                            DropdownMenuItem(
+                                value: 'Newest', child: Text('Newest')),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              selectedSort = value ?? 'Featured';
+                            });
+                          },
+                        ),
+                        const SizedBox(height: 12),
+                        // Clear Filters Button
+                        SizedBox(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            onPressed: clearFilters,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey[200],
+                              foregroundColor: Colors.black87,
+                              elevation: 0,
+                              padding: const EdgeInsets.symmetric(vertical: 12),
+                            ),
+                            child: const Text('Clear Filters'),
+                          ),
+                        ),
                       ],
-                      onChanged: (value) {
-                        setState(() {
-                          selectedSort = value ?? 'Featured';
-                        });
-                      },
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  // Clear Filters Button
-                  ElevatedButton(
-                    onPressed: clearFilters,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[200],
-                      foregroundColor: Colors.black87,
-                      elevation: 0,
-                    ),
-                    child: const Text('Clear Filters'),
-                  ),
-                ],
+                    );
+                  }
+
+                  // Desktop layout: Keep horizontal
+                  return Row(
+                    children: [
+                      // Size Filter Dropdown
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'SIZE',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                          value: selectedSize,
+                          items: sizeOptions
+                              .map((size) => DropdownMenuItem(
+                                  value: size, child: Text(size)))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedSize = value ?? 'All';
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      // Color Filter Dropdown
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'COLOR',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                          value: selectedColor,
+                          items: colorOptions
+                              .map((color) => DropdownMenuItem(
+                                  value: color, child: Text(color)))
+                              .toList(),
+                          onChanged: (value) {
+                            setState(() {
+                              selectedColor = value ?? 'All';
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      // Sort By Dropdown
+                      Expanded(
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            labelText: 'SORT BY',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12, vertical: 8),
+                          ),
+                          value: selectedSort,
+                          items: const [
+                            DropdownMenuItem(
+                                value: 'Featured', child: Text('Featured')),
+                            DropdownMenuItem(
+                                value: 'Price: Low to High',
+                                child: Text('Price: Low to High')),
+                            DropdownMenuItem(
+                                value: 'Price: High to Low',
+                                child: Text('Price: High to Low')),
+                            DropdownMenuItem(
+                                value: 'Name: A to Z',
+                                child: Text('Name: A to Z')),
+                            DropdownMenuItem(
+                                value: 'Name: Z to A',
+                                child: Text('Name: Z to A')),
+                            DropdownMenuItem(
+                                value: 'Newest', child: Text('Newest')),
+                          ],
+                          onChanged: (value) {
+                            setState(() {
+                              selectedSort = value ?? 'Featured';
+                            });
+                          },
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      // Clear Filters Button
+                      ElevatedButton(
+                        onPressed: clearFilters,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey[200],
+                          foregroundColor: Colors.black87,
+                          elevation: 0,
+                        ),
+                        child: const Text('Clear Filters'),
+                      ),
+                    ],
+                  );
+                },
               ),
             ),
 
